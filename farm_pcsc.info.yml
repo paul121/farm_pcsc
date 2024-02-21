@@ -1,0 +1,5 @@
+name: Partnerships for Climate-Smart Commodities
+description: Partnerships for Climate-Smart Commodities features for farmOS.
+type: module
+package: farmOS Contrib
+core_version_requirement: ^10

@@ -1,0 +1,20 @@
+{
+  "name": "openteam/farm_pcsc",
+  "description": "USDA Climate-Smart Commodities features for farmOS.",
+  "type": "drupal-module",
+  "homepage": "https://github.com/mstenta/farm_pcsc",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Michael Stenta",
+      "email": "mike@farmier.com"
+    },
+    {
+      "name": "Paul Weidner",
+      "email": "paul.weidner@gmail.com"
+    }
+  ],
+  "require": {
+    "farmos/farmos": "^3"
+  }
+}
