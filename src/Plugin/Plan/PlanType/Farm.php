@@ -14,4 +14,23 @@ use Drupal\farm_entity\Plugin\Plan\PlanType\FarmPlanType;
  */
 class Farm extends FarmPlanType {
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildFieldDefinitions() {
+    $fields = parent::buildFieldDefinitions();
+    $field_info = [
+      'farm_id' => [
+        'type' => 'integer',
+        'label' => $this->t('USDA Farm ID'),
+        'min' => 1,
+        'required' => TRUE,
+      ],
+    ];
+    foreach ($field_info as $name => $info) {
+      $fields[$name] = $this->farmFieldFactory->bundleFieldDefinition($info);
+    }
+    return $fields;
+  }
+
 }
