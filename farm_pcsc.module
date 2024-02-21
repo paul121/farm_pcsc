@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @file
+ * The farmOS PCSC module.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+
+/**
+ * Implements hook_farm_entity_bundle_field_info().
+ */
+function farm_pcsc_farm_entity_bundle_field_info(EntityTypeInterface $entity_type, $bundle) {
+  $fields = [];
+
+  // Add fields to Land assets.
+  if ($entity_type->id() == 'asset' && $bundle == 'land') {
+
+    // Tract ID.
+    $options = [
+      'type' => 'integer',
+      'label' => t('USDA Tract ID'),
+      'min' => 1,
+    ];
+    $fields['pcsc_tract_id'] = \Drupal::service('farm_field.factory')->bundleFieldDefinition($options);
+
+    // Field ID.
+    $options = [
+      'type' => 'integer',
+      'label' => t('USDA Field ID'),
+      'min' => 1,
+    ];
+    $fields['pcsc_field_id'] = \Drupal::service('farm_field.factory')->bundleFieldDefinition($options);
+  }
+
+  return $fields;
+}
