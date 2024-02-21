@@ -29,6 +29,16 @@ class FarmPractice extends FarmPlanRecordType {
         'cardinality' => 1,
         'required' => TRUE,
       ],
+      '528_grazing_type' => [
+        'type' => 'list_string',
+        'label' => $this->t('Grazing type'),
+        'allowed_values' => [
+          'Cell grazing',
+          'Deferred rotational',
+          'Management intensive',
+          'Rest-rotation',
+        ],
+      ],
     ];
     foreach ($field_info as $name => $info) {
       $fields[$name] = $this->farmFieldFactory->bundleFieldDefinition($info);
