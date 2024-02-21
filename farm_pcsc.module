@@ -31,6 +31,20 @@ function farm_pcsc_farm_entity_bundle_field_info(EntityTypeInterface $entity_typ
       'min' => 1,
     ];
     $fields['pcsc_field_id'] = \Drupal::service('farm_field.factory')->bundleFieldDefinition($options);
+
+    // State/territory.
+    $options = [
+      'type' => 'string',
+      'label' => t('State/territory'),
+    ];
+    $fields['pcsc_state'] = \Drupal::service('farm_field.factory')->bundleFieldDefinition($options);
+
+    // County.
+    $options = [
+      'type' => 'string',
+      'label' => t('County'),
+    ];
+    $fields['pcsc_county'] = \Drupal::service('farm_field.factory')->bundleFieldDefinition($options);
   }
 
   return $fields;
