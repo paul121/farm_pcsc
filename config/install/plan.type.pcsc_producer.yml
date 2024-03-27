@@ -4,8 +4,8 @@ dependencies:
   enforced:
     module:
       - farm_pcsc
-id: pcsc_farm
-label: 'PCSC Farm'
+id: pcsc_producer
+label: 'PCSC Producer'
 description: ''
 workflow: plan_default
 new_revision: true
