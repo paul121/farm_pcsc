@@ -29,6 +29,24 @@ class PcscField extends FarmPlanRecordType {
         'cardinality' => 1,
         'required' => TRUE,
       ],
+      'pcsc_tract_id' => [
+        'type' => 'integer',
+        'label' => t('USDA Tract ID'),
+        'min' => 1,
+      ],
+      'pcsc_field_id' => [
+        'type' => 'integer',
+        'label' => t('USDA Field ID'),
+        'min' => 1,
+      ],
+      'pcsc_state' => [
+        'type' => 'string',
+        'label' => t('State/territory'),
+      ],
+      'pcsc_county' => [
+        'type' => 'list_string',
+        'label' => t('County'),
+      ],
     ];
     foreach ($field_info as $name => $info) {
       $fields[$name] = $this->farmFieldFactory->bundleFieldDefinition($info);
