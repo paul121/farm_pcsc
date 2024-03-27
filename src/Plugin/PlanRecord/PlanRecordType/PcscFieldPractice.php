@@ -5,14 +5,14 @@ namespace Drupal\farm_pcsc\Plugin\PlanRecord\PlanRecordType;
 use Drupal\farm_entity\Plugin\PlanRecord\PlanRecordType\FarmPlanRecordType;
 
 /**
- * Provides the PCSC Farm Practice plan record type.
+ * Provides the PCSC Field Practice plan record type.
  *
  * @PlanRecordType(
- *   id = "pcsc_farm_practice",
- *   label = @Translation("PCSC Farm Practice"),
+ *   id = "pcsc_field_practice",
+ *   label = @Translation("PCSC Field Practice"),
  * )
  */
-class FarmPractice extends FarmPlanRecordType {
+class PcscFieldPractice extends FarmPlanRecordType {
 
   /**
    * {@inheritdoc}

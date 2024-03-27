@@ -4,6 +4,6 @@ dependencies:
   enforced:
     module:
       - farm_pcsc
-id: pcsc_farm_practice
-label: PCSC Farm Practice
+id: pcsc_field_practice
+label: PCSC Field Practice
 description: ''
