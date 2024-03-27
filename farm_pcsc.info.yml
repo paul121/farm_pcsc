@@ -7,5 +7,6 @@ dependencies:
   - farm_entity
   - farm_field
   - farm_land
+  - farm_land_types
   - farm_quick
   - plan
