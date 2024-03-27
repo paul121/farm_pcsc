@@ -4,6 +4,6 @@ dependencies:
   enforced:
     module:
       - farm_pcsc
-id: pcsc_field_practice
-label: PCSC Field Practice
+id: pcsc_field_practice_528
+label: PCSC Field Practice 528
 description: ''

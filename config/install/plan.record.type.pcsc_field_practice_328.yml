@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - farm_pcsc
+id: pcsc_field_practice_328
+label: PCSC Field Practice 328
+description: ''
