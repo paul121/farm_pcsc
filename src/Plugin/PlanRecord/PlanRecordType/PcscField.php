@@ -40,12 +40,14 @@ class PcscField extends FarmPlanRecordType {
         'min' => 1,
       ],
       'pcsc_state' => [
-        'type' => 'string',
+        'type' => 'list_string',
         'label' => t('State/territory'),
+        'allowed_values_function' => 'farm_pcsc_state_field_allowed_values'
       ],
       'pcsc_county' => [
         'type' => 'list_string',
         'label' => t('County'),
+        'allowed_values_function' => 'farm_pcsc_county_field_allowed_values'
       ],
     ];
     foreach ($field_info as $name => $info) {

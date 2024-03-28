@@ -5,6 +5,52 @@
  * Contains farm_pcsc.module.
  */
 
+use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+
+/**
+ * Allowed values callback function for pcsc_state field.
+ *
+ * @param \Drupal\Core\Field\FieldStorageDefinitionInterface $definition
+ *   The field storage definition.
+ * @param \Drupal\Core\Entity\ContentEntityInterface|null $entity
+ *   The entity being created if applicable.
+ * @param bool $cacheable
+ *   Boolean indicating if the allowed values can be cached. Defaults to TRUE.
+ *
+ * @return array
+ *   Returns an array of allowed values for use in form select options.
+ */
+function farm_pcsc_state_field_allowed_values(FieldStorageDefinitionInterface $definition, ContentEntityInterface $entity = NULL, bool &$cacheable = TRUE) {
+  $options = farm_pcsc_state_options();
+  return array_combine($options, $options);
+}
+
+/**
+ * Allowed values callback function for pcsc_county field.
+ *
+ * @param \Drupal\Core\Field\FieldStorageDefinitionInterface $definition
+ *   The field storage definition.
+ * @param \Drupal\Core\Entity\ContentEntityInterface|null $entity
+ *   The entity being created if applicable.
+ * @param bool $cacheable
+ *   Boolean indicating if the allowed values can be cached. Defaults to TRUE.
+ *
+ * @return array
+ *   Returns an array of allowed values for use in form select options.
+ */
+function farm_pcsc_county_field_allowed_values(FieldStorageDefinitionInterface $definition, ContentEntityInterface $entity = NULL, bool &$cacheable = TRUE) {
+  // Return valid county options if the entity has a state set.
+  if ($entity && $entity->hasField('pcsc_state')) {
+    $cacheable = FALSE;
+    if ($state = $entity->get('pcsc_state')->getString()) {
+      $options = farm_pcsc_state_county_options($state);
+      return array_combine($options, $options);
+    }
+  }
+  return [];
+}
+
 /**
  * Returns an array of PCSC state options.
  *
