@@ -1,0 +1,4 @@
+farm_pcsc.field_enrollment:
+  route_name: view.pcsc_field_enrollment.page
+  title: 'Fields'
+  base_route: entity.plan.canonical
