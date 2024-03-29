@@ -1,22 +1,43 @@
 langcode: en
 status: true
 dependencies:
+  config:
+    - filter.format.default
+  module:
+    - asset
+    - farm_flag
+    - farm_land
+    - farm_pcsc
+    - farm_quick
+    - farm_ui_location
+    - filter
+    - log
+    - plan
+    - toolbar
   enforced:
     module:
       - farm_pcsc
-  module:
-    - farm_role
 id: farm_pcsc_tap
-label: 'TAP'
+label: TAP
 weight: 1
 is_admin: false
-permissions: { }
-third_party_settings:
-  farm_role:
-    access:
-      config: false
-      entity:
-        view all: true
-        create all: true
-        update all: true
-        delete all: true
+permissions:
+  - 'access locations overview'
+  - 'access plan overview'
+  - 'access quick_form overview'
+  - 'access toolbar'
+  - 'change own username'
+  - 'enroll fields'
+  - 'enroll producers'
+  - 'update any land asset'
+  - 'update own land asset'
+  - 'use text format default'
+  - 'view any land asset'
+  - 'view any log'
+  - 'view any plan'
+  - 'view flag'
+  - 'view land_type'
+  - 'view own land asset'
+  - 'view own log'
+  - 'view own plan'
+  - 'view quick_form'
