@@ -19,7 +19,7 @@ use Drupal\plan\Entity\PlanRecord;
  *   description = @Translation("Enroll a field in this PCSC project."),
  *   helpText = @Translation("Use this form to enroll a field in this PCSC project."),
  *   permissions = {
- *     "update any pcsc_producer plan",
+ *     "enroll fields",
  *   }
  * )
  */

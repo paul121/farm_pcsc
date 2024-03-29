@@ -16,7 +16,7 @@ use Drupal\plan\Entity\Plan;
  *   description = @Translation("Enroll a producer in this PCSC project."),
  *   helpText = @Translation("Use this form to enroll a producer in this PCSC project."),
  *   permissions = {
- *     "update any pcsc_producer plan",
+ *     "enroll producers",
  *   }
  * )
  */
