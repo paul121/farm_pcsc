@@ -32,12 +32,12 @@ class PcscFieldPractice528 extends FarmPlanRecordType {
       '528_grazing_type' => [
         'type' => 'list_string',
         'label' => $this->t('528: Grazing type'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Cell grazing',
           'Deferred rotational',
           'Management intensive',
           'Rest-rotation',
-        ],
+        ]),
       ],
     ];
     foreach ($field_info as $name => $info) {

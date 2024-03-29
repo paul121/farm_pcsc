@@ -32,7 +32,7 @@ class PcscFieldPractice590 extends FarmPlanRecordType {
       '590_nutrient_type' => [
         'type' => 'list_string',
         'label' => $this->t('590: Nutrient type with CPS 590'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Biosolids',
           'Commercial fertilizers',
           'Compost',
@@ -45,12 +45,12 @@ class PcscFieldPractice590 extends FarmPlanRecordType {
           'Organic residues or materials',
           'Solid/semi-solid animal manure',
           'Wastewater',
-        ],
+        ]),
       ],
       '590_application_method' => [
         'type' => 'list_string',
         'label' => $this->t('590: Nutrient application method with CPS 590'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Banded',
           'Broadcast',
           'Injection',
@@ -58,12 +58,12 @@ class PcscFieldPractice590 extends FarmPlanRecordType {
           'Surface application',
           'Surface application with tillage',
           'Variable rate',
-        ],
+        ]),
       ],
       '590_previous_application_method' => [
         'type' => 'list_string',
         'label' => $this->t('590: Nutrient application method in the previous year'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Banded',
           'Broadcast',
           'Injection',
@@ -71,27 +71,27 @@ class PcscFieldPractice590 extends FarmPlanRecordType {
           'Surface application',
           'Surface application with tillage',
           'Variable rate',
-        ],
+        ]),
       ],
       '590_timing' => [
         'type' => 'list_string',
         'label' => $this->t('590: Nutrient application timing with CPS 590'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Single pre-planting',
           'Single post-planting',
           'Split pre- and post-planting',
           'Split post planting',
-        ],
+        ]),
       ],
       '590_previous_timing' => [
         'type' => 'list_string',
         'label' => $this->t('590: Nutrient application timing in the previous year'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Single pre-planting',
           'Single post-planting',
           'Split pre- and post-planting',
           'Split post planting',
-        ],
+        ]),
       ],
       '590_rate' => [
         'type' => 'integer',
@@ -102,19 +102,19 @@ class PcscFieldPractice590 extends FarmPlanRecordType {
       '590_rate_unit' => [
         'type' => 'list_string',
         'label' => $this->t('590: Nutrient application rate unit with CPS 590'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Gallons per acre',
           'Pounds per acre',
-        ],
+        ]),
       ],
       '590_rate_change' => [
         'type' => 'list_string',
         'label' => $this->t('590: Nutrient application rate change'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Decrease compared to previous year',
           'Increase compared to previous year',
           'No change',
-        ],
+        ]),
       ],
     ];
     foreach ($field_info as $name => $info) {

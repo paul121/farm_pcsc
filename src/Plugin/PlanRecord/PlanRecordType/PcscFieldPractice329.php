@@ -32,10 +32,10 @@ class PcscFieldPractice329 extends FarmPlanRecordType {
       '329_surface_disturbance' => [
         'type' => 'list_string',
         'label' => $this->t('329: Surface disturbance'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'None',
           'Seed row only',
-        ],
+        ]),
       ],
     ];
     foreach ($field_info as $name => $info) {

@@ -32,34 +32,34 @@ class PcscFieldPractice340 extends FarmPlanRecordType {
       '340_species_category' => [
         'type' => 'list_string',
         'label' => $this->t('340: Species category (select most common/extensive type if using more than one)'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Brassicas',
           'Forbs',
           'Grasses',
           'Legume',
           'Non-legume broadleaves',
-        ],
+        ]),
       ],
       '340_planned_management' => [
         'type' => 'list_string',
         'label' => $this->t('340: Cover crop planned management'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Grazing',
           'Haying',
           'Termination',
-        ],
+        ]),
       ],
       '340_termination_method' => [
         'type' => 'list_string',
         'label' => $this->t('340: Cover crop termination method'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Burning',
           'Herbicide application',
           'Incorporation',
           'Mowing',
           'Rolling/crimping',
           'Winter kill/frost',
-        ],
+        ]),
       ],
     ];
     foreach ($field_info as $name => $info) {

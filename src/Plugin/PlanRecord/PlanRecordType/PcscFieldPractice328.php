@@ -32,35 +32,35 @@ class PcscFieldPractice328 extends FarmPlanRecordType {
       '328_crop_type' => [
         'type' => 'list_string',
         'label' => $this->t('328: Conservation crop type'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Brassica',
           'Broadleaf',
           'Cool season',
           'Grass',
           'Legume',
           'Warm season',
-        ],
+        ]),
       ],
       '328_change_implemented' => [
         'type' => 'list_string',
         'label' => $this->t('328: Change implemented'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Added perennial crop',
           'Reduced fallow period',
           'Both',
-        ],
+        ]),
       ],
       '328_rotation_tillage_type' => [
         'type' => 'list_string',
         'label' => $this->t('328: Conservation crop rotation tillage type'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Conventional (plow, chisel, disk)',
           'No-till, direct seed',
           'Reduced rill',
           'Strip rill',
           'None',
           'Other (specify)',
-        ],
+        ]),
       ],
       '328_total_rotation_length' => [
         'type' => 'integer',

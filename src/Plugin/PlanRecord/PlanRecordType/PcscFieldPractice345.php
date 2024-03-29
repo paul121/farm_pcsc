@@ -32,12 +32,12 @@ class PcscFieldPractice345 extends FarmPlanRecordType {
       '345_surface_disturbance' => [
         'type' => 'list_string',
         'label' => $this->t('345: Surface disturbance'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'None',
           'Seed row/ridge tillage for planting',
           'Shallow across most of the soil surface',
           'Vertical/mulch',
-        ],
+        ]),
       ],
     ];
     foreach ($field_info as $name => $info) {

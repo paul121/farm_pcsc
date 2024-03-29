@@ -32,12 +32,12 @@ class PcscFieldPractice484 extends FarmPlanRecordType {
       '484_rotation_tillage_type' => [
         'type' => 'list_string',
         'label' => $this->t('484: Mulch type'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Gravel',
           'Natural',
           'Synthetic',
           'Wood',
-        ],
+        ]),
       ],
       '484_total_rotation_length' => [
         'type' => 'integer',

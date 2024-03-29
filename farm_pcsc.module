@@ -9,6 +9,19 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 
 /**
+ * Helper function for building allowed_values options.
+ *
+ * @param array $options
+ *   A non-associative array of allowed values.
+ *
+ * @return array
+ *   Returns an array with $options as both the keys and values.
+ */
+function farm_pcsc_allowed_values_helper(array $options) {
+  return array_combine($options, $options);
+}
+
+/**
  * Allowed values callback function for pcsc_state field.
  *
  * @param \Drupal\Core\Field\FieldStorageDefinitionInterface $definition

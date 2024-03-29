@@ -32,13 +32,13 @@ class PcscFieldPractice327 extends FarmPlanRecordType {
       '327_species_category' => [
         'type' => 'list_string',
         'label' => $this->t('328: Species category'),
-        'allowed_values' => [
+        'allowed_values' => farm_pcsc_allowed_values_helper([
           'Brassicas',
           'Grasses',
           'Legumes',
           'Non-legume broadleaves',
           'Shrubs',
-        ],
+        ]),
       ],
     ];
     foreach ($field_info as $name => $info) {
