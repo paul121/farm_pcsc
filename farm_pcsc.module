@@ -7,6 +7,23 @@
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\farm_entity_views\FarmEntityViewsData;
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function farm_pcsc_entity_type_build(array &$entity_types) {
+  // Remove after https://github.com/farmOS/farmOS/pull/818 is merged.
+  /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
+  if (!empty($entity_types['plan_record'])) {
+
+    // Unset the data table.
+    $entity_types['plan_record']->set('data_table', NULL);
+
+    // Set the views data handler class to FarmEntityViewsData.
+    $entity_types['plan_record']->setHandlerClass('views_data', FarmEntityViewsData::class);
+  }
+}
 
 /**
  * Helper function for building allowed_values options.
