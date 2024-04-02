@@ -8,6 +8,14 @@
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\farm_entity_views\FarmEntityViewsData;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice327;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice328;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice329;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice340;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice345;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice484;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice528;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice590;
 
 /**
  * Implements hook_entity_type_build().
@@ -22,6 +30,36 @@ function farm_pcsc_entity_type_build(array &$entity_types) {
 
     // Set the views data handler class to FarmEntityViewsData.
     $entity_types['plan_record']->setHandlerClass('views_data', FarmEntityViewsData::class);
+  }
+}
+
+/**
+ * Define bundle classes for practice types.
+ *
+ * @return array
+ *   Returns an array of bundle classes keyed by bundle ID.
+ */
+function farm_pcsc_practice_type_bundle_classes() {
+  return [
+    'pcsc_field_practice_327' => PcscFieldPractice327::class,
+    'pcsc_field_practice_328' => PcscFieldPractice328::class,
+    'pcsc_field_practice_329' => PcscFieldPractice329::class,
+    'pcsc_field_practice_340' => PcscFieldPractice340::class,
+    'pcsc_field_practice_345' => PcscFieldPractice345::class,
+    'pcsc_field_practice_484' => PcscFieldPractice484::class,
+    'pcsc_field_practice_528' => PcscFieldPractice528::class,
+    'pcsc_field_practice_590' => PcscFieldPractice590::class,
+  ];
+}
+
+/**
+ * Implements hook_entity_bundle_info_alter().
+ */
+function farm_pcsc_entity_bundle_info_alter(array &$bundles): void {
+  foreach (farm_pcsc_practice_type_bundle_classes() as $bundle => $class) {
+    if (isset($bundles['plan_record'][$bundle])) {
+      $bundles['plan_record'][$bundle]['class'] = $class;
+    }
   }
 }
 
