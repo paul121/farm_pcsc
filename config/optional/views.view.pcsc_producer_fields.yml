@@ -8,8 +8,8 @@ dependencies:
     - options
     - plan
     - user
-id: pcsc_field_enrollment
-label: 'PCSC Field Enrollment'
+id: pcsc_producer_fields
+label: 'PCSC Producer Fields'
 module: views
 description: ''
 tag: ''
@@ -22,7 +22,7 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Field Enrollment'
+      title: 'Fields'
       fields:
         field_target_id_1:
           id: field_target_id_1
