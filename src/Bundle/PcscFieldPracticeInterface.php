@@ -10,4 +10,12 @@ use Drupal\plan\Entity\PlanRecordInterface;
  */
 interface PcscFieldPracticeInterface extends PlanRecordInterface {
 
+  /**
+   * Build a form for the practice.
+   *
+   * @return array
+   *  Returns a form build array.
+   */
+  public function buildPracticeForm(): array;
+
 }
