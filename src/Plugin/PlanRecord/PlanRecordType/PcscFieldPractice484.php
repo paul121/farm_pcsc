@@ -18,7 +18,7 @@ class PcscFieldPractice484 extends PcscFieldPracticeBase {
   public function buildFieldDefinitions() {
     $fields = parent::buildFieldDefinitions();
     $field_info = [
-      '484_rotation_tillage_type' => [
+      '484_mulch_type' => [
         'type' => 'list_string',
         'label' => $this->t('484: Mulch type'),
         'allowed_values' => farm_pcsc_allowed_values_helper([
@@ -28,7 +28,7 @@ class PcscFieldPractice484 extends PcscFieldPracticeBase {
           'Wood',
         ]),
       ],
-      '484_total_rotation_length' => [
+      '484_mulch_cover' => [
         'type' => 'integer',
         'label' => $this->t('484: Mulch cover (percent of field)'),
         'mix' => 1,
