@@ -20,7 +20,7 @@ class PcscProducer extends FarmPlanType {
   public function buildFieldDefinitions() {
     $fields = parent::buildFieldDefinitions();
     $field_info = [
-      'farm_id' => [
+      'pcsc_farm_id' => [
         'type' => 'integer',
         'label' => $this->t('USDA Farm ID'),
         'min' => 1,
