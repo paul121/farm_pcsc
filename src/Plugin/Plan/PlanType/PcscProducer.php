@@ -26,6 +26,16 @@ class PcscProducer extends FarmPlanType {
         'min' => 1,
         'required' => TRUE,
       ],
+      'pcsc_state' => [
+        'type' => 'list_string',
+        'label' => t('State/territory'),
+        'allowed_values_function' => 'farm_pcsc_state_field_allowed_values'
+      ],
+      'pcsc_county' => [
+        'type' => 'list_string',
+        'label' => t('County'),
+        'allowed_values_function' => 'farm_pcsc_county_field_allowed_values'
+      ],
     ];
     foreach ($field_info as $name => $info) {
       $fields[$name] = $this->farmFieldFactory->bundleFieldDefinition($info);
