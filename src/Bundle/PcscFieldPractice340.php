@@ -11,8 +11,8 @@ class PcscFieldPractice340 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
-  public function buildPracticeForm(): array {
-    $form = parent::buildPracticeForm();
+  public function buildPracticeForm(int $delta = 1): array {
+    $form = parent::buildPracticeForm($delta);
     $form['340_species_category'] = [
       '#type' => 'select',
       '#title' => $this->t('Species category (select most common/extensive type if using more than one)'),

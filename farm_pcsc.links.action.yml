@@ -1,0 +1,6 @@
+farm_pcsc.field_enrollment:
+  title: 'Field Enrollment'
+  route_name: farm.quick.pcsc_field_enrollment
+  appears_on:
+    - entity.plan.canonical
+    - view.pcsc_producer_fields.page

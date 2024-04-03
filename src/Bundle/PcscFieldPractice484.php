@@ -10,8 +10,8 @@ class PcscFieldPractice484 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
-  public function buildPracticeForm(): array {
-    $form = parent::buildPracticeForm();
+  public function buildPracticeForm(int $delta = 1): array {
+    $form = parent::buildPracticeForm($delta);
     $form['484_mulch_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Mulch type'),

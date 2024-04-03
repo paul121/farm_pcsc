@@ -10,8 +10,8 @@ class PcscFieldPractice329 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
-  public function buildPracticeForm(): array {
-    $form = parent::buildPracticeForm();
+  public function buildPracticeForm(int $delta = 1): array {
+    $form = parent::buildPracticeForm($delta);
     $form['329_surface_disturbance'] = [
       '#type' => 'select',
       '#title' => $this->t('Surface disturbance'),

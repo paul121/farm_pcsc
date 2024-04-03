@@ -139,6 +139,11 @@ class PcscFieldEnrollment extends QuickFormBase {
     $form['pcsc_baseline_yield_unit_other'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Other baseline yield unit'),
+      '#states' => [
+        'visible' => [
+          'select[name="pcsc_baseline_yield_unit"]' => ['value' => 'Other (specify)'],
+        ],
+      ],
     ];
     $form['pcsc_baseline_yield_location'] = [
       '#type' => 'select',
@@ -149,6 +154,11 @@ class PcscFieldEnrollment extends QuickFormBase {
     $form['pcsc_baseline_yield_location_other'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Other baseline yield location'),
+      '#states' => [
+        'visible' => [
+          'select[name="pcsc_baseline_yield_location"]' => ['value' => 'Other (specify)'],
+        ],
+      ],
     ];
     $form['pcsc_land_use'] = [
       '#type' => 'select',
@@ -223,7 +233,7 @@ class PcscFieldEnrollment extends QuickFormBase {
           $practice_class = $practice_classes[$form_state->getValue(['practices', $i, 'type'])];
           /** @var \Drupal\farm_pcsc\Bundle\PcscFieldPracticeInterface $practice */
           $practice = $practice_class::create(['type' => $form_state->getValue(['practices', $i, 'type'])]);
-          $form['practices'][$i] += $practice->buildPracticeForm();
+          $form['practices'][$i] += $practice->buildPracticeForm($i);
         }
       }
     }

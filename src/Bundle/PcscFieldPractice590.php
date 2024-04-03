@@ -10,8 +10,8 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
-  public function buildPracticeForm(): array {
-    $form = parent::buildPracticeForm();
+  public function buildPracticeForm(int $delta = 1): array {
+    $form = parent::buildPracticeForm($delta);
     $form['590_nutrient_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Nutrient type with CPS 590'),

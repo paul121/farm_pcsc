@@ -13,9 +13,12 @@ interface PcscFieldPracticeInterface extends PlanRecordInterface {
   /**
    * Build a form for the practice.
    *
+   * @param int $delta
+   *   The practice number.
+   *
    * @return array
    *  Returns a form build array.
    */
-  public function buildPracticeForm(): array;
+  public function buildPracticeForm(int $delta = 1): array;
 
 }

@@ -17,18 +17,23 @@ abstract class PcscFieldPracticeBase extends PlanRecord implements PcscFieldPrac
   /**
    * {@inheritdoc}
    */
-  public function buildPracticeForm(): array {
-    $form['standard'] = [
+  public function buildPracticeForm(int $delta = 1): array {
+    $form['pcsc_practice_standard'] = [
       '#type' => 'select',
       '#title' => $this->t('Practice standard'),
       '#options' => $this->getListOptions('plan_record', $this->bundle(), 'pcsc_practice_standard'),
       '#required' => TRUE,
     ];
-    $form['standard_other'] = [
+    $form['pcsc_practice_standard_other'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Other practice standard'),
+      '#states' => [
+        'visible' => [
+          'select[name="practices[' . $delta . '][pcsc_practice_standard]"]' => ['value' => 'Other (specify)'],
+        ],
+      ],
     ];
-    $form['year'] = [
+    $form['pcsc_practice_year'] = [
       '#type' => 'number',
       '#title' => $this->t('Planned practice implementation year'),
       '#min' => 2022,
@@ -36,7 +41,7 @@ abstract class PcscFieldPracticeBase extends PlanRecord implements PcscFieldPrac
       '#step' => 1,
       '#required' => TRUE,
     ];
-    $form['extent'] = [
+    $form['pcsc_practice_extent'] = [
       '#type' => 'number',
       '#title' => $this->t('Extent'),
       '#min' => 0.01,
@@ -44,15 +49,20 @@ abstract class PcscFieldPracticeBase extends PlanRecord implements PcscFieldPrac
       '#step' => 0.01,
       '#required' => TRUE,
     ];
-    $form['extent_unit'] = [
+    $form['pcsc_practice_extent_unit'] = [
       '#type' => 'select',
       '#title' => $this->t('Extent unit'),
       '#options' => $this->getListOptions('plan_record', $this->bundle(), 'pcsc_practice_extent_unit'),
       '#required' => TRUE,
     ];
-    $form['extent_unit_other'] = [
+    $form['pcsc_practice_extent_unit_other'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Other extent unit'),
+      '#states' => [
+        'visible' => [
+          'select[name="practices[' . $delta . '][pcsc_practice_extent_unit]"]' => ['value' => 'Other (specify)'],
+        ],
+      ],
     ];
     return $form;
   }
