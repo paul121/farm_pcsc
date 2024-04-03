@@ -24,6 +24,45 @@ abstract class PcscFieldPracticeBase extends FarmPlanRecordType {
         'cardinality' => 1,
         'required' => TRUE,
       ],
+      'pcsc_practice_standard' => [
+        'type' => 'list_string',
+        'label' => $this->t('Practice standard'),
+        'allowed_values' => farm_pcsc_allowed_values_helper([
+          'NRCS',
+          'Other (specify)',
+        ]),
+      ],
+      'pcsc_practice_standard_other' => [
+        'type' => 'string',
+        'label' => $this->t('Other practice standard'),
+      ],
+      'pcsc_practice_year' => [
+        'type' => 'integer',
+        'label' => $this->t('Planned practice implementation year'),
+        'min' => 2022,
+        'max' => 2030,
+      ],
+      'pcsc_practice_extent' => [
+        'type' => 'decimal',
+        'label' => $this->t('Extent'),
+        'min' => 0.01,
+        'max' => 100000,
+      ],
+      'pcsc_practice_extent_unit' => [
+        'type' => 'list_string',
+        'label' => $this->t('Extent unit'),
+        'allowed_values' => farm_pcsc_allowed_values_helper([
+          'Acres',
+          'Head of livestock',
+          'Linear feet',
+          'Square feet',
+          'Other (specify)',
+        ]),
+      ],
+      'pcsc_practice_extent_unit_other' => [
+        'type' => 'string',
+        'label' => $this->t('Other extent unit'),
+      ],
     ];
     foreach ($field_info as $name => $info) {
       $fields[$name] = $this->farmFieldFactory->bundleFieldDefinition($info);
