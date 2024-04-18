@@ -264,8 +264,19 @@ class PcscCsvActionForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    // @TODO build data.
+    // Determine the sheet to export.
+    $sheet_type = $form_state->getValue('sheet_type');
+    if ($sheet_type != 'all') {
+      $sub_type = $form_state->getValue("{$sheet_type}_type");
+      $sheet_type = "{$sheet_type}_$sub_type";
+    }
+
+    // Build the function name to build data.
     $data = [];
+    $function_name = 'export' . implode('', array_map('ucfirst', explode('_', $sheet_type)));
+    if (is_callable([$this, $function_name])) {
+      $data = $this->{$function_name}();
+    }
 
     // Serialize the data as CSV.
     $output = $this->serializer->serialize($data, 'csv');
@@ -306,6 +317,118 @@ class PcscCsvActionForm extends ConfirmFormBase {
 
     // Clean up the temporary storage.
     $this->tempStore->delete($this->currentUser()->id());
+  }
+
+  /**
+   * Helper function to build producer enrollment data.
+   *
+   * @return array
+   *   The data array.
+   */
+  public function exportEnrollmentProducer() {
+    $data = [];
+    $data[] = [
+      'Farm ID',
+      'State or Territory',
+      'County',
+      'Producer data change',
+      'Producer start date',
+      'Producer name',
+    ];
+    foreach ($this->entities as $entity) {
+      $data[] = [
+        $entity->get('pcsc_farm_id')->value,
+        $entity->get('pcsc_state')->value,
+        $entity->get('pcsc_county')->value,
+        '',
+        '',
+        $entity->label(),
+      ];
+    }
+    return $data;
+  }
+
+  /**
+   * Helper function to build field enrollment data.
+   *
+   * @return array
+   *   The data array.
+   */
+  public function exportEnrollmentField() {
+    $data = [];
+    $data[] = [
+      'Farm ID',
+      'Tract ID',
+      'Field ID',
+      'State or Territory',
+      'County',
+    ];
+    foreach ($this->entities as $entity) {
+      $farm_id = $entity->get('pcsc_farm_id')->value;
+      $fields = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
+        'type' => 'pcsc_field',
+        'plan' => $entity->id(),
+      ]);
+      foreach ($fields as $field) {
+        $data[] = [
+          $farm_id,
+          $field->get('pcsc_tract_id')->value,
+          $field->get('pcsc_field_id')->value,
+          $field->get('pcsc_state')->value,
+          $field->get('pcsc_county')->value,
+        ];
+      }
+
+    }
+    return $data;
+  }
+
+  /**
+   * Helper function to build 528 supplemental data.
+   *
+   * @return array
+   *   The data array.
+   */
+  public function exportSupplemental528() {
+    $data = [];
+    $data[] = [
+      'Farm ID',
+      'Tract ID',
+      'Field ID',
+      'State or Territory',
+      'County',
+      'Grazing Type',
+    ];
+    foreach ($this->entities as $entity) {
+      $farm_id = $entity->get('pcsc_farm_id')->value;
+      $practices = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
+        'type' => 'pcsc_field_practice_528',
+        'plan' => $entity->id(),
+      ]);
+      foreach ($practices as $practice) {
+
+        $fields = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
+          'type' => 'pcsc_field',
+          'plan' => $entity->id(),
+          'field' => $practice->get('field')->first()->entity->id(),
+        ]);
+        if (empty($fields)) {
+          continue;
+        }
+        $field = reset($fields);
+
+        $data[] = [
+          $farm_id,
+          $field->get('pcsc_tract_id')->value,
+          $field->get('pcsc_field_id')->value,
+          $field->get('pcsc_state')->value,
+          $field->get('pcsc_county')->value,
+          $practice->get('528_grazing_type')->value,
+        ];
+      }
+
+    }
+    return $data;
   }
 
 }
