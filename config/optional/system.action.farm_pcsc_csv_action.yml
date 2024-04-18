@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - plan
+    - farm_pcsc
+  enforced:
+    module:
+      - farm_pcsc
+id: farm_pcsc_csv_action
+label: 'Export PCSC CSV'
+type: plan
+plugin: farm_pcsc:csv_action
+configuration: {  }

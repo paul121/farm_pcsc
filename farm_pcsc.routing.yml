@@ -1,0 +1,6 @@
+farm_pcsc.csv_action_form:
+  path: '/reports/pcsc/export'
+  defaults:
+    _form: 'Drupal\farm_pcsc\Form\PcscCsvActionForm'
+  requirements:
+    _user_is_logged_in: 'TRUE'
