@@ -15,7 +15,7 @@ class PcscFieldPractice345 extends PcscFieldPracticeBase {
     $form['345_surface_disturbance'] = [
       '#type' => 'select',
       '#title' => $this->t('Surface disturbance'),
-      '#options' => $this->getListOptions('345_surface_disturbance'),
+      '#options' => $this->getListOptions('plan_record', $this->bundle(), '345_surface_disturbance'),
       '#required' => TRUE,
     ];
     return $form;

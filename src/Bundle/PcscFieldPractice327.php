@@ -15,7 +15,7 @@ class PcscFieldPractice327 extends PcscFieldPracticeBase {
     $form['327_species_category']= [
       '#type' => 'select',
       '#title' => $this->t('Species category'),
-      '#options' => $this->getListOptions('327_species_category'),
+      '#options' => $this->getListOptions('plan_record', $this->bundle(), '327_species_category'),
       '#required' => TRUE,
     ];
     return $form;

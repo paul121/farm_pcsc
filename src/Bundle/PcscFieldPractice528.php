@@ -15,7 +15,7 @@ class PcscFieldPractice528 extends PcscFieldPracticeBase {
     $form['528_grazing_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Grazing type'),
-      '#options' => $this->getListOptions('528_grazing_type'),
+      '#options' => $this->getListOptions('plan_record', $this->bundle(), '528_grazing_type'),
       '#required' => TRUE,
     ];
     return $form;

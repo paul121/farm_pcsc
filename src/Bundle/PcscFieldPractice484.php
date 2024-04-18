@@ -15,7 +15,7 @@ class PcscFieldPractice484 extends PcscFieldPracticeBase {
     $form['484_mulch_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Mulch type'),
-      '#options' => $this->getListOptions('484_mulch_type'),
+      '#options' => $this->getListOptions('plan_record', $this->bundle(), '484_mulch_type'),
       '#required' => TRUE,
     ];
     $form['484_mulch_cover'] = [
