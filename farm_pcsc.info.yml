@@ -9,4 +9,5 @@ dependencies:
   - farm_land
   - farm_land_types
   - farm_quick
+  - farm_report
   - plan
