@@ -332,9 +332,33 @@ class PcscCsvActionForm extends ConfirmFormBase {
         'Farm ID' => $entity->get('pcsc_farm_id')->value,
         'State or territory' => $entity->get('pcsc_state')->value,
         'County' => $entity->get('pcsc_county')->value,
-        'Producer data change' => '',
-        'Producer start date' => '',
+        'Producer data change' => 'No',
+        'Producer start date' => date('m/d/Y', $entity->get('pcsc_start_date')->value),
         'Producer name' => $entity->label(),
+        'Underserved status' => $entity->get('pcsc_underserved')->value,
+        'Total area' => $entity->get('pcsc_producer_total_area')->value,
+        'Total crop area' => $entity->get('pcsc_total_crop_area')->value,
+        'Total livestock area' => $entity->get('pcsc_total_livestock_area')->value,
+        'Total forest area' => $entity->get('pcsc_total_forest_area')->value,
+        'Livestock type 1' => $entity->get('pcsc_livestock_type_1')->value,
+        'Livestock head (type 1 avg annual)' => $entity->get('pcsc_livestock_avg_head_1')->value,
+        'Livestock type 2' => $entity->get('pcsc_livestock_type_2')->value,
+        'Livestock head (type 2 avg annual)' => $entity->get('pcsc_livestock_avg_head_2')->value,
+        'Livestock type 3' => $entity->get('pcsc_livestock_type_3')->value,
+        'Livestock head (type 3 avg annual)' => $entity->get('pcsc_livestock_avg_head_3')->value,
+        'Other livestock type' => $entity->get('pcsc_livestock_type_other')->value,
+        'Organic farm' => $entity->get('pcsc_organic')->value,
+        'Organic fields' => $entity->get('pcsc_organic_fields')->value,
+        'Producer motivation' => $entity->get('pcsc_producer_motivation')->value,
+        'Producer outreach 1' => $entity->get('pcsc_producer_outreach_1')->value,
+        'Producer outreach 2' => $entity->get('pcsc_producer_outreach_2')->value,
+        'Producer outreach 3' => $entity->get('pcsc_producer_outreach_3')->value,
+        'Other producer outreach' => $entity->get('pcsc_producer_outreach_other')->value,
+        'CSAF experience' => $entity->get('pcsc_csaf_experience')->value,
+        'CSAF federal funds' => $entity->get('pcsc_csaf_federal_funds')->value,
+        'CSAF state or local funds' => $entity->get('pcsc_csaf_local_funds')->value,
+        'CSAF nonprofit funds' => $entity->get('pcsc_csaf_nonprofit_funds')->value,
+        'CSAF market incentives' => $entity->get('pcsc_csaf_market_incentives')->value,
       ];
     }
     return $data;
@@ -355,13 +379,72 @@ class PcscCsvActionForm extends ConfirmFormBase {
         'plan' => $entity->id(),
       ]);
       foreach ($fields as $field) {
-        $data[] = [
+
+        // Build general field enrollment information.
+        $row = [
           'Farm ID' => $farm_id,
           'Tract ID' => $field->get('pcsc_tract_id')->value,
           'Field ID' => $field->get('pcsc_field_id')->value,
-          'State or territory' => $field->get('pcsc_state')->value,
+          'State or Territory' => $field->get('pcsc_state')->value,
           'County' => $field->get('pcsc_county')->value,
+          'Prior Field ID (if applicable)' => $field->get('pcsc_prior_field_id')->value,
+          'Field data change' => 'No',
+          'Contract start date' => date('m/d/Y', $field->get('pcsc_start_date')->value),
+          'Total field area' => $field->get('pcsc_field_total_area')->value,
+          'Commodity category' => $field->get('pcsc_commodity_category')->value,
+          'Commodity type' => $field->get('pcsc_commodity_type')->value,
+          'Baseline yield' => $field->get('pcsc_baseline_yield')->value,
+          'Baseline yield unit' => $field->get('pcsc_baseline_yield_unit')->value,
+          'Other baseline yield unit' => $field->get('pcsc_baseline_yield_unit_other')->value,
+          'Baseline yield location' => $field->get('pcsc_baseline_yield_location')->value,
+          'Other baseline yield location' => $field->get('pcsc_baseline_yield_location_other')->value,
+          'Field land use' => $field->get('pcsc_land_use')->value,
+          'Field irrigated' => $field->get('pcsc_irrigated')->value,
+          'Field tillage' => $field->get('pcsc_tillage')->value,
+          'Practice (combination) past extent - farm' => $field->get('pcsc_farm_past_practice')->value,
+          'Field any CSAF practice' => $field->get('pcsc_field_csaf_practice')->value,
+          'Practice (combination) past use - this field' => $field->get('pcsc_field_past_practice')->value,
         ];
+
+        // Create placeholder columns for practices.
+        for ($i = 1; $i <= 7; $i++) {
+          $row['Practice ' . $i . ' type'] = '';
+          $row['Practice ' . $i . ' standard'] = '';
+          $row['Other practice ' . $i . ' standard'] = '';
+          $row['Planned practice ' . $i . ' implementation year'] = '';
+          $row['Practice ' . $i . ' extent'] = '';
+          $row['Practice ' . $i . ' extent unit'] = '';
+          $row['Other practice ' . $i . ' extent unit'] = '';
+        }
+
+        // Add information about practices associated with the field.
+        $practices = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
+          'type' => array_keys(farm_pcsc_practice_type_bundle_classes()),
+          'plan' => $entity->id(),
+          'field' => $field->get('field')->first()->entity->id()
+        ]);
+        $i = 1;
+        foreach ($practices as $practice) {
+          // Only include 7 practices.
+          if ($i > 7) {
+            break;
+          }
+
+          $practice_types = farm_pcsc_practice_type_options();
+
+          // Populate practice row information.
+          $row['Practice ' . $i . ' type'] = $practice_types[$practice->bundle()];
+          $row['Practice ' . $i . ' standard'] = $practice->get('pcsc_practice_standard')->value;
+          $row['Other practice ' . $i . ' standard'] = $practice->get('pcsc_practice_standard_other')->value;
+          $row['Planned practice ' . $i . ' implementation year'] = $practice->get('pcsc_practice_year')->value;
+          $row['Practice ' . $i . ' extent'] = $practice->get('pcsc_practice_extent')->value;
+          $row['Practice ' . $i . ' extent unit'] = $practice->get('pcsc_practice_extent_unit')->value;
+          $row['Other practice ' . $i . ' extent unit'] = $practice->get('pcsc_practice_extent_unit_other')->value;
+
+          // Increment the practice counter.
+          $i++;
+        }
+        $data[] = $row;
       }
 
     }
