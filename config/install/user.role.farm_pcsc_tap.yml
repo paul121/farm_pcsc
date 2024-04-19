@@ -9,6 +9,7 @@ dependencies:
     - farm_land
     - farm_pcsc
     - farm_quick
+    - farm_report
     - farm_ui_location
     - filter
     - log
@@ -22,6 +23,7 @@ label: TAP
 weight: 1
 is_admin: false
 permissions:
+  - 'access farm report index'
   - 'access locations overview'
   - 'access plan overview'
   - 'access quick_form overview'
@@ -30,14 +32,18 @@ permissions:
   - 'enroll fields'
   - 'enroll producers'
   - 'update any land asset'
+  - 'update any pcsc_producer plan'
   - 'update own land asset'
+  - 'update own pcsc_producer plan'
   - 'use text format default'
   - 'view any land asset'
   - 'view any log'
+  - 'view any pcsc_producer plan'
   - 'view any plan'
   - 'view flag'
   - 'view land_type'
   - 'view own land asset'
   - 'view own log'
+  - 'view own pcsc_producer plan'
   - 'view own plan'
   - 'view quick_form'
