@@ -74,10 +74,10 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#default_value' => 'I don\'t know',
       '#required' => TRUE,
     ];
-    $form['pcsc_total_area'] = [
+    $form['pcsc_producer_total_area'] = [
       '#type' => 'select',
       '#title' => $this->t('Total area'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_total_area'),
+      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_producer_total_area'),
       '#required' => TRUE,
     ];
     $form['pcsc_total_crop_area'] = [

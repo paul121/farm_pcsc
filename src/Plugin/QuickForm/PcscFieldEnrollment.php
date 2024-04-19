@@ -93,7 +93,7 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#title' => $this->t('Contract start date'),
       '#required' => TRUE,
     ];
-    $form['pcsc_total_area'] = [
+    $form['pcsc_field_total_area'] = [
       '#type' => 'number',
       '#title' => $this->t('Total field area (acres)'),
       '#min' => 0.01,

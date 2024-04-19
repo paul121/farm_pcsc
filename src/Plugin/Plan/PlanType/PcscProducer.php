@@ -51,7 +51,7 @@ class PcscProducer extends FarmPlanType {
           'I don\'t know',
         ]),
       ],
-      'pcsc_total_area' => [
+      'pcsc_producer_total_area' => [
         'type' => 'list_string',
         'label' => $this->t('Total area'),
         'allowed_values' => farm_pcsc_allowed_values_helper([

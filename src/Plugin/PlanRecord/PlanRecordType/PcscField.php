@@ -58,7 +58,7 @@ class PcscField extends FarmPlanRecordType {
         'type' => 'timestamp',
         'label' => $this->t('Contract start date'),
       ],
-      'pcsc_total_area' => [
+      'pcsc_field_total_area' => [
         'type' => 'decimal',
         'label' => t('Total field area (acres)'),
         'precision' => 5,
