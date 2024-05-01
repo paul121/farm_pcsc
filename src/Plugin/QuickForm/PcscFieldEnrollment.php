@@ -262,11 +262,14 @@ class PcscFieldEnrollment extends QuickFormBase {
     // Get all submitted values.
     $values = $form_state->getValues();
 
+    // Load the producer.
+    $producer = \Drupal::entityTypeManager()->getStorage('plan')->load($values['plan']);
+
     // Create land asset.
     $land = Asset::create([
       'type' => 'land',
       'land_type' => 'field',
-      'name' => $values['pcsc_field_id'],
+      'name' => $producer->label() . ': ' . $values['pcsc_field_id'],
       'intrinsic_geometry' => $values['geometry'],
       'status' => 'active',
     ]);
