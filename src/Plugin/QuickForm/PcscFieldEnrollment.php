@@ -199,8 +199,9 @@ class PcscFieldEnrollment extends QuickFormBase {
     $form['num_practices'] = [
       '#type' => 'select',
       '#title' => $this->t('Number of practices'),
-      '#options' => farm_pcsc_allowed_values_helper([1, 2, 3, 4, 5, 6, 7]),
-      '#required' => TRUE,
+      '#description' => $this->t('If practice details are not known at this time, leave this set to 0. Practices can be added later.'),
+      '#options' => farm_pcsc_allowed_values_helper([0, 1, 2, 3, 4, 5, 6, 7]),
+      '#default_value' => 0,
       '#ajax' => [
         'callback' => [$this, 'practicesCallback'],
         'wrapper' => 'practices-container',
