@@ -1,3 +1,8 @@
+farm_pcsc.producer_enrollment:
+  title: 'Producer Enrollment'
+  route_name: farm.quick.pcsc_producer_enrollment
+  appears_on:
+    - view.pcsc_plan_report.page
 farm_pcsc.field_enrollment:
   title: 'Field Enrollment'
   route_name: farm.quick.pcsc_field_enrollment
