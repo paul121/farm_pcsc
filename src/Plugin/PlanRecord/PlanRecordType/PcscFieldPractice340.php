@@ -2,6 +2,8 @@
 
 namespace Drupal\farm_pcsc\Plugin\PlanRecord\PlanRecordType;
 
+use Drupal\farm_pcsc\Traits\ListStringTrait;
+
 /**
  * Provides the PCSC Field Practice 340 plan record type.
  *
@@ -11,6 +13,8 @@ namespace Drupal\farm_pcsc\Plugin\PlanRecord\PlanRecordType;
  * )
  */
 class PcscFieldPractice340 extends PcscFieldPracticeBase {
+
+  use ListStringTrait;
 
   /**
    * {@inheritdoc}
@@ -54,6 +58,14 @@ class PcscFieldPractice340 extends PcscFieldPracticeBase {
     foreach ($field_info as $name => $info) {
       $fields[$name] = $this->farmFieldFactory->bundleFieldDefinition($info);
     }
+
+    // Convert list_string form widgets to select lists (not default radios).
+    foreach ($field_info as $name => $info) {
+      if ($info['type'] = 'list_string') {
+        $this->useSelectWidget($fields[$name]);
+      }
+    }
+
     return $fields;
   }
 

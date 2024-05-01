@@ -2,6 +2,8 @@
 
 namespace Drupal\farm_pcsc\Traits;
 
+use Drupal\entity\BundleFieldDefinition;
+
 /**
  * Provides helper methods for list_string fields.
  */
@@ -27,6 +29,18 @@ trait ListStringTrait {
       return $field_definitions[$field_name]->getSetting('allowed_values') ?? [];
     }
     return [];
+  }
+
+  /**
+   * Simple helper to change a list_string field widget to options_select.
+   *
+   * @param BundleFieldDefinition $field_definition
+   *   A bundle field definition.
+   */
+  public function useSelectWidget(BundleFieldDefinition &$field_definition) {
+    $options = $field_definition->getDisplayOptions('form');
+    $options['type'] = 'options_select';
+    $field_definition->setDisplayOptions('form', $options);
   }
 
 }
