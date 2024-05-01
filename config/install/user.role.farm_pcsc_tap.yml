@@ -23,6 +23,7 @@ is_admin: false
 permissions:
   - 'access locations overview'
   - 'access toolbar'
+  - 'access user profiles'
   - 'change own username'
   - 'enroll fields'
   - 'enroll producers'
