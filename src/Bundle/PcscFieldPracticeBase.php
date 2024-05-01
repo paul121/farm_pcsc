@@ -3,7 +3,7 @@
 namespace Drupal\farm_pcsc\Bundle;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drupal\farm_pcsc\Traits\ListOptionsTrait;
+use Drupal\farm_pcsc\Traits\ListStringTrait;
 use Drupal\plan\Entity\PlanRecord;
 
 /**
@@ -12,7 +12,7 @@ use Drupal\plan\Entity\PlanRecord;
 abstract class PcscFieldPracticeBase extends PlanRecord implements PcscFieldPracticeInterface {
 
   use StringTranslationTrait;
-  use ListOptionsTrait;
+  use ListStringTrait;
 
   /**
    * {@inheritdoc}

@@ -3,7 +3,7 @@
 namespace Drupal\farm_pcsc\Plugin\QuickForm;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\farm_pcsc\Traits\ListOptionsTrait;
+use Drupal\farm_pcsc\Traits\ListStringTrait;
 use Drupal\farm_quick\Plugin\QuickForm\QuickFormBase;
 use Drupal\plan\Entity\Plan;
 
@@ -22,7 +22,7 @@ use Drupal\plan\Entity\Plan;
  */
 class PcscProducerEnrollment extends QuickFormBase {
 
-  use ListOptionsTrait;
+  use ListStringTrait;
 
   /**
    * {@inheritdoc}

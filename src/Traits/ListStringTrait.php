@@ -3,12 +3,12 @@
 namespace Drupal\farm_pcsc\Traits;
 
 /**
- * Provides a getListOptions() method for loading allowed values lists.
+ * Provides helper methods for list_string fields.
  */
-trait ListOptionsTrait {
+trait ListStringTrait {
 
   /**
-   * Get allowed values for a given field.
+   * Get allowed values for a given list_string field.
    *
    * @param string $entity_type
    *   The entity type.
