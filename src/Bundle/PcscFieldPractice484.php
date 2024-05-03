@@ -29,4 +29,14 @@ class PcscFieldPractice484 extends PcscFieldPracticeBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildSupplementalFieldPracticeExport(): array {
+    return [
+      'Mulch Type' => $this->get('484_mulch_type')->value,
+      'Mulch cover (percent of field)' => $this->get('484_mulch_cover')->value,
+    ];
+  }
+
 }

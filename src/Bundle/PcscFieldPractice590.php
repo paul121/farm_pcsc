@@ -65,4 +65,20 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildSupplementalFieldPracticeExport(): array {
+    return [
+      'Nutrient type with CPS 590' => $this->get('590_nutrient_type')->value,
+      'Nutrient application method with CPS 590' => $this->get('590_application_method')->value,
+      'Nutrient application method in the previous year' => $this->get('590_previous_application_method')->value,
+      'Nutrient application timing with CPS 590' => $this->get('590_timing')->value,
+      'Nutrient application timing in the previous year' => $this->get('590_previous_timing')->value,
+      'Nutrient application rate with CPS 590' => $this->get('590_rate')->value,
+      'Nutrient application rate unit with CPS 590' => $this->get('590_rate_unit')->value,
+      'Nutrient application rate change' => $this->get('590_rate_change')->value,
+    ];
+  }
+
 }

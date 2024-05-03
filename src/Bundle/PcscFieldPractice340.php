@@ -34,4 +34,15 @@ class PcscFieldPractice340 extends PcscFieldPracticeBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildSupplementalFieldPracticeExport(): array {
+    return [
+      'Species category (select most common/extensive type # if using more than one)' => $this->get('340_species_category')->value,
+      'Cover crop planned management' => $this->get('340_planned_management')->value,
+      'Cover crop termination method' => $this->get('340_termination_method')->value,
+    ];
+  }
+
 }

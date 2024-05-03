@@ -21,4 +21,13 @@ class PcscFieldPractice327 extends PcscFieldPracticeBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildSupplementalFieldPracticeExport(): array {
+    return [
+      'Species category (select most common/extensive type if using more than one)' => $this->get('327_species_category')->value,
+    ];
+  }
+
 }

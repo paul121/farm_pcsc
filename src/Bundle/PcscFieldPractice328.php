@@ -58,4 +58,17 @@ class PcscFieldPractice328 extends PcscFieldPracticeBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildSupplementalFieldPracticeExport(): array {
+    return [
+      'Conservation crop type' => $this->get('328_crop_type')->value,
+      'Change implemented' => $this->get('328_change_implemented')->value,
+      'Conservation crop rotation tillage type' => $this->get('328_rotation_tillage_type')->value,
+      'Other conservation crop rotation tillage type' => $this->get('328_rotation_tillage_type_other')->value,
+      'Total conservation crop rotation length in days' => $this->get('328_total_rotation_length')->value,
+    ];
+  }
+
 }

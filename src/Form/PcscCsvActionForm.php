@@ -244,7 +244,14 @@ class PcscCsvActionForm extends ConfirmFormBase {
       '#title' => $this->t('Supplemental sheet'),
       '#description' => $this->t('Select the supplemental sheet to export.'),
       '#options' => [
+        '327' => $this->t('Conservation Cover (327)'),
+        '328' => $this->t('Conservation Cover Rotation (328)'),
+        '329' => $this->t('Residue and Tillage Management, No Till (329)'),
+        '340' => $this->t('Cover Crop (340)'),
+        '345' => $this->t('Residue and Tillage Management, Reduced Till (345)'),
+        '484' => $this->t('Mulching (484)'),
         '528' => $this->t('Prescribed Grazing (528)'),
+        '590' => $this->t('Nutrient Management (590)'),
       ],
       '#states' => [
         'visible' => [

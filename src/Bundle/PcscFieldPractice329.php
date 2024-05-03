@@ -21,4 +21,13 @@ class PcscFieldPractice329 extends PcscFieldPracticeBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildSupplementalFieldPracticeExport(): array {
+    return [
+      'Surface Disturbance' => $this->get('329_surface_disturbance')->value,
+    ];
+  }
+
 }
