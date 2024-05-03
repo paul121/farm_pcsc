@@ -58,6 +58,10 @@ class PcscFieldPractice328 extends PcscFieldPracticeBase {
         ]),
         'required' => TRUE,
       ],
+      '328_rotation_tillage_type_other' => [
+        'type' => 'string',
+        'label' => $this->t('328: Other conservation crop rotation tillage type'),
+      ],
       '328_total_rotation_length' => [
         'type' => 'integer',
         'label' => $this->t('328: Total conservation crop rotation length in days'),
