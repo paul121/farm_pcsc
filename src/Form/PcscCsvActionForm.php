@@ -264,18 +264,26 @@ class PcscCsvActionForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    // Determine the sheet to export.
-    $sheet_type = $form_state->getValue('sheet_type');
-    if ($sheet_type != 'all') {
-      $sub_type = $form_state->getValue("{$sheet_type}_type");
-      $sheet_type = "{$sheet_type}_$sub_type";
-    }
-
-    // Build the function name to build data.
+    // Determine the sheet to export and build data.
     $data = [];
-    $function_name = 'export' . implode('', array_map('ucfirst', explode('_', $sheet_type)));
-    if (is_callable([$this, $function_name])) {
-      $data = $this->{$function_name}();
+    $sheet_type = $form_state->getValue('sheet_type');
+    $sub_type = $form_state->getValue("{$sheet_type}_type");
+    switch ($sheet_type) {
+      case 'enrollment':
+      case 'summary':
+        // Build the function name to build data.
+        $function_name = 'export' . implode('', array_map('ucfirst', explode('_', "{$sheet_type}_$sub_type")));
+        if (is_callable([$this, $function_name])) {
+          $data = $this->{$function_name}();
+        }
+        break;
+
+      case 'supplemental':
+        $data = $this->exportSupplemental($sub_type);
+
+      case 'all':
+      default:
+        break;
     }
 
     // Serialize the data as CSV.
@@ -287,7 +295,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
 
     // Create the file.
     $date = date('c');
-    $filename = "$sheet_type-$date.csv";
+    $filename = "$sheet_type-$sub_type-$date.csv";
     $destination = "$directory/$filename";
     try {
       $file = $this->fileRepository->writeData($output, $destination);
@@ -457,34 +465,40 @@ class PcscCsvActionForm extends ConfirmFormBase {
    * @return array
    *   The data array.
    */
-  public function exportSupplemental528() {
+  public function exportSupplemental(string $practice_id) {
     $data = [];
     foreach ($this->entities as $entity) {
+
+      // Query all pcsc_fields for the plan.
+      $fields = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
+        'type' => 'pcsc_field',
+        'plan' => $entity->id(),
+      ]);
+
+      // Build data export for each practice.
       $farm_id = $entity->get('pcsc_farm_id')->value;
+      /** @var \Drupal\farm_pcsc\Bundle\PcscFieldPracticeInterface[] $practices */
       $practices = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
-        'type' => 'pcsc_field_practice_528',
+        'type' => "pcsc_field_practice_$practice_id",
         'plan' => $entity->id(),
       ]);
       foreach ($practices as $practice) {
 
-        $fields = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
-          'type' => 'pcsc_field',
-          'plan' => $entity->id(),
-          'field' => $practice->get('field')->first()->entity->id(),
-        ]);
-        if (empty($fields)) {
+        // Check that the practice field exists.
+        $field_id = $practice->get('field')?->first()?->entity->id();
+        if (!$field_id || !isset($fields[$field_id])) {
           continue;
         }
-        $field = reset($fields);
+        $field = $fields[$field_id];
 
+        // Build data.
         $data[] = [
           'Farm ID' => $farm_id,
           'Tract ID' => $field->get('pcsc_tract_id')->value,
           'Field ID' => $field->get('pcsc_field_id')->value,
           'State or territory' => $field->get('pcsc_state')->value,
           'County' => $field->get('pcsc_county')->value,
-          'Grazing Type' => $practice->get('528_grazing_type')->value,
-        ];
+        ] + $practice->buildSupplementalFieldPracticeExport();
       }
 
     }
