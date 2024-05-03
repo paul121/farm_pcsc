@@ -17,6 +17,20 @@ abstract class PcscFieldPracticeBase extends PlanRecord implements PcscFieldPrac
   /**
    * {@inheritdoc}
    */
+  public function label() {
+
+    // Build label with the referenced field and practice type.
+    if ($field = $this->get('field')->first()?->entity) {
+      return $this->t('%practice: %field', ['%practice' => $this->getBundleLabel(), '%field' => $field->label()]);
+    }
+
+    // Fallback to default.
+    return parent::label();
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildPracticeForm(int $delta = 1): array {
     $form['pcsc_practice_standard'] = [
       '#type' => 'select',
