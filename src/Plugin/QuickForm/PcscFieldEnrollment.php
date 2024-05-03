@@ -6,6 +6,7 @@ use Drupal\asset\Entity\Asset;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\farm_pcsc\Traits\ListStringTrait;
 use Drupal\farm_quick\Plugin\QuickForm\QuickFormBase;
+use Drupal\farm_quick\Traits\QuickFormElementsTrait;
 use Drupal\plan\Entity\PlanInterface;
 use Drupal\plan\Entity\PlanRecord;
 
@@ -25,6 +26,7 @@ use Drupal\plan\Entity\PlanRecord;
 class PcscFieldEnrollment extends QuickFormBase {
 
   use ListStringTrait;
+  use QuickFormElementsTrait;
 
   /**
    * {@inheritdoc}
@@ -45,28 +47,32 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#title' => $this->t('Geometry'),
       '#required' => TRUE,
     ];
-    $form['pcsc_tract_id'] = [
+
+    $form['id'] = $this->buildInlineContainer();
+    $form['id']['pcsc_tract_id'] = [
       '#type' => 'number',
       '#title' => $this->t('Tract ID'),
       '#min' => 1,
       '#step' => 1,
       '#required' => TRUE,
     ];
-    $form['pcsc_field_id'] = [
+    $form['id']['pcsc_field_id'] = [
       '#type' => 'number',
       '#title' => $this->t('Field ID'),
       '#min' => 1,
       '#step' => 1,
       '#required' => TRUE,
     ];
-    $form['pcsc_prior_field_id'] = [
+    $form['id']['pcsc_prior_field_id'] = [
       '#type' => 'number',
       '#title' => $this->t('Prior Field ID (if applicable)'),
       '#min' => 1,
       '#step' => 1,
     ];
+
+    $form['location'] = $this->buildInlineContainer();
     $state_options = farm_pcsc_state_options();
-    $form['pcsc_state'] = [
+    $form['location']['pcsc_state'] = [
       '#type' => 'select',
       '#title' => $this->t('State or territory'),
       '#options' => array_combine($state_options, $state_options),
@@ -76,12 +82,12 @@ class PcscFieldEnrollment extends QuickFormBase {
       ],
       '#required' => TRUE,
     ];
-    $form['county_container'] = [
+    $form['location']['county_container'] = [
       '#type' => 'container',
       '#attributes' => ['id' => 'county-container'],
     ];
     $county_options = farm_pcsc_state_county_options($form_state->getValue('pcsc_state') ?? '');
-    $form['county_container']['pcsc_county'] = [
+    $form['location']['county_container']['pcsc_county'] = [
       '#type' => 'select',
       '#title' => $this->t('County'),
       '#options' => array_combine($county_options, $county_options),
@@ -100,7 +106,9 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#step' => 0.01,
       '#required' => TRUE,
     ];
-    $form['pcsc_commodity_category'] = [
+
+    $form['commodity'] = $this->buildInlineContainer();
+    $form['commodity']['pcsc_commodity_category'] = [
       '#type' => 'select',
       '#title' => $this->t('Commodity category'),
       '#options' => farm_pcsc_allowed_values_helper([
@@ -115,13 +123,15 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#required' => TRUE,
     ];
     $commodity_types = farm_pcsc_commodity_type_options();
-    $form['pcsc_commodity_type'] = [
+    $form['commodity']['pcsc_commodity_type'] = [
       '#type' => 'select',
       '#title' => $this->t('Commodity type'),
       '#options' => farm_pcsc_allowed_values_helper($commodity_types),
       '#required' => TRUE,
     ];
-    $form['pcsc_baseline_yield'] = [
+
+    $form['baseline'] = $this->buildInlineContainer();
+    $form['baseline']['pcsc_baseline_yield'] = [
       '#type' => 'number',
       '#title' => $this->t('Baseline yield (production per acre)'),
       '#min' => 0.01,
@@ -129,13 +139,13 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#step' => 0.01,
       '#required' => TRUE,
     ];
-    $form['pcsc_baseline_yield_unit'] = [
+    $form['baseline']['pcsc_baseline_yield_unit'] = [
       '#type' => 'select',
       '#title' => $this->t('Baseline yield unit'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_baseline_yield_unit'),
       '#required' => TRUE,
     ];
-    $form['pcsc_baseline_yield_unit_other'] = [
+    $form['baseline']['pcsc_baseline_yield_unit_other'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Other baseline yield unit'),
       '#states' => [
@@ -144,13 +154,13 @@ class PcscFieldEnrollment extends QuickFormBase {
         ],
       ],
     ];
-    $form['pcsc_baseline_yield_location'] = [
+    $form['baseline']['pcsc_baseline_yield_location'] = [
       '#type' => 'select',
       '#title' => $this->t('Baseline yield location'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_baseline_yield_location'),
       '#required' => TRUE,
     ];
-    $form['pcsc_baseline_yield_location_other'] = [
+    $form['baseline']['pcsc_baseline_yield_location_other'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Other baseline yield location'),
       '#states' => [
@@ -159,37 +169,41 @@ class PcscFieldEnrollment extends QuickFormBase {
         ],
       ],
     ];
-    $form['pcsc_land_use'] = [
+
+    $form['field'] = $this->buildInlineContainer();
+    $form['field']['pcsc_land_use'] = [
       '#type' => 'select',
       '#title' => $this->t('Field land use'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_land_use'),
       '#required' => TRUE,
     ];
-    $form['pcsc_irrigated'] = [
+    $form['field']['pcsc_irrigated'] = [
       '#type' => 'select',
       '#title' => $this->t('Field irrigated'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_irrigated'),
       '#required' => TRUE,
     ];
-    $form['pcsc_tillage'] = [
+    $form['field']['pcsc_tillage'] = [
       '#type' => 'select',
       '#title' => $this->t('Field tillage'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_tillage'),
       '#required' => TRUE,
     ];
-    $form['pcsc_farm_past_practice'] = [
+
+    $form['practices'] = $this->buildInlineContainer();
+    $form['practices']['pcsc_farm_past_practice'] = [
       '#type' => 'select',
       '#title' => $this->t('Practice (combination) past extent - farm'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_farm_past_practice'),
       '#required' => TRUE,
     ];
-    $form['pcsc_field_csaf_practice'] = [
+    $form['practices']['pcsc_field_csaf_practice'] = [
       '#type' => 'select',
       '#title' => $this->t('Field any CSAF practice'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_field_csaf_practice'),
       '#required' => TRUE,
     ];
-    $form['pcsc_field_past_practice'] = [
+    $form['practices']['pcsc_field_past_practice'] = [
       '#type' => 'select',
       '#title' => $this->t('Practice (combination) past use - this field'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_field_past_practice'),
@@ -244,7 +258,7 @@ class PcscFieldEnrollment extends QuickFormBase {
    * Ajax callback for County field.
    */
   public function countyCallback(array $form, FormStateInterface $form_state) {
-    return $form['county_container'];
+    return $form['location']['county_container'];
   }
 
   /**

@@ -5,6 +5,7 @@ namespace Drupal\farm_pcsc\Plugin\QuickForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\farm_pcsc\Traits\ListStringTrait;
 use Drupal\farm_quick\Plugin\QuickForm\QuickFormBase;
+use Drupal\farm_quick\Traits\QuickFormElementsTrait;
 use Drupal\plan\Entity\Plan;
 
 /**
@@ -23,6 +24,7 @@ use Drupal\plan\Entity\Plan;
 class PcscProducerEnrollment extends QuickFormBase {
 
   use ListStringTrait;
+  use QuickFormElementsTrait;
 
   /**
    * {@inheritdoc}
@@ -40,8 +42,10 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#step' => 1,
       '#required' => TRUE,
     ];
+
+    $form['location'] = $this->buildInlineContainer();
     $state_options = farm_pcsc_state_options();
-    $form['pcsc_state'] = [
+    $form['location']['pcsc_state'] = [
       '#type' => 'select',
       '#title' => $this->t('State or territory'),
       '#options' => array_combine($state_options, $state_options),
@@ -51,12 +55,12 @@ class PcscProducerEnrollment extends QuickFormBase {
       ],
       '#required' => TRUE,
     ];
-    $form['county_container'] = [
+    $form['location']['county_container'] = [
       '#type' => 'container',
       '#attributes' => ['id' => 'county-container'],
     ];
     $county_options = farm_pcsc_state_county_options($form_state->getValue('pcsc_state') ?? '');
-    $form['county_container']['pcsc_county'] = [
+    $form['location']['county_container']['pcsc_county'] = [
       '#type' => 'select',
       '#title' => $this->t('County'),
       '#options' => array_combine($county_options, $county_options),
@@ -74,21 +78,25 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#default_value' => 'I don\'t know',
       '#required' => TRUE,
     ];
-    $form['pcsc_producer_total_area'] = [
+
+    $form['areas'] = $this->buildInlineContainer();
+    $form['areas']['pcsc_producer_total_area'] = [
       '#type' => 'select',
       '#title' => $this->t('Total area'),
       '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_producer_total_area'),
       '#required' => TRUE,
+      '#group' => 'areas',
     ];
-    $form['pcsc_total_crop_area'] = [
+    $form['areas']['pcsc_total_crop_area'] = [
       '#type' => 'number',
       '#title' => $this->t('Total crop area (acres)'),
       '#min' => 0,
       '#max' => 100000,
       '#step' => 1,
       '#required' => TRUE,
+      '#group' => 'areas',
     ];
-    $form['pcsc_total_livestock_area'] = [
+    $form['areas']['pcsc_total_livestock_area'] = [
       '#type' => 'number',
       '#title' => $this->t('Total livestock area (acres)'),
       '#min' => 0,
@@ -96,7 +104,7 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#step' => 1,
       '#required' => TRUE,
     ];
-    $form['pcsc_total_forest_area'] = [
+    $form['areas']['pcsc_total_forest_area'] = [
       '#type' => 'number',
       '#title' => $this->t('Total forest area (acres)'),
       '#min' => 0,
@@ -104,36 +112,40 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#step' => 1,
       '#required' => TRUE,
     ];
-    $form['pcsc_livestock_type_1'] = [
+
+    $form['livestock1'] = $this->buildInlineContainer();
+    $form['livestock1']['pcsc_livestock_type_1'] = [
       '#type' => 'select',
       '#title' => $this->t('Livestock type 1'),
       '#options' => ['' => ''] + $this->getListOptions('plan', 'pcsc_producer', 'pcsc_livestock_type_1'),
     ];
-    $form['pcsc_livestock_avg_head_1'] = [
+    $form['livestock1']['pcsc_livestock_avg_head_1'] = [
       '#type' => 'number',
       '#title' => $this->t('Livestock head (type 1 avg annual)'),
       '#min' => 1,
       '#max' => 10000000,
       '#step' => 1,
     ];
-    $form['pcsc_livestock_type_2'] = [
+    $form['livestock2'] = $this->buildInlineContainer();
+    $form['livestock2']['pcsc_livestock_type_2'] = [
       '#type' => 'select',
       '#title' => $this->t('Livestock type 2'),
       '#options' => ['' => ''] + $this->getListOptions('plan', 'pcsc_producer', 'pcsc_livestock_type_2'),
     ];
-    $form['pcsc_livestock_avg_head_2'] = [
+    $form['livestock2']['pcsc_livestock_avg_head_2'] = [
       '#type' => 'number',
       '#title' => $this->t('Livestock head (type 2 avg annual)'),
       '#min' => 1,
       '#max' => 10000000,
       '#step' => 1,
     ];
-    $form['pcsc_livestock_type_3'] = [
+    $form['livestock3'] = $this->buildInlineContainer();
+    $form['livestock3']['pcsc_livestock_type_3'] = [
       '#type' => 'select',
       '#title' => $this->t('Livestock type 3'),
       '#options' => ['' => ''] + $this->getListOptions('plan', 'pcsc_producer', 'pcsc_livestock_type_3'),
     ];
-    $form['pcsc_livestock_avg_head_3'] = [
+    $form['livestock3']['pcsc_livestock_avg_head_3'] = [
       '#type' => 'number',
       '#title' => $this->t('Livestock head (type 3 avg annual)'),
       '#min' => 1,
@@ -144,14 +156,16 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Other livestock type'),
     ];
-    $form['pcsc_organic'] = [
+
+    $form['organic'] = $this->buildInlineContainer();
+    $form['organic']['pcsc_organic'] = [
       '#type' => 'select',
       '#title' => $this->t('Organic farm'),
       '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_organic'),
       '#default_value' => 'I don\'t know',
       '#required' => TRUE,
     ];
-    $form['pcsc_organic_fields'] = [
+    $form['organic']['pcsc_organic_fields'] = [
       '#type' => 'select',
       '#title' => $this->t('Organic fields'),
       '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_organic_fields'),
@@ -183,35 +197,37 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#type' => 'textfield',
       '#title' => $this->t('Other producer outreach'),
     ];
-    $form['pcsc_csaf_experience'] = [
+
+    $form['csaf'] = $this->buildInlineContainer();
+    $form['csaf']['pcsc_csaf_experience'] = [
       '#type' => 'select',
       '#title' => $this->t('CSAF experience'),
       '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_experience'),
       '#default_value' => 'I don\'t know',
       '#required' => TRUE,
     ];
-    $form['pcsc_csaf_federal_funds'] = [
+    $form['csaf']['pcsc_csaf_federal_funds'] = [
       '#type' => 'select',
       '#title' => $this->t('CSAF federal funds'),
       '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_federal_funds'),
       '#default_value' => 'I don\'t know',
       '#required' => TRUE,
     ];
-    $form['pcsc_csaf_local_funds'] = [
+    $form['csaf']['pcsc_csaf_local_funds'] = [
       '#type' => 'select',
       '#title' => $this->t('CSAF state or local funds'),
       '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_local_funds'),
       '#default_value' => 'I don\'t know',
       '#required' => TRUE,
     ];
-    $form['pcsc_csaf_nonprofit_funds'] = [
+    $form['csaf']['pcsc_csaf_nonprofit_funds'] = [
       '#type' => 'select',
       '#title' => $this->t('CSAF nonprofit funds'),
       '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_nonprofit_funds'),
       '#default_value' => 'I don\'t know',
       '#required' => TRUE,
     ];
-    $form['pcsc_csaf_market_incentives'] = [
+    $form['csaf']['pcsc_csaf_market_incentives'] = [
       '#type' => 'select',
       '#title' => $this->t('CSAF market incentives'),
       '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_market_incentives'),
@@ -225,7 +241,7 @@ class PcscProducerEnrollment extends QuickFormBase {
    * Ajax callback for County field.
    */
   public function countyCallback(array $form, FormStateInterface $form_state) {
-    return $form['county_container'];
+    return $form['location']['county_container'];
   }
 
   /**
