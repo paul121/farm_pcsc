@@ -31,12 +31,14 @@ class PcscFieldPractice484 extends PcscFieldPracticeBase {
           'Synthetic',
           'Wood',
         ]),
+        'required' => TRUE,
       ],
       '484_mulch_cover' => [
         'type' => 'integer',
         'label' => $this->t('484: Mulch cover (percent of field)'),
         'mix' => 1,
         'max' => 100,
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

@@ -31,6 +31,7 @@ class PcscFieldPractice345 extends PcscFieldPracticeBase {
           'Shallow across most of the soil surface',
           'Vertical/mulch',
         ]),
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

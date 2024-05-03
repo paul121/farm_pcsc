@@ -39,6 +39,7 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
           'Solid/semi-solid animal manure',
           'Wastewater',
         ]),
+        'required' => TRUE,
       ],
       '590_application_method' => [
         'type' => 'list_string',
@@ -52,6 +53,7 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
           'Surface application with tillage',
           'Variable rate',
         ]),
+        'required' => TRUE,
       ],
       '590_previous_application_method' => [
         'type' => 'list_string',
@@ -65,6 +67,7 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
           'Surface application with tillage',
           'Variable rate',
         ]),
+        'required' => TRUE,
       ],
       '590_timing' => [
         'type' => 'list_string',
@@ -75,6 +78,7 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
           'Split pre- and post-planting',
           'Split post planting',
         ]),
+        'required' => TRUE,
       ],
       '590_previous_timing' => [
         'type' => 'list_string',
@@ -85,12 +89,14 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
           'Split pre- and post-planting',
           'Split post planting',
         ]),
+        'required' => TRUE,
       ],
       '590_rate' => [
         'type' => 'integer',
         'label' => $this->t('590: Nutrient application rate with CPS 590'),
         'mix' => 1,
         'max' => 20000,
+        'required' => TRUE,
       ],
       '590_rate_unit' => [
         'type' => 'list_string',
@@ -99,6 +105,7 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
           'Gallons per acre',
           'Pounds per acre',
         ]),
+        'required' => TRUE,
       ],
       '590_rate_change' => [
         'type' => 'list_string',
@@ -108,6 +115,7 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
           'Increase compared to previous year',
           'No change',
         ]),
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

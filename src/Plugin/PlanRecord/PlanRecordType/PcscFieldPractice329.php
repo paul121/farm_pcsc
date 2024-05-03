@@ -29,6 +29,7 @@ class PcscFieldPractice329 extends PcscFieldPracticeBase {
           'None',
           'Seed row only',
         ]),
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

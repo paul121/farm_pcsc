@@ -31,6 +31,7 @@ class PcscFieldPractice528 extends PcscFieldPracticeBase {
           'Management intensive',
           'Rest-rotation',
         ]),
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

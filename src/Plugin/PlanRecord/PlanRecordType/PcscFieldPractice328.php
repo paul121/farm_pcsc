@@ -33,6 +33,7 @@ class PcscFieldPractice328 extends PcscFieldPracticeBase {
           'Legume',
           'Warm season',
         ]),
+        'required' => TRUE,
       ],
       '328_change_implemented' => [
         'type' => 'list_string',
@@ -42,6 +43,7 @@ class PcscFieldPractice328 extends PcscFieldPracticeBase {
           'Reduced fallow period',
           'Both',
         ]),
+        'required' => TRUE,
       ],
       '328_rotation_tillage_type' => [
         'type' => 'list_string',
@@ -54,12 +56,14 @@ class PcscFieldPractice328 extends PcscFieldPracticeBase {
           'None',
           'Other (specify)',
         ]),
+        'required' => TRUE,
       ],
       '328_total_rotation_length' => [
         'type' => 'integer',
         'label' => $this->t('328: Total conservation crop rotation length in days'),
         'mix' => 1,
         'max' => 120,
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

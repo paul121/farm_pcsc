@@ -32,6 +32,7 @@ class PcscFieldPractice327 extends PcscFieldPracticeBase {
           'Non-legume broadleaves',
           'Shrubs',
         ]),
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

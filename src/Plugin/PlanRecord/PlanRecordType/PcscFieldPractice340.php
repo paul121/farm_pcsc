@@ -32,6 +32,7 @@ class PcscFieldPractice340 extends PcscFieldPracticeBase {
           'Legume',
           'Non-legume broadleaves',
         ]),
+        'required' => TRUE,
       ],
       '340_planned_management' => [
         'type' => 'list_string',
@@ -41,6 +42,7 @@ class PcscFieldPractice340 extends PcscFieldPracticeBase {
           'Haying',
           'Termination',
         ]),
+        'required' => TRUE,
       ],
       '340_termination_method' => [
         'type' => 'list_string',
@@ -53,6 +55,7 @@ class PcscFieldPractice340 extends PcscFieldPracticeBase {
           'Rolling/crimping',
           'Winter kill/frost',
         ]),
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

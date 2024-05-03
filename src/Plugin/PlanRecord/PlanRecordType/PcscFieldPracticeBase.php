@@ -31,6 +31,7 @@ abstract class PcscFieldPracticeBase extends FarmPlanRecordType {
           'NRCS',
           'Other (specify)',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_practice_standard_other' => [
         'type' => 'string',
@@ -41,12 +42,14 @@ abstract class PcscFieldPracticeBase extends FarmPlanRecordType {
         'label' => $this->t('Planned practice implementation year'),
         'min' => 2022,
         'max' => 2030,
+        'required' => TRUE,
       ],
       'pcsc_practice_extent' => [
         'type' => 'decimal',
         'label' => $this->t('Extent'),
         'min' => 0.01,
         'max' => 100000,
+        'required' => TRUE,
       ],
       'pcsc_practice_extent_unit' => [
         'type' => 'list_string',
@@ -58,6 +61,7 @@ abstract class PcscFieldPracticeBase extends FarmPlanRecordType {
           'Square feet',
           'Other (specify)',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_practice_extent_unit_other' => [
         'type' => 'string',

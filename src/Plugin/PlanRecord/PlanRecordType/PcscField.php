@@ -36,11 +36,13 @@ class PcscField extends FarmPlanRecordType {
         'type' => 'integer',
         'label' => t('USDA Tract ID'),
         'min' => 1,
+        'required' => TRUE,
       ],
       'pcsc_field_id' => [
         'type' => 'integer',
         'label' => t('USDA Field ID'),
         'min' => 1,
+        'required' => TRUE,
       ],
       'pcsc_prior_field_id' => [
         'type' => 'integer',
@@ -50,16 +52,19 @@ class PcscField extends FarmPlanRecordType {
       'pcsc_state' => [
         'type' => 'list_string',
         'label' => t('State/territory'),
-        'allowed_values_function' => 'farm_pcsc_state_field_allowed_values'
+        'allowed_values_function' => 'farm_pcsc_state_field_allowed_values',
+        'required' => TRUE,
       ],
       'pcsc_county' => [
         'type' => 'list_string',
         'label' => t('County'),
-        'allowed_values_function' => 'farm_pcsc_county_field_allowed_values'
+        'allowed_values_function' => 'farm_pcsc_county_field_allowed_values',
+        'required' => TRUE,
       ],
       'pcsc_start_date' => [
         'type' => 'timestamp',
         'label' => $this->t('Contract start date'),
+        'required' => TRUE,
       ],
       'pcsc_field_total_area' => [
         'type' => 'decimal',
@@ -68,6 +73,7 @@ class PcscField extends FarmPlanRecordType {
         'scale' => 2,
         'min' => 0.01,
         'max' => 500,
+        'required' => TRUE,
       ],
       'pcsc_commodity_category' => [
         'type' => 'list_string',
@@ -81,11 +87,13 @@ class PcscField extends FarmPlanRecordType {
           'Livestock and trees',
           'Crops, livestock and trees',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_commodity_type' => [
         'type' => 'list_string',
         'label' => $this->t('Commodity type'),
         'allowed_values' => farm_pcsc_allowed_values_helper(farm_pcsc_commodity_type_options()),
+        'required' => TRUE,
       ],
       'pcsc_baseline_yield' => [
         'type' => 'decimal',
@@ -94,6 +102,7 @@ class PcscField extends FarmPlanRecordType {
         'scale' => 2,
         'min' => 0.01,
         'max' => 100000,
+        'required' => TRUE,
       ],
       'pcsc_baseline_yield_unit' => [
         'type' => 'list_string',
@@ -110,6 +119,7 @@ class PcscField extends FarmPlanRecordType {
           'Tons per acre',
           'Other (specify)',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_baseline_yield_unit_other' => [
         'type' => 'string',
@@ -123,6 +133,7 @@ class PcscField extends FarmPlanRecordType {
           'Whole operation',
           'Other (specify)',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_baseline_yield_location_other' => [
         'type' => 'string',
@@ -139,6 +150,7 @@ class PcscField extends FarmPlanRecordType {
           'Pasture',
           'Range',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_irrigated' => [
         'type' => 'list_string',
@@ -161,6 +173,7 @@ class PcscField extends FarmPlanRecordType {
           'Wheel line',
           'Other',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_tillage' => [
         'type' => 'list_string',
@@ -175,6 +188,7 @@ class PcscField extends FarmPlanRecordType {
           'Strip till',
           'Other',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_farm_past_practice' => [
         'type' => 'list_string',
@@ -187,6 +201,7 @@ class PcscField extends FarmPlanRecordType {
           'Used on 25-50% of operation',
           'Used on more than 75% of operation',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_field_csaf_practice' => [
         'type' => 'list_string',
@@ -196,6 +211,7 @@ class PcscField extends FarmPlanRecordType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_field_past_practice' => [
         'type' => 'list_string',
@@ -206,6 +222,7 @@ class PcscField extends FarmPlanRecordType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {

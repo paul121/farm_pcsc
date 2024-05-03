@@ -32,16 +32,19 @@ class PcscProducer extends FarmPlanType {
       'pcsc_state' => [
         'type' => 'list_string',
         'label' => t('State/territory'),
-        'allowed_values_function' => 'farm_pcsc_state_field_allowed_values'
+        'allowed_values_function' => 'farm_pcsc_state_field_allowed_values',
+        'required' => TRUE,
       ],
       'pcsc_county' => [
         'type' => 'list_string',
         'label' => t('County'),
-        'allowed_values_function' => 'farm_pcsc_county_field_allowed_values'
+        'allowed_values_function' => 'farm_pcsc_county_field_allowed_values',
+        'required' => TRUE,
       ],
       'pcsc_start_date' => [
         'type' => 'timestamp',
         'label' => $this->t('Producer start date'),
+        'required' => TRUE,
       ],
       'pcsc_underserved' => [
         'type' => 'list_string',
@@ -53,6 +56,7 @@ class PcscProducer extends FarmPlanType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_producer_total_area' => [
         'type' => 'list_string',
@@ -73,24 +77,28 @@ class PcscProducer extends FarmPlanType {
           '2,000 to 4,999 acres',
           '5,000 or more acres',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_total_crop_area' => [
         'type' => 'integer',
         'label' => $this->t('Total crop area (acres)'),
         'mix' => 1,
         'max' => 100000,
+        'required' => TRUE,
       ],
       'pcsc_total_livestock_area' => [
         'type' => 'integer',
         'label' => $this->t('Total livestock area (acres)'),
         'mix' => 1,
         'max' => 100000,
+        'required' => TRUE,
       ],
       'pcsc_total_forest_area' => [
         'type' => 'integer',
         'label' => $this->t('Total forest area (acres)'),
         'mix' => 1,
         'max' => 100000,
+        'required' => TRUE,
       ],
       'pcsc_livestock_type_1' => [
         'type' => 'list_string',
@@ -137,6 +145,7 @@ class PcscProducer extends FarmPlanType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_organic_fields' => [
         'type' => 'list_string',
@@ -146,6 +155,7 @@ class PcscProducer extends FarmPlanType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_producer_motivation' => [
         'type' => 'list_string',
@@ -157,6 +167,7 @@ class PcscProducer extends FarmPlanType {
           'Partnerships or networks',
           'Other',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_producer_outreach_1' => [
         'type' => 'list_string',
@@ -185,6 +196,7 @@ class PcscProducer extends FarmPlanType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_csaf_federal_funds' => [
         'type' => 'list_string',
@@ -194,6 +206,7 @@ class PcscProducer extends FarmPlanType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_csaf_local_funds' => [
         'type' => 'list_string',
@@ -203,6 +216,7 @@ class PcscProducer extends FarmPlanType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_csaf_nonprofit_funds' => [
         'type' => 'list_string',
@@ -212,6 +226,7 @@ class PcscProducer extends FarmPlanType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
       'pcsc_csaf_market_incentives' => [
         'type' => 'list_string',
@@ -221,6 +236,7 @@ class PcscProducer extends FarmPlanType {
           'No',
           'I don\'t know',
         ]),
+        'required' => TRUE,
       ],
     ];
     foreach ($field_info as $name => $info) {
