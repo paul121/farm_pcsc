@@ -7,6 +7,7 @@
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\farm_entity_views\FarmEntityViewsData;
 use Drupal\farm_pcsc\Bundle\PcscField;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice327;
@@ -62,6 +63,20 @@ function farm_pcsc_entity_bundle_info_alter(array &$bundles): void {
     if (isset($bundles['plan_record'][$bundle])) {
       $bundles['plan_record'][$bundle]['class'] = $class;
     }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function farm_pcsc_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Don't allow changing "Field" or "Plan" in our plan_record entity forms.
+  if (in_array($form_id, array_map(function ($bundle) {
+    return 'plan_record_' . $bundle . '_edit_form';
+  }, array_keys(farm_pcsc_practice_type_bundle_classes())))) {
+    $form['plan']['#access'] = FALSE;
+    $form['field']['#access'] = FALSE;
   }
 }
 
