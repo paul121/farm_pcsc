@@ -21,4 +21,14 @@ interface PcscFieldPracticeInterface extends PlanRecordInterface {
    */
   public function buildPracticeForm(int $delta = 1): array;
 
+  /**
+   * Helper function to build the supplemental field practice data for export.
+   *
+   * This only includes the supplemental fields unique to this field practice.
+   *
+   * @return array
+   *   Array of supplement field practices data to include in export.
+   */
+  public function buildSupplementalFieldPracticeExport(): array;
+
 }

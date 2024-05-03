@@ -81,4 +81,11 @@ abstract class PcscFieldPracticeBase extends PlanRecord implements PcscFieldPrac
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildSupplementalFieldPracticeExport(): array {
+    return [];
+  }
+
 }

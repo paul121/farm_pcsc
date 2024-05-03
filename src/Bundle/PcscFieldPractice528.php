@@ -21,4 +21,13 @@ class PcscFieldPractice528 extends PcscFieldPracticeBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function buildSupplementalFieldPracticeExport(): array {
+    return [
+      'Grazing Type' => $this->get('528_grazing_type')->value,
+    ];
+  }
+
 }
