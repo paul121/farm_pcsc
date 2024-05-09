@@ -6,6 +6,7 @@ dependencies:
     - plan.record.type.pcsc_field_practice_327
     - plan.record.type.pcsc_field_practice_328
     - plan.record.type.pcsc_field_practice_329
+    - plan.record.type.pcsc_field_practice_336
     - plan.record.type.pcsc_field_practice_340
     - plan.record.type.pcsc_field_practice_345
     - plan.record.type.pcsc_field_practice_484
@@ -337,6 +338,7 @@ display:
             pcsc_field_practice_327: pcsc_field_practice_327
             pcsc_field_practice_328: pcsc_field_practice_328
             pcsc_field_practice_329: pcsc_field_practice_329
+            pcsc_field_practice_336: pcsc_field_practice_336
             pcsc_field_practice_340: pcsc_field_practice_340
             pcsc_field_practice_345: pcsc_field_practice_345
             pcsc_field_practice_484: pcsc_field_practice_484

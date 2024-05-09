@@ -13,6 +13,7 @@ use Drupal\farm_pcsc\Bundle\PcscField;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice327;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice328;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice329;
+use Drupal\farm_pcsc\Bundle\PcscFieldPractice336;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice340;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice345;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice484;
@@ -47,6 +48,7 @@ function farm_pcsc_practice_type_bundle_classes() {
     'pcsc_field_practice_327' => PcscFieldPractice327::class,
     'pcsc_field_practice_328' => PcscFieldPractice328::class,
     'pcsc_field_practice_329' => PcscFieldPractice329::class,
+    'pcsc_field_practice_336' => PcscFieldPractice336::class,
     'pcsc_field_practice_340' => PcscFieldPractice340::class,
     'pcsc_field_practice_345' => PcscFieldPractice345::class,
     'pcsc_field_practice_484' => PcscFieldPractice484::class,
@@ -148,6 +150,7 @@ function farm_pcsc_practice_type_options() {
     'pcsc_field_practice_327' => t('327, Conservation Cover'),
     'pcsc_field_practice_328' => t('328, Conservation Crop Rotation'),
     'pcsc_field_practice_329' => t('329, Residue and Tillage Management, No Till'),
+    'pcsc_field_practice_336' => t('336, Soil Carbon Amendment'),
     'pcsc_field_practice_340' => t('340, Cover Crop'),
     'pcsc_field_practice_345' => t('345, Residue and Tillage Management, Reduced Till'),
     'pcsc_field_practice_484' => t('484, Mulching'),
