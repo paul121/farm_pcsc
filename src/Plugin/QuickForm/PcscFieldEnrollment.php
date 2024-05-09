@@ -190,20 +190,20 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#required' => TRUE,
     ];
 
-    $form['practices'] = $this->buildInlineContainer();
-    $form['practices']['pcsc_farm_past_practice'] = [
+    $form['practice_summaries'] = $this->buildInlineContainer();
+    $form['practice_summaries']['pcsc_farm_past_practice'] = [
       '#type' => 'select',
       '#title' => $this->t('Practice (combination) past extent - farm'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_farm_past_practice'),
       '#required' => TRUE,
     ];
-    $form['practices']['pcsc_field_csaf_practice'] = [
+    $form['practice_summaries']['pcsc_field_csaf_practice'] = [
       '#type' => 'select',
       '#title' => $this->t('Field any CSAF practice'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_field_csaf_practice'),
       '#required' => TRUE,
     ];
-    $form['practices']['pcsc_field_past_practice'] = [
+    $form['practice_summaries']['pcsc_field_past_practice'] = [
       '#type' => 'select',
       '#title' => $this->t('Practice (combination) past use - this field'),
       '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_field_past_practice'),
