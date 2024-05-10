@@ -32,6 +32,21 @@ class PcscField extends FarmPlanRecordType {
         'cardinality' => 1,
         'required' => TRUE,
       ],
+      'pcsc_year' => [
+        'type' => 'integer',
+        'label' => t('Enrollment year'),
+        'size' => 'small',
+        'min' => 2024,
+        'required' => TRUE,
+      ],
+      'pcsc_quarter' => [
+        'type' => 'integer',
+        'label' => t('Enrollment quarter'),
+        'size' => 'tiny',
+        'min' => 1,
+        'max' => 4,
+        'required' => TRUE,
+      ],
       'pcsc_tract_id' => [
         'type' => 'integer',
         'label' => t('USDA Tract ID'),

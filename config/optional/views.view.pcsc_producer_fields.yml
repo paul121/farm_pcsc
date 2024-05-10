@@ -739,6 +739,106 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        pcsc_year_value:
+          id: pcsc_year_value
+          table: plan_record__pcsc_year
+          field: pcsc_year_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_year
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_year_value_op
+            label: 'Enrollment year'
+            description: ''
+            use_operator: false
+            operator: pcsc_year_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_year_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_pcsc_tap: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        pcsc_quarter_value:
+          id: pcsc_quarter_value
+          table: plan_record__pcsc_quarter
+          field: pcsc_quarter_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_quarter
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_quarter_value_op
+            label: 'Enrollment quarter'
+            description: ''
+            use_operator: false
+            operator: pcsc_quarter_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_quarter_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_pcsc_tap: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
       style:
         type: table
         options:

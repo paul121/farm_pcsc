@@ -32,6 +32,21 @@ class PcscFieldEnrollment extends QuickFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form['enrollment'] = $this->buildInlineContainer();
+    $form['enrollment']['pcsc_year'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Enrollment year'),
+      '#options' => farm_pcsc_allowed_values_helper([2024, 2025, 2026, 2027, 2028]),
+      '#default_value' => date('Y'),
+    ];
+    $form['enrollment']['pcsc_quarter'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Enrollment quarter'),
+      '#options' => farm_pcsc_allowed_values_helper([1, 2, 3, 4]),
+      '#default_value' => ceil(date('m') / 3),
+    ];
+
     $producers = \Drupal::entityTypeManager()->getStorage('plan')->loadByProperties(['type' => 'pcsc_producer']);
     $producer_options = array_combine(array_keys($producers), array_map(function (PlanInterface $producer) {
       return $producer->label();

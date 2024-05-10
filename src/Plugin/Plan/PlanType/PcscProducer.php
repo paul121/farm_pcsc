@@ -23,6 +23,21 @@ class PcscProducer extends FarmPlanType {
   public function buildFieldDefinitions() {
     $fields = parent::buildFieldDefinitions();
     $field_info = [
+      'pcsc_year' => [
+        'type' => 'integer',
+        'label' => t('Enrollment year'),
+        'size' => 'small',
+        'min' => 2024,
+        'required' => TRUE,
+      ],
+      'pcsc_quarter' => [
+        'type' => 'integer',
+        'label' => t('Enrollment quarter'),
+        'size' => 'tiny',
+        'min' => 1,
+        'max' => 4,
+        'required' => TRUE,
+      ],
       'pcsc_farm_id' => [
         'type' => 'integer',
         'label' => $this->t('USDA Farm ID'),
