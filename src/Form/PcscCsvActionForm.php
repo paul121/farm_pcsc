@@ -226,7 +226,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
       '#title' => $this->t('Summary sheet'),
       '#description' => $this->t('Select the summary sheet to export.'),
       '#options' => [
-        'producer' => $this->t('Producer Summary'),
+        'farm' => $this->t('Farm Summary'),
         'field' => $this->t('Field Summary'),
       ],
       '#states' => [
@@ -462,6 +462,58 @@ class PcscCsvActionForm extends ConfirmFormBase {
         $data[] = $row;
       }
 
+    }
+    return $data;
+  }
+
+  /**
+   * Helper function to build farm summary data.
+   *
+   * @return array
+   *   The data array.
+   */
+  public function exportSummaryFarm() {
+    $data = [];
+    foreach ($this->entities as $entity) {
+      // @TODO Only load the farm summary for the most recent quarter.
+      $summaries  = $this->entityTypeManager->getStorage('plan_record')
+         ->loadByProperties([
+           'type' => 'pcsc_farm_summary',
+           'plan' => $entity->id(),
+         ]);
+      foreach ($summaries as $summary) {
+        $data[] = [
+          'Farm ID' => $entity->get('pcsc_farm_id')->value,
+          'State or territory' => $entity->get('pcsc_state')->value,
+          'County' => $entity->get('pcsc_county')->value,
+          'Producer TA received 1' => $summary->get('pcsc_producer_ta_1')->value,
+          'Producer TA received 2' => $summary->get('pcsc_producer_ta_2')->value,
+          'Producer TA received 3' => $summary->get('pcsc_producer_ta_3')->value,
+          'Producer TA received 4' => $summary->get('pcsc_producer_ta_4')->value,
+          'Other producer TA received ' => $summary->get('pcsc_producer_ta_other')->value,
+          'Producer incentive amount' => $summary->get('pcsc_incentive_amount')->value,
+          'Incentive reason 1' => $summary->get('pcsc_incentive_reason_1')->value,
+          'Incentive reason 2' => $summary->get('pcsc_incentive_reason_2')->value,
+          'Incentive reason 3' => $summary->get('pcsc_incentive_reason_3')->value,
+          'Incentive reason 4' => $summary->get('pcsc_incentive_reason_4')->value,
+          'Other incentive reason' => $summary->get('pcsc_incentive_reason_other')->value,
+          'Incentive structure 1' => $summary->get('pcsc_incentive_structure_1')->value,
+          'Incentive structure 2' => $summary->get('pcsc_incentive_structure_2')->value,
+          'Incentive structure 3' => $summary->get('pcsc_incentive_structure_3')->value,
+          'Incentive structure 4' => $summary->get('pcsc_incentive_structure_4')->value,
+          'Other incentive structure' => $summary->get('pcsc_incentive_structure_other')->value,
+          'Incentive type 1' => $summary->get('pcsc_incentive_type_1')->value,
+          'Incentive type 2' => $summary->get('pcsc_incentive_type_2')->value,
+          'Incentive type 3' => $summary->get('pcsc_incentive_type_3')->value,
+          'Incentive type 4' => $summary->get('pcsc_incentive_type_4')->value,
+          'Other incentive type' => $summary->get('pcsc_incentive_type_other')->value,
+          'Payment on enrollment' => $summary->get('pcsc_payment_enrollment')->value,
+          'Payment on implementation' => $summary->get('pcsc_payment_implementation')->value,
+          'Payment on harvest' => $summary->get('pcsc_payment_harvest')->value,
+          'Payment on MMRV' => $summary->get('pcsc_payment_mmrv')->value,
+          'Payment on sale' => $summary->get('pcsc_payment_sale')->value,
+        ];
+      }
     }
     return $data;
   }
