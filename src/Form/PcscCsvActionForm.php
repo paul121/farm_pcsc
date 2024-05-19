@@ -10,6 +10,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\Core\Url;
+use Drupal\farm_pcsc\Bundle\PcscFieldPracticeInterface;
 use Drupal\file\FileRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -534,10 +535,22 @@ class PcscCsvActionForm extends ConfirmFormBase {
            'plan' => $entity->id(),
          ]);
       foreach ($summaries as $summary) {
+        /** @var \Drupal\farm_pcsc\Bundle\PcscField $field */
         $field = $summary->get('pcsc_field_enrollment')->first()?->entity;
-        if (!$field) {
+        if (!$field || $field->get('field')->isEmpty()) {
           continue;
         }
+        $field_asset_id = $field->get('field')->first()->entity->id();
+        $practice_ids = $this->entityTypeManager->getStorage('plan_record')->getQuery()
+          ->condition('type', 'pcsc_field_practice_', 'STARTS_WITH')
+          ->condition('plan', $entity->id())
+          ->condition('field', $field_asset_id)
+          ->execute();
+
+        $practice_types = array_map(function (PcscFieldPracticeInterface $practice) {
+          return $practice->practiceTypeOption();
+        }, $this->entityTypeManager->getStorage('plan_record')->loadMultiple($practice_ids));
+
         $data[] = [
           'Farm ID' => $entity->get('pcsc_farm_id')->value,
           'Tract ID' => $field->get('pcsc_tract_id')->value,
@@ -545,14 +558,13 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'State or Territory' => $field->get('pcsc_state')->value,
           'County' => $field->get('pcsc_county')->value,
           'Commodity type' => $field->get('pcsc_commodity_type')->value,
-          // @TODO Load data from the practice references.
-          'Practice type 1' => '',
-          'Practice type 2' => '',
-          'Practice type 3' => '',
-          'Practice type 4' => '',
-          'Practice type 5' => '',
-          'Practice type 6' => '',
-          'Practice type 7' => '',
+          'Practice type 1' => $practice_types[0] ?? '',
+          'Practice type 2' => $practice_types[1] ?? '',
+          'Practice type 3' => $practice_types[2] ?? '',
+          'Practice type 4' => $practice_types[3] ?? '',
+          'Practice type 5' => $practice_types[4] ?? '',
+          'Practice type 6' => $practice_types[5] ?? '',
+          'Practice type 7' => $practice_types[6] ?? '',
           'Date practice completed' => date('m/d/Y', $summary->get('pcsc_practice_completed')->value),
           'Contract end date' => date('m/d/Y', $summary->get('pcsc_end_date')->value),
           'MMRV assistance provided' => $summary->get('pcsc_mmrv_assistance')->value,
