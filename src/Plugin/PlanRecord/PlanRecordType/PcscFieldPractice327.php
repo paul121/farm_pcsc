@@ -24,7 +24,7 @@ class PcscFieldPractice327 extends PcscFieldPracticeBase {
     $field_info = [
       '327_species_category' => [
         'type' => 'list_string',
-        'label' => $this->t('328: Species category'),
+        'label' => $this->t('327: Species category'),
         'allowed_values' => farm_pcsc_allowed_values_helper([
           'Brassicas',
           'Grasses',
