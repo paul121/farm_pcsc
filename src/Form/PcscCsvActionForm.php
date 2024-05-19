@@ -565,7 +565,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Practice type 5' => $practice_types[4] ?? '',
           'Practice type 6' => $practice_types[5] ?? '',
           'Practice type 7' => $practice_types[6] ?? '',
-          'Date practice completed' => date('m/d/Y', $summary->get('pcsc_practice_completed')->value),
+          'Date practice complete' => date('m/d/Y', $summary->get('pcsc_practice_complete')->value),
           'Contract end date' => date('m/d/Y', $summary->get('pcsc_end_date')->value),
           'MMRV assistance provided' => $summary->get('pcsc_mmrv_assistance')->value,
           'Marketing assistance provided' => $summary->get('pcsc_marketing_assistance')->value,

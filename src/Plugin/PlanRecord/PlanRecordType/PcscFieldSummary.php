@@ -69,9 +69,9 @@ class PcscFieldSummary extends FarmPlanRecordType {
         'max' => 4,
         'required' => TRUE,
       ],
-      'pcsc_practice_completed' => [
+      'pcsc_practice_complete' => [
         'type' => 'timestamp',
-        'label' => $this->t('Date practice completed'),
+        'label' => $this->t('Date practice complete'),
       ],
       'pcsc_end_date' => [
         'type' => 'timestamp',

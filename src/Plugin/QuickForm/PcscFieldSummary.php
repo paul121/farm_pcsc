@@ -67,9 +67,9 @@ class PcscFieldSummary extends QuickFormBase {
       '#required' => TRUE,
     ];
 
-    $form['pcsc_practice_completed'] = [
+    $form['pcsc_practice_complete'] = [
       '#type' => 'date',
-      '#title' => $this->t('Date practice completed'),
+      '#title' => $this->t('Date practice complete'),
       '#required' => TRUE,
     ];
 
