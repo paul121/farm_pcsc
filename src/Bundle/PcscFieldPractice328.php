@@ -12,6 +12,13 @@ class PcscFieldPractice328 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeOption(): string {
+    return '328, Conservation Crop Rotation';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildPracticeForm(int $delta = 1): array {
     $form = parent::buildPracticeForm($delta);
     $form['328_crop_type'] = [

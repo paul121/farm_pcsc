@@ -10,6 +10,13 @@ class PcscFieldPractice327 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeOption(): string {
+    return '327, Conservation Cover';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildPracticeForm(int $delta = 1): array {
     $form = parent::buildPracticeForm($delta);
     $form['327_species_category']= [

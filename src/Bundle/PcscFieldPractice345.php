@@ -10,6 +10,13 @@ class PcscFieldPractice345 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeOption(): string {
+    return '345, Residue and Tillage Management, Reduced Till';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildPracticeForm(int $delta = 1): array {
     $form = parent::buildPracticeForm($delta);
     $form['345_surface_disturbance'] = [

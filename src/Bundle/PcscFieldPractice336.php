@@ -8,4 +8,11 @@ namespace Drupal\farm_pcsc\Bundle;
  */
 class PcscFieldPractice336 extends PcscFieldPracticeBase {
 
+  /**
+   * {@inheritdoc}
+   */
+  public function practiceTypeOption(): string {
+    return '336, Soil Carbon Amendment';
+  }
+
 }

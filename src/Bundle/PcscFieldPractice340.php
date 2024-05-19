@@ -11,6 +11,13 @@ class PcscFieldPractice340 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeOption(): string {
+    return '340, Cover Crop';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function buildPracticeForm(int $delta = 1): array {
     $form = parent::buildPracticeForm($delta);
     $form['340_species_category'] = [
