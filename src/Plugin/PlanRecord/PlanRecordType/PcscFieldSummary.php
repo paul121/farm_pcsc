@@ -2,6 +2,7 @@
 
 namespace Drupal\farm_pcsc\Plugin\PlanRecord\PlanRecordType;
 
+use Drupal\entity\BundleFieldDefinition;
 use Drupal\farm_entity\Plugin\PlanRecord\PlanRecordType\FarmPlanRecordType;
 
 /**
@@ -19,6 +20,39 @@ class PcscFieldSummary extends FarmPlanRecordType {
    */
   public function buildFieldDefinitions() {
     $fields = parent::buildFieldDefinitions();
+
+    $fields['pcsc_field_enrollment'] = BundleFieldDefinition::create('entity_reference')
+      ->setLabel(t('Field'))
+      ->setRequired(TRUE)
+      ->setSetting('target_type', 'plan_record')
+      ->setSetting('handler', 'default:plan_record')
+      ->setSetting('handler_settings', [
+        'target_bundles' => [
+          'pcsc_field' => 'pcsc_field',
+        ],
+        'sort' => [
+          'field' => '_none',
+        ],
+        'auto_create' => FALSE,
+        'auto_create_bundle' => '',
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'match_limit' => '10',
+          'size' => '60',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'entity_reference_label',
+        'settings' => [
+          'link' => TRUE,
+        ],
+      ]);
+
     $field_info = [
       'pcsc_year' => [
         'type' => 'integer',

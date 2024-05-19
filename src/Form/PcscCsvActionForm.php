@@ -534,14 +534,17 @@ class PcscCsvActionForm extends ConfirmFormBase {
            'plan' => $entity->id(),
          ]);
       foreach ($summaries as $summary) {
+        $field = $summary->get('pcsc_field_enrollment')->first()?->entity;
+        if (!$field) {
+          continue;
+        }
         $data[] = [
           'Farm ID' => $entity->get('pcsc_farm_id')->value,
-          // @TODO Load data from the field summary field reference.
-          'Tract ID' => '',
-          'Field ID' => '',
-          'State or Territory' => '',
-          'County' => '',
-          'Commodity type' => '',
+          'Tract ID' => $field->get('pcsc_tract_id')->value,
+          'Field ID' => $field->get('pcsc_field_id')->value,
+          'State or Territory' => $field->get('pcsc_state')->value,
+          'County' => $field->get('pcsc_county')->value,
+          'Commodity type' => $field->get('pcsc_commodity_type')->value,
           // @TODO Load data from the practice references.
           'Practice type 1' => '',
           'Practice type 2' => '',
