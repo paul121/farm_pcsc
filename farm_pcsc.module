@@ -9,6 +9,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\farm_entity_views\FarmEntityViewsData;
+use Drupal\farm_pcsc\Bundle\PcscCommodity;
 use Drupal\farm_pcsc\Bundle\PcscField;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice327;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice328;
@@ -45,6 +46,7 @@ function farm_pcsc_entity_type_build(array &$entity_types) {
 function farm_pcsc_plan_record_bundle_classes() {
   return [
     'pcsc_field' => PcscField::class,
+    'pcsc_commodity' => PcscCommodity::class,
     'pcsc_field_practice_327' => PcscFieldPractice327::class,
     'pcsc_field_practice_328' => PcscFieldPractice328::class,
     'pcsc_field_practice_329' => PcscFieldPractice329::class,
