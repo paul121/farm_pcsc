@@ -37,12 +37,12 @@ function farm_pcsc_entity_type_build(array &$entity_types) {
 }
 
 /**
- * Define bundle classes for practice types.
+ * Define bundle classes for plan records.
  *
  * @return array
  *   Returns an array of bundle classes keyed by bundle ID.
  */
-function farm_pcsc_practice_type_bundle_classes() {
+function farm_pcsc_plan_record_bundle_classes() {
   return [
     'pcsc_field' => PcscField::class,
     'pcsc_field_practice_327' => PcscFieldPractice327::class,
@@ -61,7 +61,7 @@ function farm_pcsc_practice_type_bundle_classes() {
  * Implements hook_entity_bundle_info_alter().
  */
 function farm_pcsc_entity_bundle_info_alter(array &$bundles): void {
-  foreach (farm_pcsc_practice_type_bundle_classes() as $bundle => $class) {
+  foreach (farm_pcsc_plan_record_bundle_classes() as $bundle => $class) {
     if (isset($bundles['plan_record'][$bundle])) {
       $bundles['plan_record'][$bundle]['class'] = $class;
     }
@@ -76,7 +76,7 @@ function farm_pcsc_form_alter(&$form, FormStateInterface $form_state, $form_id) 
   // Don't allow changing "Field" or "Plan" in our plan_record entity forms.
   if (in_array($form_id, array_map(function ($bundle) {
     return 'plan_record_' . $bundle . '_edit_form';
-  }, array_keys(farm_pcsc_practice_type_bundle_classes())))) {
+  }, array_keys(farm_pcsc_plan_record_bundle_classes())))) {
     $form['plan']['#access'] = FALSE;
     $form['pcsc_field']['#access'] = FALSE;
   }

@@ -438,7 +438,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
 
         // Add information about practices associated with the field.
         $practices = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
-          'type' => array_keys(farm_pcsc_practice_type_bundle_classes()),
+          'type' => array_keys(farm_pcsc_practice_type_options()),
           'plan' => $entity->id(),
           'pcsc_field' => $field->id(),
         ]);

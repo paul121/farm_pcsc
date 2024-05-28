@@ -195,7 +195,7 @@ class PcscFieldEnrollment extends QuickFormBase {
           ],
         ];
         if (!empty($form_state->getValue(['practices', $i, 'type']))) {
-          $practice_classes = farm_pcsc_practice_type_bundle_classes();
+          $practice_classes = farm_pcsc_plan_record_bundle_classes();
           $practice_class = $practice_classes[$form_state->getValue(['practices', $i, 'type'])];
           /** @var \Drupal\farm_pcsc\Bundle\PcscFieldPracticeInterface $practice */
           $practice = $practice_class::create(['type' => $form_state->getValue(['practices', $i, 'type'])]);
