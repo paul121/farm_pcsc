@@ -60,10 +60,18 @@ class PcscFieldSummary extends QuickFormBase {
       '#suffix' => '</div>',
     ];
 
-    $form['commodity'] = [
+    $commodity_options = [];
+    if ($form_state->getValue('plan') && $form_state->getValue('field')) {
+      $commodities = \Drupal::entityTypeManager()->getStorage('plan_record')->loadByProperties(['type' => 'pcsc_commodity', 'plan' => $form_state->getValue('plan'), 'field' => $form_state->getValue('field')]);
+      foreach ($commodities as $commodity) {
+        $commodity_options[$commodity->id()] = $commodity->label();
+      }
+    }
+
+    $form['pcsc_commodity'] = [
       '#type' => 'select',
       '#title' => $this->t('Commodity'),
-      '#options' => farm_pcsc_commodity_type_options(),
+      '#options' => $commodity_options,
       '#required' => TRUE,
     ];
 

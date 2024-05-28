@@ -122,69 +122,6 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#required' => TRUE,
     ];
 
-    $form['commodity'] = $this->buildInlineContainer();
-    $form['commodity']['pcsc_commodity_category'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Commodity category'),
-      '#options' => farm_pcsc_allowed_values_helper([
-        'Crops',
-        'Livestock',
-        'Trees',
-        'Crops and livestock',
-        'Crops and trees',
-        'Livestock and trees',
-        'Crops, livestock and trees',
-      ]),
-      '#required' => TRUE,
-    ];
-    $commodity_types = farm_pcsc_commodity_type_options();
-    $form['commodity']['pcsc_commodity_type'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Commodity type'),
-      '#options' => farm_pcsc_allowed_values_helper($commodity_types),
-      '#required' => TRUE,
-    ];
-
-    $form['baseline'] = $this->buildInlineContainer();
-    $form['baseline']['pcsc_baseline_yield'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Baseline yield (production per acre)'),
-      '#min' => 0.01,
-      '#max' => 100000,
-      '#step' => 0.01,
-      '#required' => TRUE,
-    ];
-    $form['baseline']['pcsc_baseline_yield_unit'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Baseline yield unit'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_baseline_yield_unit'),
-      '#required' => TRUE,
-    ];
-    $form['baseline']['pcsc_baseline_yield_unit_other'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Other baseline yield unit'),
-      '#states' => [
-        'visible' => [
-          'select[name="pcsc_baseline_yield_unit"]' => ['value' => 'Other (specify)'],
-        ],
-      ],
-    ];
-    $form['baseline']['pcsc_baseline_yield_location'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Baseline yield location'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_baseline_yield_location'),
-      '#required' => TRUE,
-    ];
-    $form['baseline']['pcsc_baseline_yield_location_other'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Other baseline yield location'),
-      '#states' => [
-        'visible' => [
-          'select[name="pcsc_baseline_yield_location"]' => ['value' => 'Other (specify)'],
-        ],
-      ],
-    ];
-
     $form['field'] = $this->buildInlineContainer();
     $form['field']['pcsc_land_use'] = [
       '#type' => 'select',

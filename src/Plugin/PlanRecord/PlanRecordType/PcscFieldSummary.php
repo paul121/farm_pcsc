@@ -21,14 +21,14 @@ class PcscFieldSummary extends FarmPlanRecordType {
   public function buildFieldDefinitions() {
     $fields = parent::buildFieldDefinitions();
 
-    $fields['pcsc_field_enrollment'] = BundleFieldDefinition::create('entity_reference')
-      ->setLabel(t('Field'))
+    $fields['pcsc_commodity'] = BundleFieldDefinition::create('entity_reference')
+      ->setLabel(t('Field Commodity'))
       ->setRequired(TRUE)
       ->setSetting('target_type', 'plan_record')
       ->setSetting('handler', 'default:plan_record')
       ->setSetting('handler_settings', [
         'target_bundles' => [
-          'pcsc_field' => 'pcsc_field',
+          'pcsc_commodity' => 'pcsc_commodity',
         ],
         'sort' => [
           'field' => '_none',
