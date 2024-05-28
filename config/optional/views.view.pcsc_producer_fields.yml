@@ -22,20 +22,19 @@ display:
     display_plugin: default
     position: 0
     display_options:
-      title: 'Fields'
+      title: Fields
       fields:
-        field_target_id_1:
-          id: field_target_id_1
-          table: plan_record__field
-          field: field_target_id
+        view_plan_record:
+          id: view_plan_record
+          table: plan_record
+          field: view_plan_record
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: field
-          plugin_id: field
+          plugin_id: entity_link
           label: ''
-          exclude: true
+          exclude: false
           alter:
             alter_text: false
             text: ''
@@ -75,30 +74,19 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_entity_id
-          settings: {  }
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_target_id:
-          id: field_target_id
-          table: plan_record__field
-          field: field_target_id
+          text: View
+          output_url_as_text: false
+          absolute: false
+        edit_plan_record:
+          id: edit_plan_record
+          table: plan_record
+          field: edit_plan_record
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: field
-          plugin_id: field
-          label: Field
+          plugin_id: entity_link_edit
+          label: ''
           exclude: false
           alter:
             alter_text: false
@@ -131,69 +119,6 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: true
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        nothing:
-          id: nothing
-          table: views
-          field: nothing
-          relationship: none
-          group_type: group
-          admin_label: 'Practices link'
-          plugin_id: custom
-          label: Practices
-          exclude: false
-          alter:
-            alter_text: true
-            text: Practices
-            make_link: true
-            path: '/plan/{{raw_arguments.plan}}/fields/{{field_target_id_1}}/practices'
-            absolute: true
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
@@ -201,7 +126,10 @@ display:
           empty: ''
           hide_empty: false
           empty_zero: false
-          hide_alter_empty: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: true
         pcsc_field_id_value:
           id: pcsc_field_id_value
           table: plan_record__pcsc_field_id
@@ -462,16 +390,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        edit_plan_record:
-          id: edit_plan_record
-          table: plan_record
-          field: edit_plan_record
+        pcsc_year_value:
+          id: pcsc_year_value
+          table: plan_record__pcsc_year
+          field: pcsc_year_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          plugin_id: entity_link_edit
-          label: Edit
+          entity_field: pcsc_year
+          plugin_id: field
+          label: 'Enrollment year'
           exclude: false
           alter:
             alter_text: false
@@ -512,9 +441,87 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: Edit
-          output_url_as_text: false
-          absolute: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_quarter_value:
+          id: pcsc_quarter_value
+          table: plan_record__pcsc_quarter
+          field: pcsc_quarter_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_quarter
+          plugin_id: field
+          label: 'Enrollment quarter'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
       pager:
         type: mini
         options:
@@ -846,16 +853,25 @@ display:
           row_class: ''
           default_row_class: true
           columns:
-            field_target_id: field_target_id
+            view_plan_record: view_plan_record
+            edit_plan_record: edit_plan_record
             pcsc_field_id_value: pcsc_field_id_value
             pcsc_tract_id_value: pcsc_tract_id_value
             pcsc_state_value: pcsc_state_value
             pcsc_county_value: pcsc_county_value
-            edit_plan_record: edit_plan_record
-          default: field_target_id
+            pcsc_year_value: pcsc_year_value
+            pcsc_quarter_value: pcsc_quarter_value
+          default: pcsc_year_value
           info:
-            field_target_id:
-              sortable: true
+            view_plan_record:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            edit_plan_record:
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -889,8 +905,15 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            edit_plan_record:
-              sortable: false
+            pcsc_year_value:
+              sortable: true
+              default_sort_order: desc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            pcsc_quarter_value:
+              sortable: true
               default_sort_order: asc
               align: ''
               separator: ''

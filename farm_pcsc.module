@@ -6,8 +6,12 @@
  */
 
 use Drupal\Core\Entity\ContentEntityInterface;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityViewBuilder;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\entity\Menu\DefaultEntityLocalTaskProvider;
 use Drupal\farm_entity_views\FarmEntityViewsData;
 use Drupal\farm_pcsc\Bundle\PcscCommodity;
 use Drupal\farm_pcsc\Bundle\PcscField;
@@ -34,6 +38,12 @@ function farm_pcsc_entity_type_build(array &$entity_types) {
 
     // Set the views data handler class to FarmEntityViewsData.
     $entity_types['plan_record']->setHandlerClass('views_data', FarmEntityViewsData::class);
+
+    $entity_types['plan_record']->setHandlerClass('view_builder',EntityViewBuilder::class);
+    $entity_types['plan_record']->setHandlerClass('local_task_provider', [
+      'default' => DefaultEntityLocalTaskProvider::class,
+    ]);
+    $entity_types['plan_record']->setLinkTemplate('canonical', '/plan/record/{plan_record}');
   }
 }
 
@@ -81,6 +91,65 @@ function farm_pcsc_form_alter(&$form, FormStateInterface $form_state, $form_id) 
   }, array_keys(farm_pcsc_plan_record_bundle_classes())))) {
     $form['plan']['#access'] = FALSE;
     $form['pcsc_field']['#access'] = FALSE;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function farm_pcsc_plan_record_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->bundle() === 'pcsc_field' && in_array($view_mode, ['full'])) {
+
+    // Set page title.
+    $build['#title'] = $entity->label();
+
+    // Render link to the plan.
+    /** @var \Drupal\plan\Entity\PlanInterface $plan */
+    $plan = $entity->get('plan')->first()->entity;
+    $build['plan_link'] = [
+      '#type' => 'link',
+      '#title' => "Producer: {$plan->label()}",
+      '#url' => $plan->toUrl(),
+      '#weight' => -100,
+    ];
+
+    // Add practices.
+    $view = Drupal\views\Views::getView('pcsc_field_practices');
+    if (is_object($view)) {
+      $view->setDisplay('block');
+      $view->setArguments([$entity->id()]);
+      $view->execute();
+      $render_array = $view->render();
+
+      // Check to ensure the view results are not empty.
+      $build['pcsc_field_practices_view'] = [
+        '#type'   => 'details',
+        '#title'  => t('Practices'),
+        '#open'   => TRUE,
+        'content' => $render_array,
+      ];
+      // To ensure the render array is cached tag it with the configuration tags.
+      $build['#cache']['tags'] = $view->getCacheTags();
+    }
+
+    // Add commodities.
+    $view = Drupal\views\Views::getView('pcsc_field_commodities');
+    if (is_object($view)) {
+      $view->setDisplay('block');
+      $view->setArguments([$entity->id()]);
+      $view->execute();
+      $render_array = $view->render();
+
+      // Check to ensure the view results are not empty.
+      $build['pcsc_field_commodities_view'] = [
+        '#type'   => 'details',
+        '#title'  => t('Commodities'),
+        '#open'   => TRUE,
+        'content' => $render_array,
+      ];
+      // To ensure the render array is cached tag it with the configuration tags.
+      $build['#cache']['tags'] = $view->getCacheTags();
+    }
   }
 }
 
