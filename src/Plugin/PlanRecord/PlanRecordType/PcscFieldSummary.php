@@ -245,7 +245,7 @@ class PcscFieldSummary extends FarmPlanRecordType {
           'Direct field measurements',
         ]),
       ],
-      'field_official_ghg_er' => [
+      'pcsc_official_ghg_er' => [
         'type' => 'decimal',
         'label' => $this->t('Field official GHG ER'),
         'precision' => 10,

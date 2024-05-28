@@ -578,7 +578,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Contract end date' => date('m/d/Y', $summary->get('pcsc_end_date')->value),
           'MMRV assistance provided' => $summary->get('pcsc_mmrv_assistance')->value,
           'Marketing assistance provided' => $summary->get('pcsc_marketing_assistance')->value,
-          'Inventive per acre or head' => $summary->get('pcsc_inventive_per_unit')->value,
+          'Inventive per acre or head' => $summary->get('pcsc_incentive_per_unit')->value,
           'Field commodity value' => $summary->get('pcsc_field_commodity_value')->value,
           'Field commodity volume unit' => $summary->get('pcsc_field_commodity_volume_unit')->value,
           'Field commodity volume unit other' => $summary->get('pcsc_field_commodity_volume_unit_other')->value,
