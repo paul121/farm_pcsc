@@ -78,7 +78,7 @@ function farm_pcsc_form_alter(&$form, FormStateInterface $form_state, $form_id) 
     return 'plan_record_' . $bundle . '_edit_form';
   }, array_keys(farm_pcsc_practice_type_bundle_classes())))) {
     $form['plan']['#access'] = FALSE;
-    $form['field']['#access'] = FALSE;
+    $form['pcsc_field']['#access'] = FALSE;
   }
 }
 

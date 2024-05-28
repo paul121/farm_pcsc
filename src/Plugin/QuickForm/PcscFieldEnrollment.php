@@ -253,7 +253,7 @@ class PcscFieldEnrollment extends QuickFormBase {
     // Create a plan record for each practice.
     foreach ($values['practices'] as $practice_values) {
       $practice_values['plan'] = $values['plan'];
-      $practice_values['field'] = $land->id();
+      $practice_values['pcsc_field'] = $field->id();
       $practice = PlanRecord::create($practice_values);
       $practice->save();
     }

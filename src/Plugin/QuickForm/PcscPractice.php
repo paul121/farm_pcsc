@@ -44,12 +44,12 @@ class PcscPractice extends QuickFormBase {
     if ($form_state->getValue('plan')) {
       $fields = \Drupal::entityTypeManager()->getStorage('plan_record')->loadByProperties(['type' => 'pcsc_field', 'plan' => $form_state->getValue('plan')]);
       foreach ($fields as $field) {
-        $field_options[$field->get('field')->first()?->entity->id()] = $field->get('field')->first()?->entity->label();
+        $field_options[$field->id()] = $field->label();
       }
     }
-    $form['field'] = [
+    $form['pcsc_field'] = [
       '#type' => 'select',
-      '#title' => $this->t('Field'),
+      '#title' => $this->t('Field Enrollment'),
       '#options' => $field_options,
       '#required' => TRUE,
       '#prefix' => '<div id="pcsc-field-wrapper">',
@@ -124,7 +124,7 @@ class PcscPractice extends QuickFormBase {
     // Create a plan record for each practice.
     foreach ($values['practices'] as $practice_values) {
       $practice_values['plan'] = $values['plan'];
-      $practice_values['field'] = $values['field'];
+      $practice_values['pcsc_field'] = $values['pcsc_field'];
       $practice = PlanRecord::create($practice_values);
       $practice->save();
     }

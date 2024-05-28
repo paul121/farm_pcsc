@@ -390,11 +390,14 @@ class PcscCsvActionForm extends ConfirmFormBase {
     $data = [];
     foreach ($this->entities as $entity) {
       $farm_id = $entity->get('pcsc_farm_id')->value;
-      $fields = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
-        'type' => 'pcsc_field',
+      $commodities = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
+        'type' => 'pcsc_commodity',
         'plan' => $entity->id(),
       ]);
-      foreach ($fields as $field) {
+      foreach ($commodities as $commodity) {
+
+        /** @var \Drupal\farm_pcsc\Bundle\PcscField $field */
+        $field = $commodity->get('pcsc_field')->first()->entity;
 
         // Build general field enrollment information.
         $row = [
@@ -407,13 +410,13 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Field data change' => 'No',
           'Contract start date' => date('m/d/Y', $field->get('pcsc_start_date')->value),
           'Total field area' => $field->get('pcsc_field_total_area')->value,
-          'Commodity category' => $field->get('pcsc_commodity_category')->value,
-          'Commodity type' => $field->get('pcsc_commodity_type')->value,
-          'Baseline yield' => $field->get('pcsc_baseline_yield')->value,
-          'Baseline yield unit' => $field->get('pcsc_baseline_yield_unit')->value,
-          'Other baseline yield unit' => $field->get('pcsc_baseline_yield_unit_other')->value,
-          'Baseline yield location' => $field->get('pcsc_baseline_yield_location')->value,
-          'Other baseline yield location' => $field->get('pcsc_baseline_yield_location_other')->value,
+          'Commodity category' => $commodity->get('pcsc_commodity_category')->value,
+          'Commodity type' => $commodity->get('pcsc_commodity_type')->value,
+          'Baseline yield' => $commodity->get('pcsc_baseline_yield')->value,
+          'Baseline yield unit' => $commodity->get('pcsc_baseline_yield_unit')->value,
+          'Other baseline yield unit' => $commodity->get('pcsc_baseline_yield_unit_other')->value,
+          'Baseline yield location' => $commodity->get('pcsc_baseline_yield_location')->value,
+          'Other baseline yield location' => $commodity->get('pcsc_baseline_yield_location_other')->value,
           'Field land use' => $field->get('pcsc_land_use')->value,
           'Field irrigated' => $field->get('pcsc_irrigated')->value,
           'Field tillage' => $field->get('pcsc_tillage')->value,
@@ -437,7 +440,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
         $practices = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
           'type' => array_keys(farm_pcsc_practice_type_bundle_classes()),
           'plan' => $entity->id(),
-          'field' => $field->get('field')->first()->entity->id()
+          'pcsc_field' => $field->id(),
         ]);
         $i = 1;
         foreach ($practices as $practice) {
@@ -531,20 +534,26 @@ class PcscCsvActionForm extends ConfirmFormBase {
       // @TODO Only load field summaries for the most recent quarter.
       $summaries  = $this->entityTypeManager->getStorage('plan_record')
          ->loadByProperties([
-           'type' => 'pcsc_farm_summary',
+           'type' => 'pcsc_field_summary',
            'plan' => $entity->id(),
          ]);
       foreach ($summaries as $summary) {
-        /** @var \Drupal\farm_pcsc\Bundle\PcscField $field */
-        $field = $summary->get('pcsc_field_enrollment')->first()?->entity;
-        if (!$field || $field->get('field')->isEmpty()) {
+
+        /** @var \Drupal\farm_pcsc\Bundle\PcscCommodity $field */
+        $commodity = $summary->get('pcsc_commodity')->first()?->entity;
+        if (!$commodity) {
           continue;
         }
-        $field_asset_id = $field->get('field')->first()->entity->id();
+
+        /** @var \Drupal\farm_pcsc\Bundle\PcscField $field */
+        $field = $commodity->get('pcsc_field')->first()?->entity;
+        if (!$field) {
+          continue;
+        }
         $practice_ids = $this->entityTypeManager->getStorage('plan_record')->getQuery()
           ->condition('type', 'pcsc_field_practice_', 'STARTS_WITH')
           ->condition('plan', $entity->id())
-          ->condition('field', $field_asset_id)
+          ->condition('pcsc_field', $field->id())
           ->execute();
 
         $practice_types = array_map(function (PcscFieldPracticeInterface $practice) {
@@ -557,7 +566,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Field ID' => $field->get('pcsc_field_id')->value,
           'State or Territory' => $field->get('pcsc_state')->value,
           'County' => $field->get('pcsc_county')->value,
-          'Commodity type' => $field->get('pcsc_commodity_type')->value,
+          'Commodity type' => $commodity->get('pcsc_commodity_type')->value,
           'Practice type 1' => $practice_types[0] ?? '',
           'Practice type 2' => $practice_types[1] ?? '',
           'Practice type 3' => $practice_types[2] ?? '',
@@ -615,12 +624,6 @@ class PcscCsvActionForm extends ConfirmFormBase {
     $data = [];
     foreach ($this->entities as $entity) {
 
-      // Query all pcsc_fields for the plan.
-      $fields = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
-        'type' => 'pcsc_field',
-        'plan' => $entity->id(),
-      ]);
-
       // Build data export for each practice.
       $farm_id = $entity->get('pcsc_farm_id')->value;
       /** @var \Drupal\farm_pcsc\Bundle\PcscFieldPracticeInterface[] $practices */
@@ -631,11 +634,10 @@ class PcscCsvActionForm extends ConfirmFormBase {
       foreach ($practices as $practice) {
 
         // Check that the practice field exists.
-        $field_id = $practice->get('field')?->first()?->entity->id();
-        if (!$field_id || !isset($fields[$field_id])) {
+        $field = $practice->get('pcsc_field')?->first()?->entity;
+        if (!$field) {
           continue;
         }
-        $field = $fields[$field_id];
 
         // Build data.
         $data[] = [

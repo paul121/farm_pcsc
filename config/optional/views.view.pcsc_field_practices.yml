@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - asset.type.land
+    - plan.record.type.pcsc_field
     - plan.record.type.pcsc_field_practice_327
     - plan.record.type.pcsc_field_practice_328
     - plan.record.type.pcsc_field_practice_329
@@ -281,17 +281,17 @@ display:
             multiple: 0
           break_phrase: false
           not: false
-        field_target_id:
-          id: field_target_id
-          table: plan_record__field
-          field: field_target_id
+        pcsc_field_target_id:
+          id: pcsc_field_target_id
+          table: plan_record__pcsc_field
+          field: pcsc_field_target_id
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: field
+          entity_field: pcsc_field
           plugin_id: numeric
-          default_action: 'not found'
+          default_action: empty
           exception:
             value: all
             title_enable: false
@@ -312,11 +312,11 @@ display:
             format: default_summary
           specify_validation: true
           validate:
-            type: 'entity:asset'
+            type: 'entity:plan_record'
             fail: 'not found'
           validate_options:
             bundles:
-              land: land
+              pcsc_field: pcsc_field
             access: true
             operation: view
             multiple: 0
