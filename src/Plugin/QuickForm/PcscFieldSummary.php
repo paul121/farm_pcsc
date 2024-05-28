@@ -6,6 +6,8 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\farm_pcsc\Traits\ListStringTrait;
 use Drupal\farm_quick\Plugin\QuickForm\QuickFormBase;
 use Drupal\farm_quick\Traits\QuickFormElementsTrait;
+use Drupal\plan\Entity\PlanInterface;
+use Drupal\plan\Entity\PlanRecord;
 
 /**
  * PCSC Field Summary quick form.
@@ -48,7 +50,7 @@ class PcscFieldSummary extends QuickFormBase {
     if ($form_state->getValue('plan')) {
       $fields = \Drupal::entityTypeManager()->getStorage('plan_record')->loadByProperties(['type' => 'pcsc_field', 'plan' => $form_state->getValue('plan')]);
       foreach ($fields as $field) {
-        $field_options[$field->get('field')->first()?->entity->id()] = $field->get('field')->first()?->entity->label();
+        $field_options[$field->id()] = $field->label();
       }
     }
     $form['field'] = [
@@ -56,23 +58,30 @@ class PcscFieldSummary extends QuickFormBase {
       '#title' => $this->t('Field'),
       '#options' => $field_options,
       '#required' => TRUE,
-      '#prefix' => '<div id="pcsc-field-wrapper">',
-      '#suffix' => '</div>',
+      '#wrapper_attributes' => [
+        'id' => 'pcsc-field-wrapper',
+      ],
+      '#ajax' => [
+        'callback' => [$this, 'commodityCallback'],
+        'wrapper' => 'pcsc-commodity-wrapper',
+      ],
     ];
 
     $commodity_options = [];
-    if ($form_state->getValue('plan') && $form_state->getValue('field')) {
-      $commodities = \Drupal::entityTypeManager()->getStorage('plan_record')->loadByProperties(['type' => 'pcsc_commodity', 'plan' => $form_state->getValue('plan'), 'field' => $form_state->getValue('field')]);
+    if ($form_state->getValue('field')) {
+      $commodities = \Drupal::entityTypeManager()->getStorage('plan_record')->loadByProperties(['type' => 'pcsc_commodity', 'plan' => $form_state->getValue('plan'), 'pcsc_field' => $form_state->getValue('field')]);
       foreach ($commodities as $commodity) {
         $commodity_options[$commodity->id()] = $commodity->label();
       }
     }
-
     $form['pcsc_commodity'] = [
       '#type' => 'select',
       '#title' => $this->t('Commodity'),
       '#options' => $commodity_options,
       '#required' => TRUE,
+      '#wrapper_attributes' => [
+        'id' => 'pcsc-commodity-wrapper',
+      ],
     ];
 
     $form['pcsc_practice_complete'] = [
@@ -307,10 +316,34 @@ class PcscFieldSummary extends QuickFormBase {
   }
 
   /**
+   * Ajax callback for field container.
+   */
+  public function fieldCallback(array $form, FormStateInterface $form_state) {
+    return $form['field'];
+  }
+
+  /**
+   * Ajax callback for commodity container.
+   */
+  public function commodityCallback(array $form, FormStateInterface $form_state) {
+    return $form['pcsc_commodity'];
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->messenger()->addWarning($this->t('Not implemented'));
+
+    // Create commodity record.
+    $record_values = [
+      'type' => 'pcsc_field_summary',
+    ] + $form_state->getValues();
+    $summary = PlanRecord::create($record_values);
+    $summary->save();
+
+    // Set a message and redirect to the list of fields.
+    $this->messenger()->addStatus($this->t('Field summary created: @summary', ['@summary' => $summary->label()]));
+    $form_state->setRedirect('view.pcsc_producer_fields.page', ['plan' => $form_state->getValue('plan')]);
   }
 
 }
