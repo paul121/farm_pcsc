@@ -23,6 +23,7 @@ class PcscFieldSummary extends FarmPlanRecordType {
 
     $fields['pcsc_commodity'] = BundleFieldDefinition::create('entity_reference')
       ->setLabel(t('Field Commodity'))
+      ->setDescription(t('Relate this field summary with a commodity.'))
       ->setRequired(TRUE)
       ->setSetting('target_type', 'plan_record')
       ->setSetting('handler', 'default:plan_record')

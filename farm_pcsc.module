@@ -99,6 +99,64 @@ function farm_pcsc_form_alter(&$form, FormStateInterface $form_state, $form_id) 
 }
 
 /**
+ * Implements hook_farm_ui_theme_region_items().
+ */
+function farm_pcsc_farm_ui_theme_region_items(string $entity_type) {
+  return [
+    'bottom' => [
+      'pcsc_farm_summaries_view',
+      'pcsc_field_summaries_view',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_view().
+ */
+function farm_pcsc_plan_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($entity->bundle() === 'pcsc_producer' && $view_mode === 'full') {
+
+    // Add farm summaries.
+    $view = Drupal\views\Views::getView('pcsc_farm_summaries');
+    if (is_object($view)) {
+      $view->setDisplay('block');
+      $view->setArguments([$entity->id()]);
+      $view->execute();
+      $render_array = $view->render();
+
+      // Check to ensure the view results are not empty.
+      $build['pcsc_farm_summaries_view'] = [
+        '#type'   => 'details',
+        '#title'  => t('Farm Summaries'),
+        '#open'   => TRUE,
+        'content' => $render_array,
+      ];
+      // To ensure the render array is cached tag it with the configuration tags.
+      $build['#cache']['tags'] = $view->getCacheTags();
+    }
+
+    // Add field summaries.
+    $view = Drupal\views\Views::getView('pcsc_field_summaries');
+    if (is_object($view)) {
+      $view->setDisplay('block');
+      $view->setArguments([$entity->id()]);
+      $view->execute();
+      $render_array = $view->render();
+
+      // Check to ensure the view results are not empty.
+      $build['pcsc_field_summaries_view'] = [
+        '#type'   => 'details',
+        '#title'  => t('Field Summaries'),
+        '#open'   => TRUE,
+        'content' => $render_array,
+      ];
+      // To ensure the render array is cached tag it with the configuration tags.
+      $build['#cache']['tags'] = $view->getCacheTags();
+    }
+  }
+}
+
+/**
  * Implements hook_ENTITY_TYPE_view().
  */
 function farm_pcsc_plan_record_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
