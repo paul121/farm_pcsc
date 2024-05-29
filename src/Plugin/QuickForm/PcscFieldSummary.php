@@ -353,6 +353,8 @@ class PcscFieldSummary extends QuickFormBase {
     // Create commodity record.
     $record_values = [
       'type' => 'pcsc_field_summary',
+      'pcsc_practice_complete' => strtotime($form_state->getValue('pcsc_practice_complete')),
+      'pcsc_end_date' => strtotime($form_state->getValue('pcsc_end_date')),
     ] + $form_state->getValues();
     $summary = PlanRecord::create($record_values);
     $summary->save();
