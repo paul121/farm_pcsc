@@ -786,6 +786,55 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
+        plan:
+          id: plan
+          table: plan_record
+          field: plan
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: plan
+          plugin_id: entity_reference
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            label: Plan
+            description: null
+            use_operator: false
+            operator: plan_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: plan
+            required: false
+            remember: false
+            multiple: false
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          handler: 'default:plan'
+          widget: autocomplete
+          handler_settings:
+            target_bundles:
+              pcsc_producer: pcsc_producer
+            sort:
+              field: _none
+              direction: ASC
+            auto_create: false
+            auto_create_bundle: ''
       style:
         type: table
         options:
@@ -926,6 +975,1164 @@ display:
       display_extenders:
         collapsible_filter:
           collapsible: false
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
+      tags: {  }
+  page:
+    id: page
+    display_title: Page
+    display_plugin: page
+    position: 1
+    display_options:
+      fields:
+        view_plan_record:
+          id: view_plan_record
+          table: plan_record
+          field: view_plan_record
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          plugin_id: entity_link
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: View
+          output_url_as_text: false
+          absolute: false
+        edit_plan_record:
+          id: edit_plan_record
+          table: plan_record
+          field: edit_plan_record
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          plugin_id: entity_link_edit
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: Edit
+          output_url_as_text: false
+          absolute: true
+        plan:
+          id: plan
+          table: plan_record
+          field: plan
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: plan
+          plugin_id: field
+          label: Producer
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_year_value:
+          id: pcsc_year_value
+          table: plan_record__pcsc_year
+          field: pcsc_year_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_year
+          plugin_id: field
+          label: 'Enrollment year'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_quarter_value:
+          id: pcsc_quarter_value
+          table: plan_record__pcsc_quarter
+          field: pcsc_quarter_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_quarter
+          plugin_id: field
+          label: 'Enrollment quarter'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_incentive_amount_value:
+          id: pcsc_incentive_amount_value
+          table: plan_record__pcsc_incentive_amount
+          field: pcsc_incentive_amount_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_incentive_amount
+          plugin_id: field
+          label: 'Producer incentive amount'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ','
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_payment_enrollment_value:
+          id: pcsc_payment_enrollment_value
+          table: plan_record__pcsc_payment_enrollment
+          field: pcsc_payment_enrollment_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_enrollment
+          plugin_id: field
+          label: 'Payment on enrollment'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_payment_harvest_value:
+          id: pcsc_payment_harvest_value
+          table: plan_record__pcsc_payment_harvest
+          field: pcsc_payment_harvest_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_harvest
+          plugin_id: field
+          label: 'Payment on harvest'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_payment_implementation_value:
+          id: pcsc_payment_implementation_value
+          table: plan_record__pcsc_payment_implementation
+          field: pcsc_payment_implementation_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_implementation
+          plugin_id: field
+          label: 'Payment on implementation'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_payment_mmrv_value:
+          id: pcsc_payment_mmrv_value
+          table: plan_record__pcsc_payment_mmrv
+          field: pcsc_payment_mmrv_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_mmrv
+          plugin_id: field
+          label: 'Payment on MMRV'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_payment_sale_value:
+          id: pcsc_payment_sale_value
+          table: plan_record__pcsc_payment_sale
+          field: pcsc_payment_sale_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_sale
+          plugin_id: field
+          label: 'Payment on sale'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: list_default
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+      arguments: {  }
+      filters:
+        type:
+          id: type
+          table: plan_record
+          field: type
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: type
+          plugin_id: bundle
+          operator: in
+          value:
+            pcsc_farm_summary: pcsc_farm_summary
+          group: 1
+          exposed: false
+          expose:
+            operator_id: ''
+            label: ''
+            description: ''
+            use_operator: false
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        plan:
+          id: plan
+          table: plan_record
+          field: plan
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: plan
+          plugin_id: entity_reference
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: plan_op
+            label: Producer
+            description: ''
+            use_operator: false
+            operator: plan_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: plan
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+          handler: 'default:plan'
+          widget: autocomplete
+          handler_settings:
+            target_bundles:
+              pcsc_producer: pcsc_producer
+            sort:
+              field: _none
+              direction: ASC
+            auto_create: false
+            auto_create_bundle: ''
+        pcsc_year_value:
+          id: pcsc_year_value
+          table: plan_record__pcsc_year
+          field: pcsc_year_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_year
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_year_value_op
+            label: 'Enrollment year'
+            description: ''
+            use_operator: false
+            operator: pcsc_year_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_year_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        pcsc_quarter_value:
+          id: pcsc_quarter_value
+          table: plan_record__pcsc_quarter
+          field: pcsc_quarter_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_quarter
+          plugin_id: numeric
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_quarter_value_op
+            label: 'Enrollment quarter'
+            description: ''
+            use_operator: false
+            operator: pcsc_quarter_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_quarter_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            min_placeholder: ''
+            max_placeholder: ''
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+        pcsc_payment_enrollment_value:
+          id: pcsc_payment_enrollment_value
+          table: plan_record__pcsc_payment_enrollment
+          field: pcsc_payment_enrollment_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_enrollment
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_payment_enrollment_value_op
+            label: 'Payment on enrollment'
+            description: ''
+            use_operator: false
+            operator: pcsc_payment_enrollment_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_payment_enrollment_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        pcsc_payment_harvest_value:
+          id: pcsc_payment_harvest_value
+          table: plan_record__pcsc_payment_harvest
+          field: pcsc_payment_harvest_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_harvest
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_payment_harvest_value_op
+            label: 'Payment on harvest'
+            description: ''
+            use_operator: false
+            operator: pcsc_payment_harvest_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_payment_harvest_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        pcsc_payment_implementation_value:
+          id: pcsc_payment_implementation_value
+          table: plan_record__pcsc_payment_implementation
+          field: pcsc_payment_implementation_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_implementation
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_payment_implementation_value_op
+            label: 'Payment on implementation'
+            description: ''
+            use_operator: false
+            operator: pcsc_payment_implementation_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_payment_implementation_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        pcsc_payment_mmrv_value:
+          id: pcsc_payment_mmrv_value
+          table: plan_record__pcsc_payment_mmrv
+          field: pcsc_payment_mmrv_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_mmrv
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_payment_mmrv_value_op
+            label: 'Payment on MMRV'
+            description: ''
+            use_operator: false
+            operator: pcsc_payment_mmrv_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_payment_mmrv_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+        pcsc_payment_sale_value:
+          id: pcsc_payment_sale_value
+          table: plan_record__pcsc_payment_sale
+          field: pcsc_payment_sale_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_payment_sale
+          plugin_id: list_field
+          operator: or
+          value: {  }
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_payment_sale_value_op
+            label: 'Payment on sale'
+            description: ''
+            use_operator: false
+            operator: pcsc_payment_sale_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_payment_sale_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            reduce: false
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          reduce_duplicates: false
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      defaults:
+        fields: false
+        arguments: false
+        filters: false
+        filter_groups: false
+      display_extenders:
+        collapsible_filter:
+          collapsible: true
+      path: report/pcsc-farm-summaries
     cache_metadata:
       max-age: -1
       contexts:

@@ -2,3 +2,12 @@ farm_pcsc.pcsc_report:
   title: PCSC Producers
   parent: farm.report
   route_name: view.pcsc_plan_report.page
+  weight: -10
+farm_pcsc.pcsc_report_farm_summaries:
+  title: PCSC Farm Summaries
+  parent: farm.report
+  route_name: view.pcsc_farm_summaries.page
+farm_pcsc.pcsc_report_field_summaries:
+  title: PCSC Field Summaries
+  parent: farm.report
+  route_name: view.pcsc_field_summaries.page
