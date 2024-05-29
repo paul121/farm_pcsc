@@ -103,7 +103,7 @@ class PcscPractice extends QuickFormBase {
    * Ajax callback for field container.
    */
   public function fieldCallback(array $form, FormStateInterface $form_state) {
-    return $form['field'];
+    return $form['pcsc_field'];
   }
 
   /**
