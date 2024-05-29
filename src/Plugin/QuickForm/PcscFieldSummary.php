@@ -84,6 +84,22 @@ class PcscFieldSummary extends QuickFormBase {
       ],
     ];
 
+    $form['enrollment'] = $this->buildInlineContainer();
+    $form['enrollment']['pcsc_year'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Enrollment year'),
+      '#options' => farm_pcsc_allowed_values_helper([2024, 2025, 2026, 2027, 2028]),
+      '#default_value' => date('Y'),
+      '#required' => TRUE,
+    ];
+    $form['enrollment']['pcsc_quarter'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Enrollment quarter'),
+      '#options' => farm_pcsc_allowed_values_helper([1, 2, 3, 4]),
+      '#default_value' => ceil(date('m') / 3),
+      '#required' => TRUE,
+    ];
+
     $form['pcsc_practice_complete'] = [
       '#type' => 'date',
       '#title' => $this->t('Date practice complete'),
