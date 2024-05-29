@@ -7,6 +7,7 @@ use Drupal\farm_pcsc\Traits\ListStringTrait;
 use Drupal\farm_quick\Plugin\QuickForm\QuickFormBase;
 use Drupal\farm_quick\Traits\QuickFormElementsTrait;
 use Drupal\plan\Entity\PlanInterface;
+use Drupal\plan\Entity\PlanRecord;
 
 /**
  * PCSC Farm Summary quick form.
@@ -39,10 +40,22 @@ class PcscFarmSummary extends QuickFormBase {
       '#title' => $this->t('Producer'),
       '#options' => $producer_options,
       '#required' => TRUE,
-      '#ajax' => [
-        'callback' => [$this, 'fieldCallback'],
-        'wrapper' => 'pcsc-field-wrapper',
-      ],
+    ];
+
+    $form['enrollment'] = $this->buildInlineContainer();
+    $form['enrollment']['pcsc_year'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Enrollment year'),
+      '#options' => farm_pcsc_allowed_values_helper([2024, 2025, 2026, 2027, 2028]),
+      '#default_value' => date('Y'),
+      '#required' => TRUE,
+    ];
+    $form['enrollment']['pcsc_quarter'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Enrollment quarter'),
+      '#options' => farm_pcsc_allowed_values_helper([1, 2, 3, 4]),
+      '#default_value' => ceil(date('m') / 3),
+      '#required' => TRUE,
     ];
 
     $form['ta'] = $this->buildInlineContainer();
@@ -207,6 +220,18 @@ class PcscFarmSummary extends QuickFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->messenger()->addWarning($this->t('Not implemented'));
+
+    // Create farm summary.
+    $summary_values = [
+      'type' => 'pcsc_farm_summary'
+    ] + $form_state->getValues();
+    $summary = PlanRecord::create($summary_values);
+    $summary->save();
+
+    // Set a message and redirect to the list of fields.
+    $entity_url = $summary->toUrl()->setAbsolute()->toString();
+    $this->messenger()->addStatus($this->t('Farm summary created: <a href=":url">%label</a>', [':url' => $entity_url, '%label' => $summary->label()]));
+    $form_state->setRedirect('entity.plan.canonical', ['plan' => $form_state->getValue('plan')]);
   }
 
 }
