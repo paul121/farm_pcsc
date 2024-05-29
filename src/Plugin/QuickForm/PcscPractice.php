@@ -129,9 +129,9 @@ class PcscPractice extends QuickFormBase {
       $practice->save();
     }
 
-    // Set a message and redirect to the list of practices.
+    // Set a message and redirect to the field enrollment.
     $this->messenger()->addStatus($this->t('@num_practices practices added.', ['@num_practices' => $values['num_practices']]));
-    $form_state->setRedirect('view.pcsc_field_practices.page', ['plan' => $values['plan'], 'asset' => $values['field']]);
+    $form_state->setRedirect('entity.plan_record.canonical', ['plan_record' => $form_state->getValue('pcsc_field')]);
   }
 
 }

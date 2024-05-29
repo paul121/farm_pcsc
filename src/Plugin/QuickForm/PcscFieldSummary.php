@@ -359,9 +359,10 @@ class PcscFieldSummary extends QuickFormBase {
     $summary = PlanRecord::create($record_values);
     $summary->save();
 
-    // Set a message and redirect to the list of fields.
-    $this->messenger()->addStatus($this->t('Field summary created: @summary', ['@summary' => $summary->label()]));
-    $form_state->setRedirect('view.pcsc_producer_fields.page', ['plan' => $form_state->getValue('plan')]);
+    // Set a message and redirect to the producer plan.
+    $entity_url = $summary->toUrl()->setAbsolute()->toString();
+    $this->messenger()->addStatus($this->t('Field summary created: <a href=":url">%label</a>', [':url' => $entity_url, '%label' => $summary->label()]));
+    $form_state->setRedirect('entity.plan_record.canonical', ['plan_record' => $form_state->getValue('field')]);
   }
 
 }
