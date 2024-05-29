@@ -21,7 +21,7 @@ class PcscCommodity extends PlanRecord {
 
     // Build label with the referenced field.
     if ($field = $this->get('pcsc_field')->first()?->entity) {
-      return $this->t('Commodity %commodity: %field', ['%commodity' => $this->get('pcsc_commodity_type')->value, '%field' => $field->label()]);
+      return $this->t('Commodity @commodity: @field', ['@commodity' => $this->get('pcsc_commodity_type')->value, '@field' => $field->label()]);
     }
 
     // Fallback to default.

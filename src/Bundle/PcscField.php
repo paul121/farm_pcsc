@@ -21,7 +21,7 @@ class PcscField extends PlanRecord {
 
     // Build label with the referenced field.
     if ($field = $this->get('field')->first()?->entity) {
-      return $this->t('Field enrollment: %field', ['%field' => $field->label()]);
+      return $this->t('Field enrollment: @field', ['@field' => $field->label()]);
     }
 
     // Fallback to default.
