@@ -160,20 +160,27 @@ function farm_pcsc_plan_view(array &$build, EntityInterface $entity, EntityViewD
  * Implements hook_ENTITY_TYPE_view().
  */
 function farm_pcsc_plan_record_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
-  if ($entity->bundle() === 'pcsc_field' && in_array($view_mode, ['full'])) {
+
+  // Add plan link on all plan records.
+  if (in_array($view_mode, ['full'])) {
 
     // Set page title.
     $build['#title'] = $entity->label();
 
     // Render link to the plan.
     /** @var \Drupal\plan\Entity\PlanInterface $plan */
-    $plan = $entity->get('plan')->first()->entity;
-    $build['plan_link'] = [
-      '#type' => 'link',
-      '#title' => "Producer: {$plan->label()}",
-      '#url' => $plan->toUrl(),
-      '#weight' => -100,
-    ];
+    if ($plan = $entity->get('plan')->first()?->entity) {
+      $build['plan_link'] = [
+        '#type' => 'link',
+        '#title' => "Producer: {$plan->label()}",
+        '#url' => $plan->toUrl(),
+        '#weight' => -100,
+      ];
+    }
+  }
+
+  // Add view tables to field enrollments.
+  if ($entity->bundle() === 'pcsc_field' && in_array($view_mode, ['full'])) {
 
     // Add practices.
     $view = Drupal\views\Views::getView('pcsc_field_practices');
