@@ -942,8 +942,18 @@ display:
           query_tags: {  }
       relationships: {  }
       use_ajax: false
-      header: {  }
-      footer:
+      header:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: false
+          content: '<a class="button button-small" href="/quick/pcsc_farm_summary">Add farm summary</a>'
+          tokenize: false
         result:
           id: result
           table: views
@@ -952,8 +962,9 @@ display:
           group_type: group
           admin_label: ''
           plugin_id: result
-          empty: true
+          empty: false
           content: 'Displaying @start - @end of @total'
+      footer: {  }
       display_extenders:
         collapsible_filter:
           collapsible: false
