@@ -2,8 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - plan.record.type.pcsc_field
     - plan.record.type.pcsc_field_summary
+    - plan.type.pcsc_producer
   module:
     - options
     - plan
@@ -796,48 +796,7 @@ display:
             label: ''
             field_identifier: ''
           exposed: false
-      arguments:
-        pcsc_field_target_id:
-          id: pcsc_field_target_id
-          table: plan_record__pcsc_field
-          field: pcsc_field_target_id
-          relationship: pcsc_commodity_target_id
-          group_type: group
-          admin_label: ''
-          entity_type: plan_record
-          entity_field: pcsc_field
-          plugin_id: numeric
-          default_action: empty
-          exception:
-            value: all
-            title_enable: false
-            title: All
-          title_enable: false
-          title: ''
-          default_argument_type: fixed
-          default_argument_options:
-            argument: ''
-          summary_options:
-            base_path: ''
-            count: true
-            override: false
-            items_per_page: 25
-          summary:
-            sort_order: asc
-            number_of_records: 0
-            format: default_summary
-          specify_validation: true
-          validate:
-            type: 'entity:plan_record'
-            fail: 'not found'
-          validate_options:
-            bundles:
-              pcsc_field: pcsc_field
-            access: true
-            operation: view
-            multiple: 0
-          break_phrase: false
-          not: false
+      arguments: {  }
       filters:
         type:
           id: type
@@ -890,10 +849,10 @@ display:
           columns:
             view_plan_record: view_plan_record
             edit_plan_record: edit_plan_record
-            pcsc_field_target_id: pcsc_field_target_id
-            pcsc_commodity_type_value: pcsc_commodity_type_value
             pcsc_year_value: pcsc_year_value
             pcsc_quarter_value: pcsc_quarter_value
+            pcsc_field_target_id: pcsc_field_target_id
+            pcsc_commodity_type_value: pcsc_commodity_type_value
             pcsc_practice_complete_value: pcsc_practice_complete_value
             pcsc_end_date_value: pcsc_end_date_value
             pcsc_field_commodity_value_value: pcsc_field_commodity_value_value
@@ -915,20 +874,6 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            pcsc_field_target_id:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            pcsc_commodity_type_value:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
             pcsc_year_value:
               sortable: true
               default_sort_order: desc
@@ -937,6 +882,20 @@ display:
               empty_column: false
               responsive: ''
             pcsc_quarter_value:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            pcsc_field_target_id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            pcsc_commodity_type_value:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -1005,7 +964,7 @@ display:
           entity_type: plan_record
           entity_field: pcsc_commodity
           plugin_id: standard
-          required: false
+          required: true
       use_ajax: false
       header: {  }
       footer:
@@ -1027,7 +986,6 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
         - user.permissions
       tags: {  }
@@ -1037,6 +995,74 @@ display:
     display_plugin: block
     position: 2
     display_options:
+      arguments:
+        plan:
+          id: plan
+          table: plan_record
+          field: plan
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: plan
+          plugin_id: numeric
+          default_action: empty
+          exception:
+            value: all
+            title_enable: false
+            title: All
+          title_enable: false
+          title: ''
+          default_argument_type: fixed
+          default_argument_options:
+            argument: ''
+          summary_options:
+            base_path: ''
+            count: true
+            override: false
+            items_per_page: 25
+          summary:
+            sort_order: asc
+            number_of_records: 0
+            format: default_summary
+          specify_validation: true
+          validate:
+            type: 'entity:plan'
+            fail: 'not found'
+          validate_options:
+            bundles:
+              pcsc_producer: pcsc_producer
+            access: true
+            operation: view
+            multiple: 0
+          break_phrase: false
+          not: false
+      defaults:
+        relationships: false
+        arguments: false
+      relationships:
+        pcsc_commodity_target_id:
+          id: pcsc_commodity_target_id
+          table: plan_record__pcsc_commodity
+          field: pcsc_commodity_target_id
+          relationship: none
+          group_type: group
+          admin_label: Commodity
+          entity_type: plan_record
+          entity_field: pcsc_commodity
+          plugin_id: standard
+          required: true
+        pcsc_field_target_id:
+          id: pcsc_field_target_id
+          table: plan_record__pcsc_field
+          field: pcsc_field_target_id
+          relationship: pcsc_commodity_target_id
+          group_type: group
+          admin_label: 'Field enrollment'
+          entity_type: plan_record
+          entity_field: pcsc_field
+          plugin_id: standard
+          required: false
       display_extenders:
         collapsible_filter:
           collapsible: false
