@@ -10,6 +10,13 @@ class PcscFieldPractice484 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeLabel(): string {
+    return '484: Mulching';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function practiceTypeOption(): string {
     return '484, Mulching';
   }

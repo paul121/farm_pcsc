@@ -10,6 +10,13 @@ class PcscFieldPractice528 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeLabel(): string {
+    return '528: Prescribed Grazing';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function practiceTypeOption(): string {
     return '528, Prescribed Grazing';
   }

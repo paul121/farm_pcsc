@@ -11,6 +11,13 @@ class PcscFieldPractice340 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeLabel(): string {
+    return '340: Cover Crop';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function practiceTypeOption(): string {
     return '340, Cover Crop';
   }

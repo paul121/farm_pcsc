@@ -11,6 +11,14 @@ use Drupal\plan\Entity\PlanRecordInterface;
 interface PcscFieldPracticeInterface extends PlanRecordInterface {
 
   /**
+   * Returns a nice practice type label.
+   *
+   * @return string
+   *   The practice type label.
+   */
+  public function practiceTypeLabel(): string;
+
+  /**
    * Returns the practice type option as expected in PCSC workbooks.
    *
    * @return string

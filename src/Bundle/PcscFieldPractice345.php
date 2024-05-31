@@ -10,6 +10,13 @@ class PcscFieldPractice345 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeLabel(): string {
+    return '345: Residue and Tillage Management, Reduced Till';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function practiceTypeOption(): string {
     return '345, Residue and Tillage Management, Reduced Till';
   }

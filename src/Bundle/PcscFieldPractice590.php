@@ -10,6 +10,13 @@ class PcscFieldPractice590 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeLabel(): string {
+    return '590: Nutrient Management';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function practiceTypeOption(): string {
     return '590, Nutrient Management';
   }

@@ -12,6 +12,13 @@ class PcscFieldPractice328 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeLabel(): string {
+    return '328: Conservation Crop Rotation';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function practiceTypeOption(): string {
     return '328, Conservation Crop Rotation';
   }

@@ -10,6 +10,13 @@ class PcscFieldPractice327 extends PcscFieldPracticeBase {
   /**
    * {@inheritdoc}
    */
+  public function practiceTypeLabel(): string {
+    return '327: Conservation Cover';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function practiceTypeOption(): string {
     return '327, Conservation Cover';
   }
