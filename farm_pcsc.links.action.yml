@@ -8,7 +8,6 @@ farm_pcsc.field_enrollment:
   route_name: farm.quick.pcsc_field_enrollment
   appears_on:
     - entity.plan.canonical
-    - view.pcsc_producer_fields.page
 farm_pcsc.practice:
   title: 'Add Practice'
   route_name: farm.quick.pcsc_practice

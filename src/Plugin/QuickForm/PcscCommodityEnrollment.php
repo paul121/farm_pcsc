@@ -167,7 +167,7 @@ class PcscCommodityEnrollment extends QuickFormBase {
 
     // Set a message and redirect to the list of fields.
     $this->messenger()->addStatus($this->t('Commodity enrolled: @field', ['@field' => $commodity->label()]));
-    $form_state->setRedirect('view.pcsc_producer_fields.page', ['plan' => $form_state->getValue('plan')]);
+    $form_state->setRedirect('entity.plan.canonical', ['plan' => $form_state->getValue('plan')]);
   }
 
 }

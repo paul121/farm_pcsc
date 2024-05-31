@@ -1,3 +1,4 @@
+uuid: 355cb530-9a88-4859-86a7-fd5bde8a18b7
 langcode: en
 status: true
 dependencies:
@@ -8,6 +9,8 @@ dependencies:
     - options
     - plan
     - user
+_core:
+  default_config_hash: jtBY7b0LtDGIM5vU_Pyyl2vQIQQ3-a3EKFTAZec4NFA
 id: pcsc_producer_fields
 label: 'PCSC Producer Fields'
 module: views
@@ -958,16 +961,15 @@ display:
         - url.query_args
         - user.permissions
       tags: {  }
-  page:
-    id: page
-    display_title: Page
-    display_plugin: page
+  block:
+    id: block
+    display_title: Block
+    display_plugin: block
     position: 1
     display_options:
       display_extenders:
         collapsible_filter:
           collapsible: true
-      path: plan/%plan/fields
     cache_metadata:
       max-age: -1
       contexts:

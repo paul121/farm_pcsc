@@ -263,7 +263,7 @@ class PcscFieldEnrollment extends QuickFormBase {
     // Set a message and redirect to the list of fields.
     $entity_url = $field->toUrl()->setAbsolute()->toString();
     $this->messenger()->addStatus($this->t('Field enrolled: <a href=":url">%label</a>', [':url' => $entity_url, '%label' => $field->label()]));
-    $form_state->setRedirect('view.pcsc_producer_fields.page', ['plan' => $form_state->getValue('plan')]);
+    $form_state->setRedirect('entity.plan.canonical', ['plan' => $form_state->getValue('plan')]);
   }
 
 }
