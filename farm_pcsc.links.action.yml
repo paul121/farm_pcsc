@@ -8,8 +8,23 @@ farm_pcsc.field_enrollment:
   route_name: farm.quick.pcsc_field_enrollment
   appears_on:
     - entity.plan.canonical
+farm_pcsc.farm_summary:
+  title: 'Add Farm Summary'
+  route_name: farm.quick.pcsc_farm_summary
+  appears_on:
+    - entity.plan.canonical
+farm_pcsc.field_summary:
+  title: 'Add Field Summary'
+  route_name: farm.quick.pcsc_field_summary
+  appears_on:
+    - entity.plan.canonical
 farm_pcsc.practice:
   title: 'Add Practice'
   route_name: farm.quick.pcsc_practice
   appears_on:
-    - view.pcsc_field_practices.page
+    - entity.plan_record.canonical
+farm_pcsc.commodity:
+  title: 'Add Commodity'
+  route_name: farm.quick.pcsc_commodity_enrollment
+  appears_on:
+    - entity.plan_record.canonical
