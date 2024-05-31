@@ -140,7 +140,7 @@ display:
           entity_type: plan_record
           entity_field: pcsc_year
           plugin_id: field
-          label: 'Enrollment year'
+          label: Year
           exclude: false
           alter:
             alter_text: false
@@ -206,7 +206,7 @@ display:
           entity_type: plan_record
           entity_field: pcsc_quarter
           plugin_id: field
-          label: 'Enrollment quarter'
+          label: Quarter
           exclude: false
           alter:
             alter_text: false
@@ -849,6 +849,7 @@ display:
           columns:
             view_plan_record: view_plan_record
             edit_plan_record: edit_plan_record
+            plan: plan
             pcsc_year_value: pcsc_year_value
             pcsc_quarter_value: pcsc_quarter_value
             pcsc_field_target_id: pcsc_field_target_id
@@ -868,6 +869,13 @@ display:
               empty_column: false
               responsive: ''
             edit_plan_record:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            plan:
               sortable: false
               default_sort_order: asc
               align: ''
@@ -1274,7 +1282,7 @@ display:
           entity_type: plan_record
           entity_field: pcsc_year
           plugin_id: field
-          label: 'Enrollment year'
+          label: Year
           exclude: false
           alter:
             alter_text: false
@@ -1340,7 +1348,7 @@ display:
           entity_type: plan_record
           entity_field: pcsc_quarter
           plugin_id: field
-          label: 'Enrollment quarter'
+          label: Quarter
           exclude: false
           alter:
             alter_text: false
@@ -2046,7 +2054,7 @@ display:
           exposed: true
           expose:
             operator_id: pcsc_year_value_op
-            label: 'Enrollment year'
+            label: Year
             description: ''
             use_operator: false
             operator: pcsc_year_value_op
@@ -2097,7 +2105,7 @@ display:
           exposed: true
           expose:
             operator_id: pcsc_quarter_value_op
-            label: 'Enrollment quarter'
+            label: Quarter
             description: ''
             use_operator: false
             operator: pcsc_quarter_value_op
