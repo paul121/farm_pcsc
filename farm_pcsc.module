@@ -31,22 +31,20 @@ use Drupal\farm_pcsc\Bundle\PcscFieldSummary;
  * Implements hook_entity_type_build().
  */
 function farm_pcsc_entity_type_build(array &$entity_types) {
-  // Remove after https://github.com/farmOS/farmOS/pull/818 is merged.
   /** @var \Drupal\Core\Entity\EntityTypeInterface[] $entity_types */
   if (!empty($entity_types['plan_record'])) {
-
-    // Unset the data table.
-    $entity_types['plan_record']->set('data_table', NULL);
 
     // Set the views data handler class to FarmEntityViewsData.
     $entity_types['plan_record']->setHandlerClass('views_data', FarmEntityViewsData::class);
 
+    // Add view and edit routes for plan records.
     $entity_types['plan_record']->setHandlerClass('view_builder',EntityViewBuilder::class);
     $entity_types['plan_record']->setHandlerClass('local_task_provider', [
       'default' => DefaultEntityLocalTaskProvider::class,
     ]);
     $entity_types['plan_record']->setLinkTemplate('canonical', '/plan/record/{plan_record}');
   }
+
 }
 
 /**
