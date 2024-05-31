@@ -22,6 +22,7 @@ label: TAP
 weight: 1
 is_admin: false
 permissions:
+  - 'access farm dashboard'
   - 'access farm report index'
   - 'access locations overview'
   - 'access toolbar'

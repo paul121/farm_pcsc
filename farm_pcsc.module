@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityViewBuilder;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\entity\Menu\DefaultEntityLocalTaskProvider;
 use Drupal\farm_entity_views\FarmEntityViewsData;
 use Drupal\farm_pcsc\Bundle\PcscCommodity;
@@ -335,6 +336,26 @@ function farm_pcsc_practice_type_options() {
     'pcsc_field_practice_484' => t('484, Mulching'),
     'pcsc_field_practice_528' => t('528, Prescribed Grazing'),
     'pcsc_field_practice_590' => t('590, Nutrient Management'),
+  ];
+}
+
+/**
+ * Implements hook_farm_dashboard_panes().
+ */
+function farm_pcsc_farm_dashboard_panes() {
+  return [
+    'pcsc_links' => [
+      'block' => 'pcsc_links',
+      'title' => new TranslatableMarkup('Quick Forms'),
+      'region' => 'first',
+      'weight' => -50,
+    ],
+    'pcsc_metrics' => [
+      'block' => 'pcsc_metrics',
+      'title' => new TranslatableMarkup('Reports'),
+      'region'  => 'second',
+      'weight' => -50,
+    ],
   ];
 }
 
