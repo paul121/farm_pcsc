@@ -115,14 +115,6 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#title' => $this->t('Contract start date'),
       '#required' => TRUE,
     ];
-    $form['pcsc_field_total_area'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Total field area (acres)'),
-      '#min' => 0.01,
-      '#max' => 500,
-      '#step' => 0.01,
-      '#required' => TRUE,
-    ];
 
     $form['field'] = $this->buildInlineContainer();
     $form['field']['pcsc_land_use'] = [
@@ -144,25 +136,6 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#required' => TRUE,
     ];
 
-    $form['practice_summaries'] = $this->buildInlineContainer();
-    $form['practice_summaries']['pcsc_farm_past_practice'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Practice (combination) past extent - farm'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_farm_past_practice'),
-      '#required' => TRUE,
-    ];
-    $form['practice_summaries']['pcsc_field_csaf_practice'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Field any CSAF practice'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_field_csaf_practice'),
-      '#required' => TRUE,
-    ];
-    $form['practice_summaries']['pcsc_field_past_practice'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Practice (combination) past use - this field'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_field', 'pcsc_field_past_practice'),
-      '#required' => TRUE,
-    ];
     $form['num_practices'] = [
       '#type' => 'select',
       '#title' => $this->t('Number of practices'),

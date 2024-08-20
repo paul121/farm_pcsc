@@ -396,9 +396,8 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'State or Territory' => $field->get('pcsc_state')->value,
           'County' => $field->get('pcsc_county')->value,
           'Prior Field ID' => $field->get('pcsc_prior_field_id')->value,
-          'Field data change' => 'No',
+          'Change future data for previously enrolled field?' => '',
           'Contract start date' => date('m/d/Y', $field->get('pcsc_start_date')->value),
-          'Total field area' => $field->get('pcsc_field_total_area')->value,
           'Commodity category' => $commodity->get('pcsc_commodity_category')->value,
           'Commodity type' => $commodity->get('pcsc_commodity_type')->value,
           'Baseline yield' => $commodity->get('pcsc_baseline_yield')->value,
@@ -409,9 +408,6 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Field land use' => $field->get('pcsc_land_use')->value,
           'Field irrigated' => $field->get('pcsc_irrigated')->value,
           'Field tillage' => $field->get('pcsc_tillage')->value,
-          'Practice (combination) past extent - farm' => $field->get('pcsc_farm_past_practice')->value,
-          'Field any CSAF practice' => $field->get('pcsc_field_csaf_practice')->value,
-          'Practice (combination) past use - this field' => $field->get('pcsc_field_past_practice')->value,
         ];
 
         // Create placeholder columns for practices.
