@@ -616,7 +616,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
   }
 
   /**
-   * Helper function to build 528 supplemental data.
+   * Helper function to build supplemental data.
    *
    * @return array
    *   The data array.
