@@ -471,35 +471,50 @@ class PcscCsvActionForm extends ConfirmFormBase {
            'plan' => $entity->id(),
          ]);
       foreach ($summaries as $summary) {
+
+        /** @var \Drupal\farm_pcsc\Bundle\PcscCommodity $commodity */
+        $commodity = $summary->get('pcsc_commodity')->first()?->entity;
+        if (!$commodity) {
+          continue;
+        }
+
+        /** @var \Drupal\farm_pcsc\Bundle\PcscField $field */
+        $field = $commodity->get('pcsc_field')->first()?->entity;
+        if (!$field) {
+          continue;
+        }
+        $practice_ids = $this->entityTypeManager->getStorage('plan_record')->getQuery()
+          ->accessCheck(TRUE)
+          ->condition('type', 'pcsc_field_practice_', 'STARTS_WITH')
+          ->condition('plan', $entity->id())
+          ->condition('pcsc_field', $field->id())
+          ->execute();
+
         $data[] = [
           'Farm ID' => $entity->get('pcsc_farm_id')->value,
           'State or territory' => $entity->get('pcsc_state')->value,
           'County' => $entity->get('pcsc_county')->value,
-          'Producer TA received 1' => $summary->get('pcsc_producer_ta_1')->value,
-          'Producer TA received 2' => $summary->get('pcsc_producer_ta_2')->value,
-          'Producer TA received 3' => $summary->get('pcsc_producer_ta_3')->value,
-          'Other producer TA received ' => $summary->get('pcsc_producer_ta_other')->value,
-          'Producer incentive amount' => $summary->get('pcsc_incentive_amount')->value,
-          'Incentive reason 1' => $summary->get('pcsc_incentive_reason_1')->value,
-          'Incentive reason 2' => $summary->get('pcsc_incentive_reason_2')->value,
-          'Incentive reason 3' => $summary->get('pcsc_incentive_reason_3')->value,
-          'Incentive reason 4' => $summary->get('pcsc_incentive_reason_4')->value,
-          'Other incentive reason' => $summary->get('pcsc_incentive_reason_other')->value,
-          'Incentive structure 1' => $summary->get('pcsc_incentive_structure_1')->value,
-          'Incentive structure 2' => $summary->get('pcsc_incentive_structure_2')->value,
-          'Incentive structure 3' => $summary->get('pcsc_incentive_structure_3')->value,
-          'Incentive structure 4' => $summary->get('pcsc_incentive_structure_4')->value,
-          'Other incentive structure' => $summary->get('pcsc_incentive_structure_other')->value,
-          'Incentive type 1' => $summary->get('pcsc_incentive_type_1')->value,
-          'Incentive type 2' => $summary->get('pcsc_incentive_type_2')->value,
-          'Incentive type 3' => $summary->get('pcsc_incentive_type_3')->value,
-          'Incentive type 4' => $summary->get('pcsc_incentive_type_4')->value,
-          'Other incentive type' => $summary->get('pcsc_incentive_type_other')->value,
-          'Payment on enrollment' => $summary->get('pcsc_payment_enrollment')->value,
-          'Payment on implementation' => $summary->get('pcsc_payment_implementation')->value,
-          'Payment on harvest' => $summary->get('pcsc_payment_harvest')->value,
-          'Payment on MMRV' => $summary->get('pcsc_payment_mmrv')->value,
-          'Payment on sale' => $summary->get('pcsc_payment_sale')->value,
+          'Commodity Type' => $commodity->get('pcsc_commodity_type')->value,
+          'Practice type 1' => $practice_types[0] ?? '',
+          'Practice type 2' => $practice_types[1] ?? '',
+          'Practice type 3' => $practice_types[2] ?? '',
+          'Practice type 4' => $practice_types[3] ?? '',
+          'Practice type 5' => $practice_types[4] ?? '',
+          'Practice type 6' => $practice_types[5] ?? '',
+          'Practice type 7' => $practice_types[6] ?? '',
+          'Farm commodity value' => $summary->get('pcsc_farm_commodity_value')->value,
+          'Farm commodity volume' => $summary->get('pcsc_farm_commodity_volume')->value,
+          'Farm commodity volume unit' => $summary->get('pcsc_farm_commodity_volume_unit')->value,
+          'Other farm commodity volume unit' => $summary->get('pcsc_farm_commodity_volume_unit_other')->value,
+          'Farm GHG calculations' => $summary->get('pcsc_ghg_calculations')->value,
+          'Farm official GHG calculations' => $summary->get('pcsc_official_ghg_calculations')->value,
+          'Farm official GHG ER' => $summary->get('pcsc_official_ghg_er')->value,
+          'Farm official carbon stock' => $summary->get('pcsc_official_carbon_stock')->value,
+          'Farm official CO2 ER' => $summary->get('pcsc_official_co2_er')->value,
+          'Farm official CH4 ER' => $summary->get('pcsc_official_ch4_er')->value,
+          'Farm official N2O ER' => $summary->get('pcsc_official_n20_er')->value,
+          'Farm offsets produced' => $summary->get('pcsc_offsets')->value,
+          'Farm insets produced' => $summary->get('pcsc_insets')->value,
         ];
       }
     }
@@ -523,7 +538,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
          ]);
       foreach ($summaries as $summary) {
 
-        /** @var \Drupal\farm_pcsc\Bundle\PcscCommodity $field */
+        /** @var \Drupal\farm_pcsc\Bundle\PcscCommodity $commodity */
         $commodity = $summary->get('pcsc_commodity')->first()?->entity;
         if (!$commodity) {
           continue;

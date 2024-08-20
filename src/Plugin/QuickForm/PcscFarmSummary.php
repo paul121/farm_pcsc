@@ -40,6 +40,27 @@ class PcscFarmSummary extends QuickFormBase {
       '#title' => $this->t('Producer'),
       '#options' => $producer_options,
       '#required' => TRUE,
+      '#ajax' => [
+        'callback' => [$this, 'commodityCallback'],
+        'wrapper' => 'pcsc-commodity-wrapper',
+      ],
+    ];
+
+    $commodity_options = [];
+    if ($form_state->getValue('plan')) {
+      $commodities = \Drupal::entityTypeManager()->getStorage('plan_record')->loadByProperties(['type' => 'pcsc_commodity', 'plan' => $form_state->getValue('plan')]);
+      foreach ($commodities as $commodity) {
+        $commodity_options[$commodity->id()] = $commodity->label();
+      }
+    }
+    $form['pcsc_commodity'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Commodity'),
+      '#options' => $commodity_options,
+      '#required' => TRUE,
+      '#wrapper_attributes' => [
+        'id' => 'pcsc-commodity-wrapper',
+      ],
     ];
 
     $form['quarter'] = $this->buildInlineContainer();
@@ -58,161 +79,109 @@ class PcscFarmSummary extends QuickFormBase {
       '#required' => TRUE,
     ];
 
-    $form['ta'] = $this->buildInlineContainer();
-    $form['ta']['pcsc_producer_ta_1'] = [
+    $form['commodity'] = $this->buildInlineContainer();
+    $form['commodity']['pcsc_farm_commodity_value'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Farm commodity value'),
+      '#min' => 0,
+      '#max' => 10000000,
+      '#step' => 0.01,
+    ];
+    $form['commodity']['pcsc_farm_commodity_volume'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Farm commodity volume'),
+      '#min' => 0,
+      '#max' => 10000000,
+      '#step' => 0.01,
+    ];
+    $form['commodity']['pcsc_farm_commodity_volume_unit'] = [
       '#type' => 'select',
-      '#title' => $this->t('Producer TA received 1'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_producer_ta_1'),
+      '#title' => $this->t('Farm commodity volume unit'),
+      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_farm_commodity_volume_unit'),
       '#empty_option' => '',
     ];
-    $form['ta']['pcsc_producer_ta_2'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Producer TA received 2'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_producer_ta_2'),
-      '#empty_option' => '',
-    ];
-    $form['ta']['pcsc_producer_ta_3'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Producer TA received 3'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_producer_ta_3'),
-      '#empty_option' => '',
-    ];
-    $form['ta']['pcsc_producer_ta_other'] = [
+    $form['commodity']['pcsc_farm_commodity_volume_unit_other'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Other producer TA received'),
+      '#title' => $this->t('Other farm commodity volume unit'),
+      '#states' => [
+        'visible' => [
+          'select[name="pcsc_farm_commodity_volume_unit"]' => ['value' => 'Other (specify)'],
+        ],
+      ],
     ];
 
-    $form['pcsc_incentive_amount'] = [
+    $form['pcsc_ghg_calculations'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Farm GHG calculations'),
+      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_ghg_calculations'),
+      '#empty_option' => '',
+    ];
+    $form['pcsc_official_ghg_calculations'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Farm official GHG calculations'),
+      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_official_ghg_calculations'),
+      '#empty_option' => '',
+    ];
+
+    $form['measurements'] = $this->buildInlineContainer();
+    $form['measurements']['pcsc_official_ghg_er'] = [
       '#type' => 'number',
-      '#title' => $this->t('Producer incentive amount'),
+      '#title' => $this->t('Farm official GHG ER'),
       '#min' => 0,
-      '#max' => 5000000,
+      '#max' => 10000000,
+      '#step' => 0.01,
+    ];
+    $form['measurements']['pcsc_official_carbon_stock'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Farm official carbon stock'),
+      '#min' => 0,
+      '#max' => 10000000,
+      '#step' => 0.01,
+    ];
+    $form['measurements']['pcsc_official_co2_er'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Farm official CO2 ER'),
+      '#min' => 0,
+      '#max' => 10000000,
+      '#step' => 0.01,
+    ];
+    $form['measurements']['pcsc_official_ch4_er'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Farm official CH4 ER'),
+      '#min' => 0,
+      '#max' => 10000000,
+      '#step' => 0.01,
+    ];
+    $form['measurements']['pcsc_official_n20_er'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Farm official N2O ER'),
+      '#min' => 0,
+      '#max' => 10000000,
+      '#step' => 0.01,
+    ];
+    $form['measurements']['pcsc_offsets'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Farm offsets produced'),
+      '#min' => 0,
+      '#max' => 10000000,
+      '#step' => 0.01,
+    ];
+    $form['measurements']['pcsc_insets'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Farm insets produced'),
+      '#min' => 0,
+      '#max' => 10000000,
       '#step' => 0.01,
     ];
 
-    $form['reason'] = $this->buildInlineContainer();
-    $form['reason']['pcsc_incentive_reason_1'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive reason 1'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_reason_1'),
-      '#empty_option' => '',
-    ];
-    $form['reason']['pcsc_incentive_reason_2'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive reason 2'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_reason_2'),
-      '#empty_option' => '',
-    ];
-    $form['reason']['pcsc_incentive_reason_3'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive reason 3'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_reason_3'),
-      '#empty_option' => '',
-    ];
-    $form['reason']['pcsc_incentive_reason_4'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive reason 4'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_reason_4'),
-      '#empty_option' => '',
-    ];
-    $form['reason']['pcsc_incentive_reason_other'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Other incentive reason'),
-    ];
-
-    $form['structure'] = $this->buildInlineContainer();
-    $form['structure']['pcsc_incentive_structure_1'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive structure 1'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_structure_1'),
-      '#empty_option' => '',
-    ];
-    $form['structure']['pcsc_incentive_structure_2'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive structure 2'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_structure_2'),
-      '#empty_option' => '',
-    ];
-    $form['structure']['pcsc_incentive_structure_3'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive structure 3'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_structure_3'),
-      '#empty_option' => '',
-    ];
-    $form['structure']['pcsc_incentive_structure_4'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive structure 4'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_structure_4'),
-      '#empty_option' => '',
-    ];
-    $form['structure']['pcsc_incentive_structure_other'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Other incentive structure'),
-    ];
-
-    $form['type'] = $this->buildInlineContainer();
-    $form['type']['pcsc_incentive_type_1'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive type 1'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_type_1'),
-      '#empty_option' => '',
-    ];
-    $form['type']['pcsc_incentive_type_2'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive type 2'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_type_2'),
-      '#empty_option' => '',
-    ];
-    $form['type']['pcsc_incentive_type_3'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive type 3'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_type_3'),
-      '#empty_option' => '',
-    ];
-    $form['type']['pcsc_incentive_type_4'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Incentive type 4'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_incentive_type_4'),
-      '#empty_option' => '',
-    ];
-    $form['type']['pcsc_incentive_type_other'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Other incentive type'),
-    ];
-
-    $form['payment'] = $this->buildInlineContainer();
-    $form['payment']['pcsc_payment_enrollment'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Payment on enrollment'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_payment_enrollment'),
-      '#empty_option' => '',
-    ];
-    $form['payment']['pcsc_payment_implementation'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Payment on implementation'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_payment_implementation'),
-      '#empty_option' => '',
-    ];
-    $form['payment']['pcsc_payment_harvest'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Payment on harvest'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_payment_harvest'),
-      '#empty_option' => '',
-    ];
-    $form['payment']['pcsc_payment_mmrv'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Payment on MMRV'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_payment_mmrv'),
-      '#empty_option' => '',
-    ];
-    $form['payment']['pcsc_payment_sale'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Payment on sale'),
-      '#options' => $this->getListOptions('plan_record', 'pcsc_farm_summary', 'pcsc_payment_sale'),
-      '#empty_option' => '',
-    ];
-
     return $form;
+  }
+
+  /**
+   * Ajax callback for practices container.
+   */
+  public function commodityCallback(array $form, FormStateInterface $form_state) {
+    return $form['pcsc_commodity'];
   }
 
   /**
