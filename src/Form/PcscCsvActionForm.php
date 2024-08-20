@@ -406,7 +406,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Field ID' => $field->get('pcsc_field_id')->value,
           'State or Territory' => $field->get('pcsc_state')->value,
           'County' => $field->get('pcsc_county')->value,
-          'Prior Field ID (if applicable)' => $field->get('pcsc_prior_field_id')->value,
+          'Prior Field ID' => $field->get('pcsc_prior_field_id')->value,
           'Field data change' => 'No',
           'Contract start date' => date('m/d/Y', $field->get('pcsc_start_date')->value),
           'Total field area' => $field->get('pcsc_field_total_area')->value,

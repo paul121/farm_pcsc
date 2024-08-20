@@ -61,7 +61,7 @@ class PcscField extends FarmPlanRecordType {
       ],
       'pcsc_prior_field_id' => [
         'type' => 'integer',
-        'label' => t('Prior Field ID (if applicable)'),
+        'label' => t('Prior Field ID'),
         'min' => 1,
       ],
       'pcsc_state' => [

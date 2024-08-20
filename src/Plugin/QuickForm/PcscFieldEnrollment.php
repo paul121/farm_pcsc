@@ -82,7 +82,7 @@ class PcscFieldEnrollment extends QuickFormBase {
     ];
     $form['id']['pcsc_prior_field_id'] = [
       '#type' => 'number',
-      '#title' => $this->t('Prior Field ID (if applicable)'),
+      '#title' => $this->t('Prior Field ID'),
       '#min' => 1,
       '#step' => 1,
     ];
