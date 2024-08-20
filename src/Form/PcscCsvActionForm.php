@@ -582,7 +582,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Field commodity value' => $summary->get('pcsc_field_commodity_value')->value,
           'Field commodity volume' => $summary->get('pcsc_field_commodity_volume')->value,
           'Field commodity volume unit' => $summary->get('pcsc_field_commodity_volume_unit')->value,
-          'Field commodity volume unit other' => $summary->get('pcsc_field_commodity_volume_unit_other')->value,
+          'Other field commodity volume unit' => $summary->get('pcsc_field_commodity_volume_unit_other')->value,
           'Cost of implementation' => $summary->get('pcsc_implementation_cost')->value,
           'Cost of implementation unit' => $summary->get('pcsc_implementation_cost_unit')->value,
           'Other cost unit' => $summary->get('pcsc_implementation_cost_unit_other')->value,
