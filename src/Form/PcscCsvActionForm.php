@@ -493,7 +493,6 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Producer TA received 1' => $summary->get('pcsc_producer_ta_1')->value,
           'Producer TA received 2' => $summary->get('pcsc_producer_ta_2')->value,
           'Producer TA received 3' => $summary->get('pcsc_producer_ta_3')->value,
-          'Producer TA received 4' => $summary->get('pcsc_producer_ta_4')->value,
           'Other producer TA received ' => $summary->get('pcsc_producer_ta_other')->value,
           'Producer incentive amount' => $summary->get('pcsc_incentive_amount')->value,
           'Incentive reason 1' => $summary->get('pcsc_incentive_reason_1')->value,
