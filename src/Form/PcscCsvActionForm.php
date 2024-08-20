@@ -581,6 +581,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
           'Marketing assistance provided' => $summary->get('pcsc_marketing_assistance')->value,
           'Inventive per acre or head' => $summary->get('pcsc_incentive_per_unit')->value,
           'Field commodity value' => $summary->get('pcsc_field_commodity_value')->value,
+          'Field commodity volume' => $summary->get('pcsc_field_commodity_volume')->value,
           'Field commodity volume unit' => $summary->get('pcsc_field_commodity_volume_unit')->value,
           'Field commodity volume unit other' => $summary->get('pcsc_field_commodity_volume_unit_other')->value,
           'Cost of implementation' => $summary->get('pcsc_implementation_cost')->value,
