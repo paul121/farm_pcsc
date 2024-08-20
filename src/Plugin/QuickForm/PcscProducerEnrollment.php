@@ -96,34 +96,42 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#required' => TRUE,
     ];
 
-    $form['areas'] = $this->buildInlineContainer();
-    $form['areas']['pcsc_producer_total_area'] = [
+    $form['organic'] = $this->buildInlineContainer();
+    $form['organic']['pcsc_organic'] = [
       '#type' => 'select',
-      '#title' => $this->t('Total area'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_producer_total_area'),
+      '#title' => $this->t('Organic farm'),
+      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_organic'),
+      '#default_value' => 'I don\'t know',
       '#required' => TRUE,
-      '#group' => 'areas',
     ];
-    $form['areas']['pcsc_total_crop_area'] = [
+    $form['organic']['pcsc_organic_fields'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Organic fields'),
+      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_organic_fields'),
+      '#default_value' => 'I don\'t know',
+      '#required' => TRUE,
+    ];
+
+    $form['pcsc_csaf_experience'] = [
+      '#type' => 'select',
+      '#title' => $this->t('CSAF experience'),
+      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_experience'),
+      '#default_value' => 'I don\'t know',
+      '#required' => TRUE,
+    ];
+
+    $form['areas'] = $this->buildInlineContainer();
+    $form['areas']['pcsc_total_forest_area'] = [
       '#type' => 'number',
-      '#title' => $this->t('Total crop area (acres)'),
+      '#title' => $this->t('Total forest area (acres)'),
       '#min' => 0,
       '#max' => 100000,
       '#step' => 1,
       '#required' => TRUE,
-      '#group' => 'areas',
     ];
     $form['areas']['pcsc_total_livestock_area'] = [
       '#type' => 'number',
       '#title' => $this->t('Total livestock area (acres)'),
-      '#min' => 0,
-      '#max' => 100000,
-      '#step' => 1,
-      '#required' => TRUE,
-    ];
-    $form['areas']['pcsc_total_forest_area'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Total forest area (acres)'),
       '#min' => 0,
       '#max' => 100000,
       '#step' => 1,
@@ -174,83 +182,6 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#title' => $this->t('Other livestock type'),
     ];
 
-    $form['organic'] = $this->buildInlineContainer();
-    $form['organic']['pcsc_organic'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Organic farm'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_organic'),
-      '#default_value' => 'I don\'t know',
-      '#required' => TRUE,
-    ];
-    $form['organic']['pcsc_organic_fields'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Organic fields'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_organic_fields'),
-      '#default_value' => 'I don\'t know',
-      '#required' => TRUE,
-    ];
-    $form['pcsc_producer_motivation'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Producer motivation'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_producer_motivation'),
-      '#required' => TRUE,
-    ];
-    $form['pcsc_producer_outreach_1'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Producer outreach 1'),
-      '#options' => ['' => ''] + $this->getListOptions('plan', 'pcsc_producer', 'pcsc_producer_outreach_1'),
-    ];
-    $form['pcsc_producer_outreach_2'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Producer outreach 2'),
-      '#options' => ['' => ''] + $this->getListOptions('plan', 'pcsc_producer', 'pcsc_producer_outreach_2'),
-    ];
-    $form['pcsc_producer_outreach_3'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Producer outreach 3'),
-      '#options' => ['' => ''] + $this->getListOptions('plan', 'pcsc_producer', 'pcsc_producer_outreach_3'),
-    ];
-    $form['pcsc_producer_outreach_other'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Other producer outreach'),
-    ];
-
-    $form['csaf'] = $this->buildInlineContainer();
-    $form['csaf']['pcsc_csaf_experience'] = [
-      '#type' => 'select',
-      '#title' => $this->t('CSAF experience'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_experience'),
-      '#default_value' => 'I don\'t know',
-      '#required' => TRUE,
-    ];
-    $form['csaf']['pcsc_csaf_federal_funds'] = [
-      '#type' => 'select',
-      '#title' => $this->t('CSAF federal funds'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_federal_funds'),
-      '#default_value' => 'I don\'t know',
-      '#required' => TRUE,
-    ];
-    $form['csaf']['pcsc_csaf_local_funds'] = [
-      '#type' => 'select',
-      '#title' => $this->t('CSAF state or local funds'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_local_funds'),
-      '#default_value' => 'I don\'t know',
-      '#required' => TRUE,
-    ];
-    $form['csaf']['pcsc_csaf_nonprofit_funds'] = [
-      '#type' => 'select',
-      '#title' => $this->t('CSAF nonprofit funds'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_nonprofit_funds'),
-      '#default_value' => 'I don\'t know',
-      '#required' => TRUE,
-    ];
-    $form['csaf']['pcsc_csaf_market_incentives'] = [
-      '#type' => 'select',
-      '#title' => $this->t('CSAF market incentives'),
-      '#options' => $this->getListOptions('plan', 'pcsc_producer', 'pcsc_csaf_market_incentives'),
-      '#default_value' => 'I don\'t know',
-      '#required' => TRUE,
-    ];
     return $form;
   }
 
