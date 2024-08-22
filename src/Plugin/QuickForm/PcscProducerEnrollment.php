@@ -127,6 +127,7 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#min' => 0,
       '#max' => 100000,
       '#step' => 1,
+      '#default_value' => 0,
       '#required' => TRUE,
     ];
     $form['areas']['pcsc_total_livestock_area'] = [
@@ -135,6 +136,7 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#min' => 0,
       '#max' => 100000,
       '#step' => 1,
+      '#default_value' => 0,
       '#required' => TRUE,
     ];
 
