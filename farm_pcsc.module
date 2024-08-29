@@ -130,6 +130,7 @@ function farm_pcsc_farm_ui_theme_region_items(string $entity_type) {
   return [
     'bottom' => [
       'pcsc_producer_fields_view',
+      'pcsc_farm_benefits_view',
       'pcsc_farm_summaries_view',
       'pcsc_field_summaries_view',
     ],
@@ -154,6 +155,24 @@ function farm_pcsc_plan_view(array &$build, EntityInterface $entity, EntityViewD
       $build['pcsc_producer_fields_view'] = [
         '#type'   => 'details',
         '#title'  => t('Producer Fields'),
+        '#open'   => TRUE,
+        'content' => $render_array,
+        '#cache' => ['tags' => $view->getCacheTags()],
+      ];
+    }
+
+    // Add farm benefits.
+    $view = Drupal\views\Views::getView('pcsc_farm_benefits');
+    if (is_object($view)) {
+      $view->setDisplay('block');
+      $view->setArguments([$entity->id()]);
+      $view->execute();
+      $render_array = $view->render();
+
+      // Check to ensure the view results are not empty.
+      $build['pcsc_farm_benefits_view'] = [
+        '#type'   => 'details',
+        '#title'  => t('Farm Benefits'),
         '#open'   => TRUE,
         'content' => $render_array,
         '#cache' => ['tags' => $view->getCacheTags()],

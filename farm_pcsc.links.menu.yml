@@ -3,6 +3,10 @@ farm_pcsc.pcsc_report:
   parent: farm.report
   route_name: view.pcsc_plan_report.page
   weight: -10
+farm_pcsc.pcsc_report_farm_benefits:
+  title: PCSC Farm Benefits
+  parent: farm.report
+  route_name: view.pcsc_farm_benefits.page
 farm_pcsc.pcsc_report_farm_summaries:
   title: PCSC Farm Summaries
   parent: farm.report
