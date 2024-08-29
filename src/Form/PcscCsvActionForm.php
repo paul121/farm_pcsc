@@ -197,6 +197,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
       '#options' => [
         'all' => $this->t('All'),
         'enrollment' => $this->t('Enrollment'),
+        'farm_benefit' => $this->t('Farm Benefits'),
         'summary' => $this->t('Summary'),
         'supplemental' => $this->t('Supplemental'),
       ],
@@ -277,6 +278,10 @@ class PcscCsvActionForm extends ConfirmFormBase {
     $sheet_type = $form_state->getValue('sheet_type');
     $sub_type = $form_state->getValue("{$sheet_type}_type");
     switch ($sheet_type) {
+      case 'farm_benefit':
+        $data = $this->exportFarmBenefits();
+        break;
+
       case 'enrollment':
       case 'summary':
         // Build the function name to build data.
@@ -451,6 +456,42 @@ class PcscCsvActionForm extends ConfirmFormBase {
         $data[] = $row;
       }
 
+    }
+    return $data;
+  }
+
+  /**
+   * Helper function to build farm benefits data.
+   *
+   * @return array
+   *   The data array.
+   */
+  public function exportFarmBenefits() {
+    $data = [];
+    foreach ($this->entities as $entity) {
+      // @TODO Only load the farm summary for the most recent quarter.
+      $benefits  = $this->entityTypeManager->getStorage('plan_record')
+        ->loadByProperties([
+          'type' => 'pcsc_farm_benefit',
+          'plan' => $entity->id(),
+        ]);
+      foreach ($benefits as $summary) {
+        $data[] = [
+          'Farm ID' => $entity->get('pcsc_farm_id')->value,
+          'State or territory' => $entity->get('pcsc_state')->value,
+          'County' => $entity->get('pcsc_county')->value,
+          'Producer TA received 1' => $summary->get('pcsc_producer_ta_1')->value,
+          'Producer TA received 2' => $summary->get('pcsc_producer_ta_2')->value,
+          'Producer TA received 3' => $summary->get('pcsc_producer_ta_3')->value,
+          'Other producer TA received ' => $summary->get('pcsc_producer_ta_other')->value,
+          'Incentive type 1' => $summary->get('pcsc_incentive_type_1')->value,
+          'Incentive type 2' => $summary->get('pcsc_incentive_type_2')->value,
+          'Incentive type 3' => $summary->get('pcsc_incentive_type_3')->value,
+          'Incentive type 4' => $summary->get('pcsc_incentive_type_4')->value,
+          'Other incentive type' => $summary->get('pcsc_incentive_type_other')->value,
+          'Producer incentive amount' => $summary->get('pcsc_incentive_amount')->value,
+        ];
+      }
     }
     return $data;
   }
