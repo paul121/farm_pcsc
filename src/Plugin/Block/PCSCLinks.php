@@ -64,6 +64,7 @@ class PCSCLinks extends BlockBase implements ContainerFactoryPluginInterface {
     $quick_forms = [
       'pcsc_producer_enrollment',
       'pcsc_field_enrollment',
+      'pcsc_farm_benefit',
       'pcsc_farm_summary',
       'pcsc_field_summary',
     ];
