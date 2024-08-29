@@ -293,6 +293,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
 
       case 'supplemental':
         $data = $this->exportSupplemental($sub_type);
+        break;
 
       case 'all':
       default:
