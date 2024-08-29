@@ -8,6 +8,11 @@ farm_pcsc.field_enrollment:
   route_name: farm.quick.pcsc_field_enrollment
   appears_on:
     - entity.plan.canonical
+farm_pcsc.farm_benefit:
+  title: 'Add Farm Benefit'
+  route_name: farm.quick.pcsc_farm_benefit
+  appears_on:
+    - entity.plan.canonical
 farm_pcsc.farm_summary:
   title: 'Add Farm Summary'
   route_name: farm.quick.pcsc_farm_summary
