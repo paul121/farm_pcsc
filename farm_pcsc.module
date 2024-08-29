@@ -143,7 +143,7 @@ function farm_pcsc_farm_ui_theme_region_items(string $entity_type) {
 function farm_pcsc_plan_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
   if ($entity->bundle() === 'pcsc_producer' && $view_mode === 'full') {
 
-    // Add farm summaries.
+    // Add producer fields.
     $view = Drupal\views\Views::getView('pcsc_producer_fields');
     if (is_object($view)) {
       $view->setDisplay('block');
