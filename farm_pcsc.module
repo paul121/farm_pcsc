@@ -15,6 +15,7 @@ use Drupal\Core\StringTranslation\TranslatableMarkup;
 use Drupal\entity\Menu\DefaultEntityLocalTaskProvider;
 use Drupal\farm_entity_views\FarmEntityViewsData;
 use Drupal\farm_pcsc\Bundle\PcscCommodity;
+use Drupal\farm_pcsc\Bundle\PcscFarmBenefit;
 use Drupal\farm_pcsc\Bundle\PcscFarmSummary;
 use Drupal\farm_pcsc\Bundle\PcscField;
 use Drupal\farm_pcsc\Bundle\PcscFieldPractice327;
@@ -58,6 +59,7 @@ function farm_pcsc_plan_record_bundle_classes() {
   return [
     'pcsc_field' => PcscField::class,
     'pcsc_commodity' => PcscCommodity::class,
+    'pcsc_farm_benefit' => PcscFarmBenefit::class,
     'pcsc_farm_summary' => PcscFarmSummary::class,
     'pcsc_field_summary' => PcscFieldSummary::class,
     'pcsc_field_practice_327' => PcscFieldPractice327::class,
