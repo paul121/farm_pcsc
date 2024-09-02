@@ -83,6 +83,7 @@ abstract class PcscFieldPracticeBase extends FarmPlanRecordType {
         'allowed_values' => farm_pcsc_allowed_values_helper([
           'Acres',
           'Head of livestock',
+          'Kilowatts',
           'Linear feet',
           'Square feet',
           'Other (specify)',

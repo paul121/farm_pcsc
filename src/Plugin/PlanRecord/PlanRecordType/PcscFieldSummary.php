@@ -116,7 +116,6 @@ class PcscFieldSummary extends FarmPlanRecordType {
         'allowed_values' => farm_pcsc_allowed_values_helper([
           'Yes',
           'No',
-          'I don\'t know',
         ]),
       ],
     ];

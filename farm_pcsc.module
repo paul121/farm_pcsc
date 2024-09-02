@@ -4007,6 +4007,8 @@ function farm_pcsc_commodity_type_options() {
     'MILKWEED',
     'MILLET',
     'MIXED FORAGE',
+    'MIXED FRUIT (<5-ACRE PRODUCER ENROLLMENT)',
+    'MIXED VEGETABLES (<5-ACRE PRODUCER ENROLLMENT)',
     'MOHAIR',
     'MOLLUSK',
     'MORINGA',
