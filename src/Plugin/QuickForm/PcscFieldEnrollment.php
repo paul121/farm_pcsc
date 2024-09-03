@@ -62,7 +62,6 @@ class PcscFieldEnrollment extends QuickFormBase {
     $form['geometry'] = [
       '#type' => 'farm_map_input',
       '#title' => $this->t('Geometry'),
-      '#required' => TRUE,
     ];
 
     $form['id'] = $this->buildInlineContainer();
