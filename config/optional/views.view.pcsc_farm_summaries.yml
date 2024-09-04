@@ -262,17 +262,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_incentive_amount_value:
-          id: pcsc_incentive_amount_value
-          table: plan_record__pcsc_incentive_amount
-          field: pcsc_incentive_amount_value
+        pcsc_farm_commodity_value_value:
+          id: pcsc_farm_commodity_value_value
+          table: plan_record__pcsc_farm_commodity_value
+          field: pcsc_farm_commodity_value_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_incentive_amount
+          entity_field: pcsc_farm_commodity_value
           plugin_id: field
-          label: 'Producer incentive amount'
+          label: 'Farm commodity value'
           exclude: false
           alter:
             alter_text: false
@@ -316,7 +316,7 @@ display:
           click_sort_column: value
           type: number_decimal
           settings:
-            thousand_separator: ','
+            thousand_separator: ''
             decimal_separator: .
             scale: 2
             prefix_suffix: true
@@ -330,17 +330,85 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_enrollment_value:
-          id: pcsc_payment_enrollment_value
-          table: plan_record__pcsc_payment_enrollment
-          field: pcsc_payment_enrollment_value
+        pcsc_farm_commodity_volume_value:
+          id: pcsc_farm_commodity_volume_value
+          table: plan_record__pcsc_farm_commodity_volume
+          field: pcsc_farm_commodity_volume_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_enrollment
+          entity_field: pcsc_farm_commodity_volume
           plugin_id: field
-          label: 'Payment on enrollment'
+          label: 'Farm commodity volume'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_farm_commodity_volume_unit_value:
+          id: pcsc_farm_commodity_volume_unit_value
+          table: plan_record__pcsc_farm_commodity_volume_unit
+          field: pcsc_farm_commodity_volume_unit_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_farm_commodity_volume_unit
+          plugin_id: field
+          label: 'Farm commodity volume unit'
           exclude: false
           alter:
             alter_text: false
@@ -394,17 +462,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_harvest_value:
-          id: pcsc_payment_harvest_value
-          table: plan_record__pcsc_payment_harvest
-          field: pcsc_payment_harvest_value
+        pcsc_ghg_calculations_value:
+          id: pcsc_ghg_calculations_value
+          table: plan_record__pcsc_ghg_calculations
+          field: pcsc_ghg_calculations_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_harvest
+          entity_field: pcsc_ghg_calculations
           plugin_id: field
-          label: 'Payment on harvest'
+          label: 'Farm GHG calculations'
           exclude: false
           alter:
             alter_text: false
@@ -458,17 +526,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_implementation_value:
-          id: pcsc_payment_implementation_value
-          table: plan_record__pcsc_payment_implementation
-          field: pcsc_payment_implementation_value
+        pcsc_official_ghg_calculations_value:
+          id: pcsc_official_ghg_calculations_value
+          table: plan_record__pcsc_official_ghg_calculations
+          field: pcsc_official_ghg_calculations_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_implementation
+          entity_field: pcsc_official_ghg_calculations
           plugin_id: field
-          label: 'Payment on implementation'
+          label: 'Farm official GHG calculations'
           exclude: false
           alter:
             alter_text: false
@@ -522,17 +590,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_mmrv_value:
-          id: pcsc_payment_mmrv_value
-          table: plan_record__pcsc_payment_mmrv
-          field: pcsc_payment_mmrv_value
+        pcsc_official_ghg_er_value:
+          id: pcsc_official_ghg_er_value
+          table: plan_record__pcsc_official_ghg_er
+          field: pcsc_official_ghg_er_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_mmrv
+          entity_field: pcsc_official_ghg_er
           plugin_id: field
-          label: 'Payment on MMRV'
+          label: 'Farm official GHG ER'
           exclude: false
           alter:
             alter_text: false
@@ -574,8 +642,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_default
-          settings: {  }
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -586,17 +658,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_sale_value:
-          id: pcsc_payment_sale_value
-          table: plan_record__pcsc_payment_sale
-          field: pcsc_payment_sale_value
+        pcsc_official_carbon_stock_value:
+          id: pcsc_official_carbon_stock_value
+          table: plan_record__pcsc_official_carbon_stock
+          field: pcsc_official_carbon_stock_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_sale
+          entity_field: pcsc_official_carbon_stock
           plugin_id: field
-          label: 'Payment on sale'
+          label: 'Farm official carbon stock'
           exclude: false
           alter:
             alter_text: false
@@ -638,8 +710,352 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_default
-          settings: {  }
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_official_co2_er_value:
+          id: pcsc_official_co2_er_value
+          table: plan_record__pcsc_official_co2_er
+          field: pcsc_official_co2_er_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_official_co2_er
+          plugin_id: field
+          label: 'Farm official CO2 ER'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_official_ch4_er_value:
+          id: pcsc_official_ch4_er_value
+          table: plan_record__pcsc_official_ch4_er
+          field: pcsc_official_ch4_er_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_official_ch4_er
+          plugin_id: field
+          label: 'Farm official CH4 ER'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_official_n20_er_value:
+          id: pcsc_official_n20_er_value
+          table: plan_record__pcsc_official_n20_er
+          field: pcsc_official_n20_er_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_official_n20_er
+          plugin_id: field
+          label: 'Farm official N2O ER'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_offsets_value:
+          id: pcsc_offsets_value
+          table: plan_record__pcsc_offsets
+          field: pcsc_offsets_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_offsets
+          plugin_id: field
+          label: 'Farm offsets produced'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_insets_value:
+          id: pcsc_insets_value
+          table: plan_record__pcsc_insets
+          field: pcsc_insets_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_insets
+          plugin_id: field
+          label: 'Farm insets produced'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -825,8 +1241,8 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          handler: 'default:plan'
           widget: autocomplete
+          handler: 'default:plan'
           handler_settings:
             target_bundles:
               pcsc_producer: pcsc_producer
@@ -1355,17 +1771,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_incentive_amount_value:
-          id: pcsc_incentive_amount_value
-          table: plan_record__pcsc_incentive_amount
-          field: pcsc_incentive_amount_value
+        pcsc_farm_commodity_value_value:
+          id: pcsc_farm_commodity_value_value
+          table: plan_record__pcsc_farm_commodity_value
+          field: pcsc_farm_commodity_value_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_incentive_amount
+          entity_field: pcsc_farm_commodity_value
           plugin_id: field
-          label: 'Producer incentive amount'
+          label: 'Farm commodity value'
           exclude: false
           alter:
             alter_text: false
@@ -1409,7 +1825,7 @@ display:
           click_sort_column: value
           type: number_decimal
           settings:
-            thousand_separator: ','
+            thousand_separator: ''
             decimal_separator: .
             scale: 2
             prefix_suffix: true
@@ -1423,17 +1839,85 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_enrollment_value:
-          id: pcsc_payment_enrollment_value
-          table: plan_record__pcsc_payment_enrollment
-          field: pcsc_payment_enrollment_value
+        pcsc_farm_commodity_volume_value:
+          id: pcsc_farm_commodity_volume_value
+          table: plan_record__pcsc_farm_commodity_volume
+          field: pcsc_farm_commodity_volume_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_enrollment
+          entity_field: pcsc_farm_commodity_volume
           plugin_id: field
-          label: 'Payment on enrollment'
+          label: 'Farm commodity volume'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_farm_commodity_volume_unit_value:
+          id: pcsc_farm_commodity_volume_unit_value
+          table: plan_record__pcsc_farm_commodity_volume_unit
+          field: pcsc_farm_commodity_volume_unit_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_farm_commodity_volume_unit
+          plugin_id: field
+          label: 'Farm commodity volume unit'
           exclude: false
           alter:
             alter_text: false
@@ -1487,17 +1971,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_harvest_value:
-          id: pcsc_payment_harvest_value
-          table: plan_record__pcsc_payment_harvest
-          field: pcsc_payment_harvest_value
+        pcsc_ghg_calculations_value:
+          id: pcsc_ghg_calculations_value
+          table: plan_record__pcsc_ghg_calculations
+          field: pcsc_ghg_calculations_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_harvest
+          entity_field: pcsc_ghg_calculations
           plugin_id: field
-          label: 'Payment on harvest'
+          label: 'Farm GHG calculations'
           exclude: false
           alter:
             alter_text: false
@@ -1551,17 +2035,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_implementation_value:
-          id: pcsc_payment_implementation_value
-          table: plan_record__pcsc_payment_implementation
-          field: pcsc_payment_implementation_value
+        pcsc_official_ghg_calculations_value:
+          id: pcsc_official_ghg_calculations_value
+          table: plan_record__pcsc_official_ghg_calculations
+          field: pcsc_official_ghg_calculations_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_implementation
+          entity_field: pcsc_official_ghg_calculations
           plugin_id: field
-          label: 'Payment on implementation'
+          label: 'Farm official GHG calculations'
           exclude: false
           alter:
             alter_text: false
@@ -1615,17 +2099,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_mmrv_value:
-          id: pcsc_payment_mmrv_value
-          table: plan_record__pcsc_payment_mmrv
-          field: pcsc_payment_mmrv_value
+        pcsc_official_ghg_er_value:
+          id: pcsc_official_ghg_er_value
+          table: plan_record__pcsc_official_ghg_er
+          field: pcsc_official_ghg_er_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_mmrv
+          entity_field: pcsc_official_ghg_er
           plugin_id: field
-          label: 'Payment on MMRV'
+          label: 'Farm official GHG ER'
           exclude: false
           alter:
             alter_text: false
@@ -1667,8 +2151,12 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_default
-          settings: {  }
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1679,17 +2167,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        pcsc_payment_sale_value:
-          id: pcsc_payment_sale_value
-          table: plan_record__pcsc_payment_sale
-          field: pcsc_payment_sale_value
+        pcsc_official_carbon_stock_value:
+          id: pcsc_official_carbon_stock_value
+          table: plan_record__pcsc_official_carbon_stock
+          field: pcsc_official_carbon_stock_value
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: plan_record
-          entity_field: pcsc_payment_sale
+          entity_field: pcsc_official_carbon_stock
           plugin_id: field
-          label: 'Payment on sale'
+          label: 'Farm official carbon stock'
           exclude: false
           alter:
             alter_text: false
@@ -1731,8 +2219,352 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: list_default
-          settings: {  }
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_official_co2_er_value:
+          id: pcsc_official_co2_er_value
+          table: plan_record__pcsc_official_co2_er
+          field: pcsc_official_co2_er_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_official_co2_er
+          plugin_id: field
+          label: 'Farm official CO2 ER'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_official_ch4_er_value:
+          id: pcsc_official_ch4_er_value
+          table: plan_record__pcsc_official_ch4_er
+          field: pcsc_official_ch4_er_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_official_ch4_er
+          plugin_id: field
+          label: 'Farm official CH4 ER'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_official_n20_er_value:
+          id: pcsc_official_n20_er_value
+          table: plan_record__pcsc_official_n20_er
+          field: pcsc_official_n20_er_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_official_n20_er
+          plugin_id: field
+          label: 'Farm official N2O ER'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_offsets_value:
+          id: pcsc_offsets_value
+          table: plan_record__pcsc_offsets
+          field: pcsc_offsets_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_offsets
+          plugin_id: field
+          label: 'Farm offsets produced'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        pcsc_insets_value:
+          id: pcsc_insets_value
+          table: plan_record__pcsc_insets
+          field: pcsc_insets_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan_record
+          entity_field: pcsc_insets
+          plugin_id: field
+          label: 'Farm insets produced'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_decimal
+          settings:
+            thousand_separator: ''
+            decimal_separator: .
+            scale: 2
+            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1834,8 +2666,8 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           reduce_duplicates: false
-          handler: 'default:plan'
           widget: autocomplete
+          handler: 'default:plan'
           handler_settings:
             target_bundles:
               pcsc_producer: pcsc_producer
