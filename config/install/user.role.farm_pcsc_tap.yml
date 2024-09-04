@@ -9,6 +9,7 @@ dependencies:
     - farm_land
     - farm_pcsc
     - farm_report
+    - farm_ui_dashboard
     - farm_ui_location
     - filter
     - log
