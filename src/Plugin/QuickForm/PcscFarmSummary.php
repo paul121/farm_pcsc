@@ -188,7 +188,6 @@ class PcscFarmSummary extends QuickFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $this->messenger()->addWarning($this->t('Not implemented'));
 
     // Create farm summary.
     $summary_values = [
