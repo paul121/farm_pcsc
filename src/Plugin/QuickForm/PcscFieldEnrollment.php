@@ -67,21 +67,21 @@ class PcscFieldEnrollment extends QuickFormBase {
     $form['id'] = $this->buildInlineContainer();
     $form['id']['pcsc_tract_id'] = [
       '#type' => 'number',
-      '#title' => $this->t('Tract ID'),
+      '#title' => $this->t('FSA Tract ID'),
       '#min' => 1,
       '#step' => 1,
       '#required' => TRUE,
     ];
     $form['id']['pcsc_field_id'] = [
       '#type' => 'number',
-      '#title' => $this->t('Field ID'),
+      '#title' => $this->t('FSA Field ID'),
       '#min' => 1,
       '#step' => 1,
       '#required' => TRUE,
     ];
     $form['id']['pcsc_prior_field_id'] = [
       '#type' => 'number',
-      '#title' => $this->t('Prior Field ID'),
+      '#title' => $this->t('Prior FSA Field ID'),
       '#min' => 1,
       '#step' => 1,
     ];

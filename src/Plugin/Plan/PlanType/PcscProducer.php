@@ -40,7 +40,7 @@ class PcscProducer extends FarmPlanType {
       ],
       'pcsc_farm_id' => [
         'type' => 'integer',
-        'label' => $this->t('USDA Farm ID'),
+        'label' => $this->t('FSA Farm ID'),
         'min' => 1,
         'required' => TRUE,
       ],

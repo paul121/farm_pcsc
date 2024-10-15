@@ -49,19 +49,19 @@ class PcscField extends FarmPlanRecordType {
       ],
       'pcsc_tract_id' => [
         'type' => 'integer',
-        'label' => t('USDA Tract ID'),
+        'label' => t('FSA Tract ID'),
         'min' => 1,
         'required' => TRUE,
       ],
       'pcsc_field_id' => [
         'type' => 'integer',
-        'label' => t('USDA Field ID'),
+        'label' => t('FSA Field ID'),
         'min' => 1,
         'required' => TRUE,
       ],
       'pcsc_prior_field_id' => [
         'type' => 'integer',
-        'label' => t('Prior Field ID'),
+        'label' => t('Prior FSA Field ID'),
         'min' => 1,
       ],
       'pcsc_state' => [
