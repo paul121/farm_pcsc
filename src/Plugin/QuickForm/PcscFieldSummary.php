@@ -4,6 +4,7 @@ namespace Drupal\farm_pcsc\Plugin\QuickForm;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\farm_pcsc\Traits\ListStringTrait;
+use Drupal\farm_pcsc\Traits\UsdaQuarterTrait;
 use Drupal\farm_quick\Plugin\QuickForm\QuickFormBase;
 use Drupal\farm_quick\Traits\QuickFormElementsTrait;
 use Drupal\plan\Entity\PlanInterface;
@@ -26,6 +27,7 @@ class PcscFieldSummary extends QuickFormBase {
 
   use ListStringTrait;
   use QuickFormElementsTrait;
+  use UsdaQuarterTrait;
 
   /**
    * {@inheritdoc}
@@ -84,21 +86,8 @@ class PcscFieldSummary extends QuickFormBase {
       ],
     ];
 
-    $form['quarter'] = $this->buildInlineContainer();
-    $form['quarter']['pcsc_year'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Year'),
-      '#options' => farm_pcsc_allowed_values_helper([2024, 2025, 2026, 2027, 2028]),
-      '#default_value' => date('Y'),
-      '#required' => TRUE,
-    ];
-    $form['quarter']['pcsc_quarter'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Quarter'),
-      '#options' => farm_pcsc_allowed_values_helper([1, 2, 3, 4]),
-      '#default_value' => ceil(date('m') / 3),
-      '#required' => TRUE,
-    ];
+    // Add fields for year and quarter.
+    $form['quarter'] = $this->usdaYearQuarterDropdowns();
 
     $form['pcsc_practice_complete'] = [
       '#type' => 'date',

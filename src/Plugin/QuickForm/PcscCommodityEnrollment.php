@@ -4,6 +4,7 @@ namespace Drupal\farm_pcsc\Plugin\QuickForm;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\farm_pcsc\Traits\ListStringTrait;
+use Drupal\farm_pcsc\Traits\UsdaQuarterTrait;
 use Drupal\farm_quick\Plugin\QuickForm\QuickFormBase;
 use Drupal\farm_quick\Traits\QuickFormElementsTrait;
 use Drupal\plan\Entity\PlanInterface;
@@ -26,27 +27,17 @@ class PcscCommodityEnrollment extends QuickFormBase {
 
   use ListStringTrait;
   use QuickFormElementsTrait;
+  use UsdaQuarterTrait;
 
   /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-    $form['quarter'] = $this->buildInlineContainer();
-    $form['quarter']['pcsc_year'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Enrollment year'),
-      '#options' => farm_pcsc_allowed_values_helper([2024, 2025, 2026, 2027, 2028]),
-      '#default_value' => date('Y'),
-      '#required' => TRUE,
-    ];
-    $form['quarter']['pcsc_quarter'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Enrollment quarter'),
-      '#options' => farm_pcsc_allowed_values_helper([1, 2, 3, 4]),
-      '#default_value' => ceil(date('m') / 3),
-      '#required' => TRUE,
-    ];
+    // Add fields for year and quarter.
+    $form['quarter'] = $this->usdaYearQuarterDropdowns();
+    $form['quarter']['year']['#title'] = $this->t('Enrollment year');
+    $form['quarter']['quarter']['#title'] = $this->t('Enrollment quarter');
 
     $producers = \Drupal::entityTypeManager()->getStorage('plan')->loadByProperties(['type' => 'pcsc_producer']);
     $producer_options = array_combine(array_keys($producers), array_map(function (PlanInterface $producer) {
