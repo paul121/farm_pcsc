@@ -195,7 +195,6 @@ class PcscCsvActionForm extends ConfirmFormBase {
       '#title' => $this->t('Sheet Type'),
       '#description' => $this->t('Select the type of workbook sheet to export.'),
       '#options' => [
-        'all' => $this->t('All'),
         'enrollment' => $this->t('Enrollment'),
         'farm_benefit' => $this->t('Farm Benefits'),
         'summary' => $this->t('Summary'),
@@ -295,7 +294,6 @@ class PcscCsvActionForm extends ConfirmFormBase {
         $data = $this->exportSupplemental($sub_type);
         break;
 
-      case 'all':
       default:
         break;
     }
