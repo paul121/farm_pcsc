@@ -133,7 +133,7 @@ class PcscFarmSummary extends FarmPlanRecordType {
         'label' => $this->t('Farm official GHG ER'),
         'precision' => 10,
         'scale' => 2,
-        'min' => 0.01,
+        'min' => -10000000,
         'max' => 10000000,
       ],
       'pcsc_official_carbon_stock' => [
@@ -141,7 +141,7 @@ class PcscFarmSummary extends FarmPlanRecordType {
         'label' => $this->t('Farm official carbon stock'),
         'precision' => 10,
         'scale' => 2,
-        'min' => 0,
+        'min' => -10000000,
         'max' => 10000000,
       ],
       'pcsc_official_co2_er' => [
@@ -149,7 +149,7 @@ class PcscFarmSummary extends FarmPlanRecordType {
         'label' => $this->t('Farm official CO2 ER'),
         'precision' => 10,
         'scale' => 2,
-        'min' => 0,
+        'min' => -10000000,
         'max' => 10000000,
       ],
       'pcsc_official_ch4_er' => [
@@ -157,7 +157,7 @@ class PcscFarmSummary extends FarmPlanRecordType {
         'label' => $this->t('Farm official CH4 ER'),
         'precision' => 10,
         'scale' => 2,
-        'min' => 0,
+        'min' => -10000000,
         'max' => 10000000,
       ],
       'pcsc_official_n20_er' => [
@@ -165,7 +165,7 @@ class PcscFarmSummary extends FarmPlanRecordType {
         'label' => $this->t('Farm official N2O ER'),
         'precision' => 10,
         'scale' => 2,
-        'min' => 0,
+        'min' => -10000000,
         'max' => 10000000,
       ],
       'pcsc_offsets' => [

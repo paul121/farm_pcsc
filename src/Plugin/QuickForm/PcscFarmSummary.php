@@ -116,35 +116,35 @@ class PcscFarmSummary extends QuickFormBase {
     $form['measurements']['pcsc_official_ghg_er'] = [
       '#type' => 'number',
       '#title' => $this->t('Farm official GHG ER'),
-      '#min' => 0,
+      '#min' => -10000000,
       '#max' => 10000000,
       '#step' => 0.01,
     ];
     $form['measurements']['pcsc_official_carbon_stock'] = [
       '#type' => 'number',
       '#title' => $this->t('Farm official carbon stock'),
-      '#min' => 0,
+      '#min' => -10000000,
       '#max' => 10000000,
       '#step' => 0.01,
     ];
     $form['measurements']['pcsc_official_co2_er'] = [
       '#type' => 'number',
       '#title' => $this->t('Farm official CO2 ER'),
-      '#min' => 0,
+      '#min' => -10000000,
       '#max' => 10000000,
       '#step' => 0.01,
     ];
     $form['measurements']['pcsc_official_ch4_er'] = [
       '#type' => 'number',
       '#title' => $this->t('Farm official CH4 ER'),
-      '#min' => 0,
+      '#min' => -10000000,
       '#max' => 10000000,
       '#step' => 0.01,
     ];
     $form['measurements']['pcsc_official_n20_er'] = [
       '#type' => 'number',
       '#title' => $this->t('Farm official N2O ER'),
-      '#min' => 0,
+      '#min' => -10000000,
       '#max' => 10000000,
       '#step' => 0.01,
     ];
