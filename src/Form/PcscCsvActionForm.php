@@ -530,6 +530,10 @@ class PcscCsvActionForm extends ConfirmFormBase {
           ->condition('pcsc_field', $field->id())
           ->execute();
 
+        $practice_types = array_values(array_map(function (PcscFieldPracticeInterface $practice) {
+          return $practice->practiceTypeOption();
+        }, $this->entityTypeManager->getStorage('plan_record')->loadMultiple($practice_ids)));
+
         $data[] = [
           'Farm ID' => $entity->get('pcsc_farm_id')->value,
           'State or territory' => $entity->get('pcsc_state')->value,
