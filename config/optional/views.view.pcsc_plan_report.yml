@@ -78,6 +78,71 @@ display:
           selected_actions:
             - farm_pcsc_csv_action
             - plan_flag_action
+        pcsc_project_id_value:
+          id: pcsc_project_id_value
+          table: plan__pcsc_project_id
+          field: pcsc_project_id_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan
+          entity_field: pcsc_project_id
+          plugin_id: field
+          label: 'Internal Project ID'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
         pcsc_farm_id_value:
           id: pcsc_farm_id_value
           table: plan__pcsc_farm_id
@@ -450,6 +515,52 @@ display:
           value:
             pcsc_producer: pcsc_producer
           group: 1
+        pcsc_project_id_value:
+          id: pcsc_project_id_value
+          table: plan__pcsc_project_id
+          field: pcsc_project_id_value
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: plan
+          entity_field: pcsc_project_id
+          plugin_id: string
+          operator: '='
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: pcsc_project_id_value_op
+            label: 'Internal Project ID'
+            description: ''
+            use_operator: false
+            operator: pcsc_project_id_value_op
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: pcsc_project_id_value
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              farm_manager: '0'
+              farm_pcsc_tap: '0'
+              farm_viewer: '0'
+              farm_worker: '0'
+            placeholder: ''
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
         pcsc_farm_id_value:
           id: pcsc_farm_id_value
           table: plan__pcsc_farm_id
@@ -702,6 +813,7 @@ display:
           default_row_class: true
           columns:
             plan_bulk_form: plan_bulk_form
+            pcsc_project_id_value: pcsc_project_id_value
             pcsc_farm_id_value: pcsc_farm_id_value
             name: name
             pcsc_state_value: pcsc_state_value
@@ -710,6 +822,13 @@ display:
           default: pcsc_farm_id_value
           info:
             plan_bulk_form:
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            pcsc_project_id_value:
+              sortable: true
+              default_sort_order: asc
               align: ''
               separator: ''
               empty_column: false
