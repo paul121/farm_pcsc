@@ -11,6 +11,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\TempStore\PrivateTempStoreFactory;
 use Drupal\Core\Url;
 use Drupal\farm_pcsc\Bundle\PcscFieldPracticeInterface;
+use Drupal\farm_pcsc\Traits\UsdaQuarterTrait;
 use Drupal\file\FileRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,6 +24,8 @@ use Symfony\Component\Serializer\SerializerInterface;
  * @see \Drupal\Core\Entity\Form\DeleteMultipleForm
  */
 class PcscCsvActionForm extends ConfirmFormBase {
+
+  use UsdaQuarterTrait;
 
   /**
    * The entity type manager.
@@ -264,6 +267,18 @@ class PcscCsvActionForm extends ConfirmFormBase {
       ],
     ];
 
+    // Add toggle to filter records by quarter.
+    $form['filter_quarter'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Filter records by quarter'),
+    ];
+    $form['quarter'] = $this->usdaYearQuarterDropdowns();
+    $form['quarter']['#states'] = [
+      'visible' => [
+        ':input[name="filter_quarter"]' => ['checked' => TRUE],
+      ],
+    ];
+
     return $form;
   }
 
@@ -272,13 +287,21 @@ class PcscCsvActionForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
+    // Save quarter filter values if selected.
+    $year = NULL;
+    $quarter = NULL;
+    if ($form_state->getValue('filter_quarter') ?? FALSE) {
+      $year = $form_state->getValue('pcsc_year');
+      $quarter = $form_state->getValue('pcsc_quarter');
+    }
+
     // Determine the sheet to export and build data.
     $data = [];
     $sheet_type = $form_state->getValue('sheet_type');
     $sub_type = $form_state->getValue("{$sheet_type}_type");
     switch ($sheet_type) {
       case 'farm_benefit':
-        $data = $this->exportFarmBenefits();
+        $data = $this->exportFarmBenefits($year, $quarter);
         break;
 
       case 'enrollment':
@@ -286,7 +309,7 @@ class PcscCsvActionForm extends ConfirmFormBase {
         // Build the function name to build data.
         $function_name = 'export' . implode('', array_map('ucfirst', explode('_', "{$sheet_type}_$sub_type")));
         if (is_callable([$this, $function_name])) {
-          $data = $this->{$function_name}();
+          $data = $this->{$function_name}($year, $quarter);
         }
         break;
 
@@ -342,12 +365,28 @@ class PcscCsvActionForm extends ConfirmFormBase {
   /**
    * Helper function to build producer enrollment data.
    *
+   * @param int|null $year
+   *   Optional year to filter by.
+   * @param int|null $quarter
+   *   Optional quarter to filter by.
+   *
    * @return array
    *   The data array.
    */
-  public function exportEnrollmentProducer() {
+  public function exportEnrollmentProducer(?int $year, ?int $quarter): array {
     $data = [];
     foreach ($this->entities as $entity) {
+
+      // Skip producers not enrolled in the specified year and quarter.
+      if ($year && $quarter) {
+        if (
+          $entity->get('pcsc_year')->value != $year
+          || $entity->get('pcsc_quarter')->value != $quarter
+        ) {
+          continue;
+        }
+      }
+
       $data[] = [
         'Farm ID' => $entity->get('pcsc_farm_id')->value,
         'State or territory' => $entity->get('pcsc_state')->value,
@@ -376,17 +415,30 @@ class PcscCsvActionForm extends ConfirmFormBase {
   /**
    * Helper function to build field enrollment data.
    *
+   * @param int|null $year
+   *   Optional year to filter by.
+   * @param int|null $quarter
+   *   Optional quarter to filter by.
+   *
    * @return array
    *   The data array.
    */
-  public function exportEnrollmentField() {
+  public function exportEnrollmentField(?int $year, ?int $quarter) {
+
+    // Build a quarter filter.
+    $quarter_filter = [];
+    if ($year && $quarter) {
+      $quarter_filter['pcsc_year'] = $year;
+      $quarter_filter['pcsc_quarter'] = $quarter;
+    }
+
     $data = [];
     foreach ($this->entities as $entity) {
       $farm_id = $entity->get('pcsc_farm_id')->value;
       $commodities = $this->entityTypeManager->getStorage('plan_record')->loadByProperties([
         'type' => 'pcsc_commodity',
         'plan' => $entity->id(),
-      ]);
+      ] + $quarter_filter);
       foreach ($commodities as $commodity) {
 
         /** @var \Drupal\farm_pcsc\Bundle\PcscField $field */
@@ -462,19 +514,31 @@ class PcscCsvActionForm extends ConfirmFormBase {
   /**
    * Helper function to build farm benefits data.
    *
+   * @param int|null $year
+   *   Optional year to filter by.
+   * @param int|null $quarter
+   *   Optional quarter to filter by.
+   *
    * @return array
    *   The data array.
    */
-  public function exportFarmBenefits() {
+  public function exportFarmBenefits(?int $year, ?int $quarter) {
+
+    // Build a quarter filter.
+    $quarter_filter = [];
+    if ($year && $quarter) {
+      $quarter_filter['pcsc_year'] = $year;
+      $quarter_filter['pcsc_quarter'] = $quarter;
+    }
+
     $data = [];
     foreach ($this->entities as $entity) {
-      // @TODO Only load the farm summary for the most recent quarter.
       $benefits  = $this->entityTypeManager->getStorage('plan_record')
         ->loadByProperties([
           'type' => 'pcsc_farm_benefit',
           'plan' => $entity->id(),
-        ]);
-      foreach ($benefits as $summary) {
+        ] + $quarter_filter);
+      foreach ($benefits as $benefit) {
         $data[] = [
           'Farm ID' => $entity->get('pcsc_farm_id')->value,
           'State or territory' => $entity->get('pcsc_state')->value,
@@ -498,18 +562,30 @@ class PcscCsvActionForm extends ConfirmFormBase {
   /**
    * Helper function to build farm summary data.
    *
+   * @param int|null $year
+   *   Optional year to filter by.
+   * @param int|null $quarter
+   *   Optional quarter to filter by.
+   *
    * @return array
    *   The data array.
    */
-  public function exportSummaryFarm() {
+  public function exportSummaryFarm(?int $year, ?int $quarter) {
+
+    // Build a quarter filter.
+    $quarter_filter = [];
+    if ($year && $quarter) {
+      $quarter_filter['pcsc_year'] = $year;
+      $quarter_filter['pcsc_quarter'] = $quarter;
+    }
+
     $data = [];
     foreach ($this->entities as $entity) {
-      // @TODO Only load the farm summary for the most recent quarter.
       $summaries  = $this->entityTypeManager->getStorage('plan_record')
          ->loadByProperties([
            'type' => 'pcsc_farm_summary',
            'plan' => $entity->id(),
-         ]);
+         ] + $quarter_filter);
       foreach ($summaries as $summary) {
 
         /** @var \Drupal\farm_pcsc\Bundle\PcscCommodity $commodity */
@@ -568,18 +644,30 @@ class PcscCsvActionForm extends ConfirmFormBase {
   /**
    * Helper function to build field summary data.
    *
+   * @param int|null $year
+   *   Optional year to filter by.
+   * @param int|null $quarter
+   *   Optional quarter to filter by.
+   *
    * @return array
    *   The data array.
    */
-  public function exportSummaryField() {
+  public function exportSummaryField(?int $year, ?int $quarter) {
+
+    // Build a quarter filter.
+    $quarter_filter = [];
+    if ($year && $quarter) {
+      $quarter_filter['pcsc_year'] = $year;
+      $quarter_filter['pcsc_quarter'] = $quarter;
+    }
+
     $data = [];
     foreach ($this->entities as $entity) {
-      // @TODO Only load field summaries for the most recent quarter.
       $summaries  = $this->entityTypeManager->getStorage('plan_record')
          ->loadByProperties([
            'type' => 'pcsc_field_summary',
            'plan' => $entity->id(),
-         ]);
+         ] + $quarter_filter);
       foreach ($summaries as $summary) {
 
         /** @var \Drupal\farm_pcsc\Bundle\PcscCommodity $commodity */
