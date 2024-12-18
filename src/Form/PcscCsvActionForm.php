@@ -271,6 +271,11 @@ class PcscCsvActionForm extends ConfirmFormBase {
     $form['filter_quarter'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Filter records by quarter'),
+      '#states' => [
+        'invisible' => [
+          ':input[name="sheet_type"]' => ['value' => 'supplemental'],
+        ],
+      ],
     ];
     $form['quarter'] = $this->usdaYearQuarterDropdowns();
     $form['quarter']['#states'] = [
