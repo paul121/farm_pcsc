@@ -44,6 +44,10 @@ class PcscProducer extends FarmPlanType {
         'min' => 1,
         'required' => TRUE,
       ],
+      'pcsc_project_id' => [
+        'type' => 'string',
+        'label' => $this->t('Internal Project ID'),
+      ],
       'pcsc_state' => [
         'type' => 'list_string',
         'label' => t('State/territory'),

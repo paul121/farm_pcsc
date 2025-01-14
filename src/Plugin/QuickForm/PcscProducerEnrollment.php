@@ -51,6 +51,11 @@ class PcscProducerEnrollment extends QuickFormBase {
       '#required' => TRUE,
     ];
 
+    $form['pcsc_project_id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Internal Project ID'),
+    ];
+
     $form['location'] = $this->buildInlineContainer();
     $state_options = farm_pcsc_state_options();
     $form['location']['pcsc_state'] = [
