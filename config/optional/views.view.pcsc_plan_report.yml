@@ -632,7 +632,7 @@ display:
         options:
           perm: 'view any pcsc_producer plan'
       cache:
-        type: tag
+        type: none
         options: {  }
       empty: {  }
       sorts: {  }
