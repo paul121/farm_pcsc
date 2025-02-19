@@ -107,11 +107,6 @@ class PcscFieldEnrollment extends QuickFormBase {
       '#options' => array_combine($county_options, $county_options),
       '#required' => TRUE,
     ];
-    $form['pcsc_start_date'] = [
-      '#type' => 'date',
-      '#title' => $this->t('Contract start date'),
-      '#required' => TRUE,
-    ];
 
     $form['field'] = $this->buildInlineContainer();
     $form['field']['pcsc_land_use'] = [
@@ -217,13 +212,13 @@ class PcscFieldEnrollment extends QuickFormBase {
     $field_values = $values;
     $field_values['type'] = 'pcsc_field';
     $field_values['field'] = $land->id();
-    $field_values['pcsc_start_date'] = strtotime($form_state->getValue('pcsc_start_date'));
+    $field_values['pcsc_start_date'] = $producer->get('pcsc_start_date')->value;
     unset($field_values['practices']);
     $field = PlanRecord::create($field_values);
     $field->save();
 
     // Create a plan record for each practice.
-    foreach ($values['practices'] as $practice_values) {
+    foreach ($values['practices'] ?? [] as $practice_values) {
       $practice_values['plan'] = $values['plan'];
       $practice_values['pcsc_field'] = $field->id();
       $practice = PlanRecord::create($practice_values);

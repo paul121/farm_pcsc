@@ -80,6 +80,7 @@ class PcscField extends FarmPlanRecordType {
         'type' => 'timestamp',
         'label' => $this->t('Contract start date'),
         'required' => TRUE,
+        'hidden' => 'form',
       ],
       'pcsc_land_use' => [
         'type' => 'list_string',
