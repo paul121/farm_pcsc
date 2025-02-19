@@ -37,11 +37,9 @@ class PcscFieldPractice327 extends PcscFieldPracticeBase {
     ];
     foreach ($field_info as $name => $info) {
       $fields[$name] = $this->farmFieldFactory->bundleFieldDefinition($info);
-    }
 
-    // Convert list_string form widgets to select lists (not default radios).
-    foreach ($field_info as $name => $info) {
-      if ($info['type'] = 'list_string') {
+      // Convert list_string form widgets to select lists (not default radios).
+      if ($info['type'] == 'list_string') {
         $this->useSelectWidget($fields[$name]);
       }
     }
