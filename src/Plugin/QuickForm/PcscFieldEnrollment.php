@@ -40,7 +40,14 @@ class PcscFieldEnrollment extends QuickFormBase {
     $form['quarter']['year']['#title'] = $this->t('Enrollment year');
     $form['quarter']['quarter']['#title'] = $this->t('Enrollment quarter');
 
-    $producers = \Drupal::entityTypeManager()->getStorage('plan')->loadByProperties(['type' => 'pcsc_producer']);
+    // Load producer plans sorted by name.
+    $plan_storage = \Drupal::entityTypeManager()->getStorage('plan');
+    $producer_ids = $plan_storage->getQuery()
+      ->accessCheck(TRUE)
+      ->condition('type', 'pcsc_producer')
+      ->sort('name')
+      ->execute();
+    $producers = $plan_storage->loadMultiple($producer_ids);
     $producer_options = array_combine(array_keys($producers), array_map(function (PlanInterface $producer) {
       return $producer->label();
     }, $producers));
