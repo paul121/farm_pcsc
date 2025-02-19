@@ -166,6 +166,13 @@ class PcscProducer extends FarmPlanType {
       if ($info['type'] == 'list_string') {
         $this->useSelectWidget($fields[$name]);
       }
+
+      // Change timestamps to use html_date format.
+      if ($info['type'] == 'timestamp') {
+        $options = $fields[$name]->getDisplayOptions('view');
+        $options['settings']['date_format'] = 'html_date';
+        $fields[$name]->setDisplayOptions('view', $options);
+      }
     }
 
     return $fields;

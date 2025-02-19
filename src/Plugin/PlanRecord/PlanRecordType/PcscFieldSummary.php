@@ -121,6 +121,13 @@ class PcscFieldSummary extends FarmPlanRecordType {
     ];
     foreach ($field_info as $name => $info) {
       $fields[$name] = $this->farmFieldFactory->bundleFieldDefinition($info);
+
+      // Change timestamps to use html_date format.
+      if ($info['type'] == 'timestamp') {
+        $options = $fields[$name]->getDisplayOptions('view');
+        $options['settings']['date_format'] = 'html_date';
+        $fields[$name]->setDisplayOptions('view', $options);
+      }
     }
     return $fields;
   }
